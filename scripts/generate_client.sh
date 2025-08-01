@@ -43,6 +43,7 @@ generate_client() {
   find .generated/$output_dir \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s/from $api_dir/from ryhti_api_client.$api_dir/g"
 
   git add .generated/$output_dir
+  git add $input_file
   git commit -m "Update generated client for $output_dir API"
 }
 

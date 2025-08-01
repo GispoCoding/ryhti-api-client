@@ -1,0 +1,31 @@
+# Descriptor
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**descriptor_identifier** | **str** |  | [optional] 
+**vocabulary** | **str** |  | [optional] 
+**descriptor** | **str** |  | [optional] 
+
+## Example
+
+```python
+from ryhti_api_client.models.descriptor import Descriptor
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of Descriptor from a JSON string
+descriptor_instance = Descriptor.from_json(json)
+# print the JSON string representation of the object
+print(Descriptor.to_json())
+
+# convert the object into a dict
+descriptor_dict = descriptor_instance.to_dict()
+# create an instance of Descriptor from a dict
+descriptor_from_dict = Descriptor.from_dict(descriptor_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

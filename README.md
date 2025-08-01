@@ -36,7 +36,7 @@ uv run bash scripts/generate_client.sh v2025-release-23
 uv run bash scripts/copy_generated_client.sh xroad
 # Inspect modified files and commit changes
 uv run bash scripts/copy_generated_client.sh public
-# Inspect modified files and commit changes
+# Inspect modified files and commit (Amend) changes
 ```
 
 ### 
