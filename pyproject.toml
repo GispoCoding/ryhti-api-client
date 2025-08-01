@@ -1,0 +1,37 @@
+[project]
+name = "ryhti-api-client"
+version = "2025.23.0"
+description = "Api Client for the Finnish Built environment information system Ryhti (Rakennetun ympäristön tietojärjestelmä)"
+readme = "README.md"
+authors = [
+    { name = "Gispo Ltd", email = "info@gispo.fi" }
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pydantic>=2.11.7",
+    "python-dateutil>=2.9.0.post0",
+    "typing-extensions>=4.14.1",
+    "urllib3>=2.5.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.4,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "ruff>=0.12.7",
+    "types-python-dateutil>=2.9.0.20250708",
+]
+
+[tool.ruff]
+target-version = "py39"
+
+[tool.ruff.lint]
+extend-ignore = ["F841", "E721"]
+unfixable = [
+    "F401", # unused imports
+    "F841", # unused variables
+]
