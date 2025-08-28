@@ -23,6 +23,7 @@ __all__ = [
     "LandUseRestrictionMatterApi",
     "LocalDetailedPlanMatterApi",
     "LocalMasterPlanMatterApi",
+    "PlanApi",
     "PlanAttachmentDocumentApi",
     "RegionalPlanMatterApi",
     "StatusApi",
@@ -140,9 +141,11 @@ __all__ = [
     "TimePeriodDateOnly",
     "TimePeriodDateOnlyValue",
     "TimePeriodValue",
+    "ValidationProblemDetails",
 ]
 
 # import apis into sdk package
+from ryhti_api_client.public_api.plan_api import PlanApi as PlanApi
 from ryhti_api_client.xroad_api.authentication_api import AuthenticationApi as AuthenticationApi
 from ryhti_api_client.xroad_api.binding_plot_division_matter_api import (
     BindingPlotDivisionMatterApi as BindingPlotDivisionMatterApi,
@@ -424,3 +427,6 @@ from ryhti_api_client.models.time_period_date_only_value import (
     TimePeriodDateOnlyValue as TimePeriodDateOnlyValue,
 )
 from ryhti_api_client.models.time_period_value import TimePeriodValue as TimePeriodValue
+from ryhti_api_client.models.validation_problem_details import (
+    ValidationProblemDetails as ValidationProblemDetails,
+)

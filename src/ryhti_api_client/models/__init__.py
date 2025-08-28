@@ -189,3 +189,5 @@ from ryhti_api_client.models.time_period import TimePeriod
 from ryhti_api_client.models.time_period_date_only import TimePeriodDateOnly
 from ryhti_api_client.models.time_period_date_only_value import TimePeriodDateOnlyValue
 from ryhti_api_client.models.time_period_value import TimePeriodValue
+from ryhti_api_client.models.validation_problem_details import ValidationProblemDetails
+
