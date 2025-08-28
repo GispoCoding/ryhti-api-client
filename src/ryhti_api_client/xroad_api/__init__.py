@@ -1,0 +1,13 @@
+# flake8: noqa
+
+# import apis into api package
+from ryhti_api_client.xroad_api.authentication_api import AuthenticationApi
+from ryhti_api_client.xroad_api.binding_plot_division_matter_api import BindingPlotDivisionMatterApi
+from ryhti_api_client.xroad_api.building_ordinance_api import BuildingOrdinanceApi
+from ryhti_api_client.xroad_api.land_use_restriction_matter_api import LandUseRestrictionMatterApi
+from ryhti_api_client.xroad_api.local_detailed_plan_matter_api import LocalDetailedPlanMatterApi
+from ryhti_api_client.xroad_api.local_master_plan_matter_api import LocalMasterPlanMatterApi
+from ryhti_api_client.xroad_api.plan_attachment_document_api import PlanAttachmentDocumentApi
+from ryhti_api_client.xroad_api.regional_plan_matter_api import RegionalPlanMatterApi
+from ryhti_api_client.xroad_api.status_api import StatusApi
+from ryhti_api_client.xroad_api.uploaded_file_api import UploadedFileApi
