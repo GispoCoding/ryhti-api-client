@@ -13,7 +13,9 @@ Do not edit the class manually.
 
 import unittest
 
-from ryhti_api_client.xroad_api.binding_plot_division_matter_api import BindingPlotDivisionMatterApi
+from ryhti_api_client.xroad_api.binding_plot_division_matter_api import (
+    BindingPlotDivisionMatterApi,
+)
 
 
 class TestBindingPlotDivisionMatterApi(unittest.TestCase):

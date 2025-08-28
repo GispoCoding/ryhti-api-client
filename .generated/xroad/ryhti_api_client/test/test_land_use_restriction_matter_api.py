@@ -13,7 +13,9 @@ Do not edit the class manually.
 
 import unittest
 
-from ryhti_api_client.xroad_api.land_use_restriction_matter_api import LandUseRestrictionMatterApi
+from ryhti_api_client.xroad_api.land_use_restriction_matter_api import (
+    LandUseRestrictionMatterApi,
+)
 
 
 class TestLandUseRestrictionMatterApi(unittest.TestCase):

@@ -13,7 +13,9 @@ Do not edit the class manually.
 
 import unittest
 
-from ryhti_api_client.xroad_api.plan_attachment_document_api import PlanAttachmentDocumentApi
+from ryhti_api_client.xroad_api.plan_attachment_document_api import (
+    PlanAttachmentDocumentApi,
+)
 
 
 class TestPlanAttachmentDocumentApi(unittest.TestCase):

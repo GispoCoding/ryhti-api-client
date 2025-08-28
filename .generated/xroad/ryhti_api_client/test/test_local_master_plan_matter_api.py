@@ -13,7 +13,9 @@ Do not edit the class manually.
 
 import unittest
 
-from ryhti_api_client.xroad_api.local_master_plan_matter_api import LocalMasterPlanMatterApi
+from ryhti_api_client.xroad_api.local_master_plan_matter_api import (
+    LocalMasterPlanMatterApi,
+)
 
 
 class TestLocalMasterPlanMatterApi(unittest.TestCase):
