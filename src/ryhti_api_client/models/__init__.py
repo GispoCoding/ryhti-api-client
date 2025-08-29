@@ -180,7 +180,6 @@ from ryhti_api_client.models.reserve_regional_plan_matter_permanent_identifier_c
     ReserveRegionalPlanMatterPermanentIdentifierCommand,
 )
 from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
-from ryhti_api_client.models.ryhti_geometry_geometry import RyhtiGeometryGeometry
 from ryhti_api_client.models.spot_elevation import SpotElevation
 from ryhti_api_client.models.statute import Statute
 from ryhti_api_client.models.success_response import SuccessResponse

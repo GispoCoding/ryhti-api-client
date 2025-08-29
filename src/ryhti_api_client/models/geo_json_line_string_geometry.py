@@ -22,10 +22,8 @@ from pydantic import (
     Field,
     StrictFloat,
     StrictInt,
-    StrictStr,
-    field_validator,
 )
-from typing import Any, ClassVar, Dict, List, Union
+from typing import Any, ClassVar, Dict, List, Literal, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -38,28 +36,10 @@ class GeoJsonLineStringGeometry(BaseModel):
     coordinates: List[List[Union[StrictFloat, StrictInt]]] = Field(
         description="Koordinaatit"
     )
-    type: StrictStr = Field(
-        description='Geometriatyyppi. Pakollinen arvo: "lineString"'
+    type: Literal['LineString'] = Field(
+        description='Geometriatyyppi. Pakollinen arvo: "LineString"'
     )
     __properties: ClassVar[List[str]] = ["type"]
-
-    @field_validator("type")
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(
-            [
-                "Point",
-                "MultiPoint",
-                "LineString",
-                "MultiLineString",
-                "Polygon",
-                "MultiPolygon",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('Point', 'MultiPoint', 'LineString', 'MultiLineString', 'Polygon', 'MultiPolygon')"
-            )
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

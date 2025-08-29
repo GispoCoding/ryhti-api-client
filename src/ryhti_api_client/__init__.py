@@ -132,7 +132,6 @@ __all__ = [
     "ReservePermanentLandUseRestrictionIdentifierCommand",
     "ReserveRegionalPlanMatterPermanentIdentifierCommand",
     "RyhtiGeometry",
-    "RyhtiGeometryGeometry",
     "SpotElevation",
     "Statute",
     "SuccessResponse",
@@ -412,9 +411,6 @@ from ryhti_api_client.models.reserve_regional_plan_matter_permanent_identifier_c
     ReserveRegionalPlanMatterPermanentIdentifierCommand as ReserveRegionalPlanMatterPermanentIdentifierCommand,
 )
 from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry as RyhtiGeometry
-from ryhti_api_client.models.ryhti_geometry_geometry import (
-    RyhtiGeometryGeometry as RyhtiGeometryGeometry,
-)
 from ryhti_api_client.models.spot_elevation import SpotElevation as SpotElevation
 from ryhti_api_client.models.statute import Statute as Statute
 from ryhti_api_client.models.success_response import SuccessResponse as SuccessResponse
