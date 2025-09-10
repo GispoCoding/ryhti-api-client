@@ -18,12 +18,9 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from ryhti_api_client.models.additional_information_value import (
-    AdditionalInformationValue,
-)
+from ryhti_api_client.models.attribute_value import AttributeValue
 from typing import Set
 from typing_extensions import Self
-
 
 class AdditionalInformation(BaseModel):
     """
@@ -33,7 +30,7 @@ class AdditionalInformation(BaseModel):
     type: StrictStr = Field(
         description='Määräystä täydentävä tieto, jolla ohjataan alueidenkäyttöä ja rakentamista. Käytetään koodistoa <a href="http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji">http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji</a>'
     )
-    value: Optional[AdditionalInformationValue] = None
+    value: Optional[AttributeValue] = Field(discriminator="data_type", default=None)
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     @field_validator("type")

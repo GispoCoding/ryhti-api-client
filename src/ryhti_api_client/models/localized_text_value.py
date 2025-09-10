@@ -16,8 +16,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Literal, Optional
 from ryhti_api_client.models.language_string import LanguageString
 from typing import Set
 from typing_extensions import Self
@@ -32,37 +32,10 @@ class LocalizedTextValue(BaseModel):
         default=None, description="Kielistetty teksti"
     )
     syntax: Optional[StrictStr] = Field(default=None, description="Syntaksi")
-    data_type: StrictStr = Field(
+    data_type: Literal["LocalizedText"] = Field(
         description='Pakollinen arvo: "localizedText"', alias="dataType"
     )
     __properties: ClassVar[List[str]] = ["dataType"]
-
-    @field_validator("data_type")
-    def data_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(
-            [
-                "LocalizedText",
-                "Text",
-                "Numeric",
-                "NumericRange",
-                "PositiveNumeric",
-                "PositiveNumericRange",
-                "Decimal",
-                "DecimalRange",
-                "PositiveDecimal",
-                "PositiveDecimalRange",
-                "Code",
-                "Identifier",
-                "SpotElevation",
-                "TimePeriod",
-                "TimePeriodDateOnly",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('LocalizedText', 'Text', 'Numeric', 'NumericRange', 'PositiveNumeric', 'PositiveNumericRange', 'Decimal', 'DecimalRange', 'PositiveDecimal', 'PositiveDecimalRange', 'Code', 'Identifier', 'SpotElevation', 'TimePeriod', 'TimePeriodDateOnly')"
-            )
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

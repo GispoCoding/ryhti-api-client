@@ -15,11 +15,7 @@ Do not edit the class manually.
 # import models into model package
 from ryhti_api_client.models.access_to_road import AccessToRoad
 from ryhti_api_client.models.additional_information import AdditionalInformation
-from ryhti_api_client.models.additional_information_value import (
-    AdditionalInformationValue,
-)
 from ryhti_api_client.models.attachment_document import AttachmentDocument
-from ryhti_api_client.models.attribute_value import AttributeValue
 from ryhti_api_client.models.binding_plot_division import BindingPlotDivision
 from ryhti_api_client.models.binding_plot_division_attachment_document import (
     BindingPlotDivisionAttachmentDocument,
@@ -143,7 +139,6 @@ from ryhti_api_client.models.plan_regulation_group import PlanRegulationGroup
 from ryhti_api_client.models.plan_regulation_group_relations import (
     PlanRegulationGroupRelations,
 )
-from ryhti_api_client.models.plan_regulation_value import PlanRegulationValue
 from ryhti_api_client.models.plan_report import PlanReport
 from ryhti_api_client.models.plan_source_data import PlanSourceData
 from ryhti_api_client.models.plot_division_plot import PlotDivisionPlot

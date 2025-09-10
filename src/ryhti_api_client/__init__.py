@@ -17,6 +17,7 @@ __version__ = "1.0.0"
 
 # Define package exports
 __all__ = [
+    "AttributeValue",
     "AuthenticationApi",
     "BindingPlotDivisionMatterApi",
     "BuildingOrdinanceApi",
@@ -39,9 +40,7 @@ __all__ = [
     "ApiException",
     "AccessToRoad",
     "AdditionalInformation",
-    "AdditionalInformationValue",
     "AttachmentDocument",
-    "AttributeValue",
     "BindingPlotDivision",
     "BindingPlotDivisionAttachmentDocument",
     "BindingPlotDivisionCancellationInfo",
@@ -111,7 +110,6 @@ __all__ = [
     "PlanRegulation",
     "PlanRegulationGroup",
     "PlanRegulationGroupRelations",
-    "PlanRegulationValue",
     "PlanReport",
     "PlanSourceData",
     "PlotDivisionPlot",
@@ -185,9 +183,6 @@ from ryhti_api_client.exceptions import ApiException as ApiException
 from ryhti_api_client.models.access_to_road import AccessToRoad as AccessToRoad
 from ryhti_api_client.models.additional_information import (
     AdditionalInformation as AdditionalInformation,
-)
-from ryhti_api_client.models.additional_information_value import (
-    AdditionalInformationValue as AdditionalInformationValue,
 )
 from ryhti_api_client.models.attachment_document import (
     AttachmentDocument as AttachmentDocument,
@@ -357,9 +352,6 @@ from ryhti_api_client.models.plan_regulation_group import (
 )
 from ryhti_api_client.models.plan_regulation_group_relations import (
     PlanRegulationGroupRelations as PlanRegulationGroupRelations,
-)
-from ryhti_api_client.models.plan_regulation_value import (
-    PlanRegulationValue as PlanRegulationValue,
 )
 from ryhti_api_client.models.plan_report import PlanReport as PlanReport
 from ryhti_api_client.models.plan_source_data import PlanSourceData as PlanSourceData

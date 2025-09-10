@@ -51,7 +51,7 @@ class RyhtiGeometry(BaseModel):
             GeoJsonMultiPolygonGeometry,
             GeoJsonPointGeometry,
             GeoJsonPolygonGeometry,
-        ] = Field(description="type")
+        ] = Field(discriminator="type")
     __properties: ClassVar[List[str]] = ["srid", "geometry"]
 
     @field_validator("srid")

@@ -23,9 +23,8 @@ from pydantic import (
     StrictFloat,
     StrictInt,
     StrictStr,
-    field_validator,
 )
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Literal, Optional, Union
 from typing import Set
 from typing_extensions import Self
 
@@ -44,37 +43,10 @@ class PositiveDecimalRange(BaseModel):
     unit_of_measure: Optional[StrictStr] = Field(
         default=None, description="Mittayksikkö", alias="unitOfMeasure"
     )
-    data_type: StrictStr = Field(
+    data_type: Literal["PositiveDecimalRange"] = Field(
         description='Pakollinen arvo: "positiveDecimalRange"', alias="dataType"
     )
     __properties: ClassVar[List[str]] = ["dataType"]
-
-    @field_validator("data_type")
-    def data_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(
-            [
-                "LocalizedText",
-                "Text",
-                "Numeric",
-                "NumericRange",
-                "PositiveNumeric",
-                "PositiveNumericRange",
-                "Decimal",
-                "DecimalRange",
-                "PositiveDecimal",
-                "PositiveDecimalRange",
-                "Code",
-                "Identifier",
-                "SpotElevation",
-                "TimePeriod",
-                "TimePeriodDateOnly",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('LocalizedText', 'Text', 'Numeric', 'NumericRange', 'PositiveNumeric', 'PositiveNumericRange', 'Decimal', 'DecimalRange', 'PositiveDecimal', 'PositiveDecimalRange', 'Code', 'Identifier', 'SpotElevation', 'TimePeriod', 'TimePeriodDateOnly')"
-            )
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

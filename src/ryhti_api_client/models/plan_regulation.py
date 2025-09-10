@@ -19,9 +19,10 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from ryhti_api_client.models.additional_information import AdditionalInformation
+from ryhti_api_client.models.attribute_value import AttributeValue
 from ryhti_api_client.models.plan_attachment_document import PlanAttachmentDocument
-from ryhti_api_client.models.plan_regulation_value import PlanRegulationValue
 from ryhti_api_client.models.time_period_date_only import TimePeriodDateOnly
+
 from typing import Set
 from typing_extensions import Self
 
@@ -40,7 +41,7 @@ class PlanRegulation(BaseModel):
         description="Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{guid})",
         alias="planRegulationUri",
     )
-    value: Optional[PlanRegulationValue] = None
+    value: Optional[AttributeValue] = Field(discriminator="data_type", default=None)
     life_cycle_status: StrictStr = Field(
         description='Kaavamääräyksen elinkaaren tila. Käytetään koodistoa <a href="http://uri.suomi.fi/codelist/rytj/kaavaelinkaari">http://uri.suomi.fi/codelist/rytj/kaavaelinkaari</a>',
         alias="lifeCycleStatus",
