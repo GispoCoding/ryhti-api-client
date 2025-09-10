@@ -1,6 +1,6 @@
 [project]
 name = "ryhti-api-client"
-version = "2025.23.0"
+version = "2025.23.2"
 description = "Api Client for the Finnish Built environment information system Ryhti (Rakennetun ympäristön tietojärjestelmä)"
 readme = "README.md"
 authors = [
