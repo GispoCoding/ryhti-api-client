@@ -6,7 +6,7 @@ download_api_specs() {
   mkdir -p "api_specs"
   
   wget "https://raw.githubusercontent.com/sykefi/Ryhti-rajapintakuvaukset/refs/tags/${release_tag}/OpenApi/Alueidenk%C3%A4ytt%C3%B6/Avoin/ryhti-plan-public-validate-api.json" -O "api_specs/ryhti-plan-public-validate-api.json"
-  wget "https://raw.githubusercontent.com/sykefi/Ryhti-rajapintakuvaukset/refs/tags/${release_tag}/OpenApi/Alueidenk%C3%A4ytt%C3%B6/Palveluv%C3%A4yl%C3%A4/alueidenk%C3%A4ytt%C3%B6-OpenApi.json" -O "api_specs/ryhti-plan-open-api.json"
+  wget "https://raw.githubusercontent.com/sykefi/Ryhti-rajapintakuvaukset/refs/tags/${release_tag}/OpenApi/Alueidenk%C3%A4ytt%C3%B6/Palveluv%C3%A4yl%C3%A4/planService-OpenApi.json" -O "api_specs/planService-OpenApi.json"
 }
 
 replace_description() {
@@ -24,18 +24,14 @@ generate_client() {
   local output_dir=$2
   local api_dir=${output_dir}_api
 
-  docker run --rm \
-      -v "$PWD":/local \
-      openapitools/openapi-generator-cli generate \
-      -i "/local/$input_file" \
+  uv run openapi-generator-cli generate \
+      -i "$input_file" \
       -g python \
       --additional-properties=packageName=ryhti_api_client \
       --additional-properties=generateSourceCodeOnly=true \
       --additional-properties=setEnsureAsciiToFalse=true \
       --api-package=$api_dir \
-      -o "/local/.generated/$output_dir"
-
-  sudo chown -R $(whoami):$(whoami) .generated/$output_dir
+      -o ".generated/$output_dir"
 
   uv run ruff check --fix --extend-fixable=F841,F401 .generated/$output_dir
   uv run ruff format .generated/$output_dir
@@ -49,8 +45,8 @@ generate_client() {
 
 download_api_specs
 replace_description "api_specs/ryhti-plan-public-validate-api.json"
-replace_description "api_specs/ryhti-plan-open-api.json"
+replace_description "api_specs/planService-OpenApi.json"
 remove_servers "api_specs/ryhti-plan-public-validate-api.json"
 
 generate_client "api_specs/ryhti-plan-public-validate-api.json" "public"
-generate_client "api_specs/ryhti-plan-open-api.json" "xroad"
+generate_client "api_specs/planService-OpenApi.json" "xroad"
