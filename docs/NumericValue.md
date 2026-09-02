@@ -1,14 +1,13 @@
 # NumericValue
 
-Numeerinen arvo
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;Numeric\&quot; | 
 **number** | **int** | Numero | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;numeric\&quot; | 
 
 ## Example
 

@@ -137,7 +137,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LocalDetailedPlanMatterApi(api_client)
     permanent_plan_identifier = 'permanent_plan_identifier_example' # str | 
-    plan_matter_phase_key = 'plan_matter_phase_key_example' # str | 
+    plan_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Kaava-asian vaiheen (asemakaava) hakeminen vaiheen avaimella.
@@ -156,7 +156,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_plan_identifier** | **str**|  | 
- **plan_matter_phase_key** | **str**|  | 
+ **plan_matter_phase_key** | **UUID**|  | 
 
 ### Return type
 
@@ -224,7 +224,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LocalDetailedPlanMatterApi(api_client)
     permanent_plan_identifier = 'permanent_plan_identifier_example' # str | Pysyvä yksilöivä tunnus kaava-asialle.
-    plan_matter_phase_key = 'plan_matter_phase_key_example' # str | Pysyvä yksilöivä tunnus kaava-asian vaiheelle.
+    plan_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Pysyvä yksilöivä tunnus kaava-asian vaiheelle.
     plan_matter_phase = ryhti_api_client.PlanMatterPhase() # PlanMatterPhase | Lisättävä kaava-asian vaihe kokonaisuudessaan.
 
     try:
@@ -244,7 +244,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_plan_identifier** | **str**| Pysyvä yksilöivä tunnus kaava-asialle. | 
- **plan_matter_phase_key** | **str**| Pysyvä yksilöivä tunnus kaava-asian vaiheelle. | 
+ **plan_matter_phase_key** | **UUID**| Pysyvä yksilöivä tunnus kaava-asian vaiheelle. | 
  **plan_matter_phase** | [**PlanMatterPhase**](PlanMatterPhase.md)| Lisättävä kaava-asian vaihe kokonaisuudessaan. | 
 
 ### Return type
@@ -313,7 +313,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LocalDetailedPlanMatterApi(api_client)
     permanent_plan_identifier = 'permanent_plan_identifier_example' # str | Pysyvä yksilöivä tunnus kaava-asialle.
-    plan_matter_phase_key = 'plan_matter_phase_key_example' # str | Pysyvä yksilöivä tunnus kaava-asian vaiheelle.
+    plan_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Pysyvä yksilöivä tunnus kaava-asian vaiheelle.
     plan_matter_phase = ryhti_api_client.PlanMatterPhase() # PlanMatterPhase | Päivitettävä kaava-asian vaihe kokonaisuudessaan.
 
     try:
@@ -333,7 +333,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_plan_identifier** | **str**| Pysyvä yksilöivä tunnus kaava-asialle. | 
- **plan_matter_phase_key** | **str**| Pysyvä yksilöivä tunnus kaava-asian vaiheelle. | 
+ **plan_matter_phase_key** | **UUID**| Pysyvä yksilöivä tunnus kaava-asian vaiheelle. | 
  **plan_matter_phase** | [**PlanMatterPhase**](PlanMatterPhase.md)| Päivitettävä kaava-asian vaihe kokonaisuudessaan. | 
 
 ### Return type
@@ -403,7 +403,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LocalDetailedPlanMatterApi(api_client)
     permanent_plan_identifier = 'permanent_plan_identifier_example' # str | Pysyvä yksilöivä tunnus kaava-asialle.
-    plan_matter_phase_key = 'plan_matter_phase_key_example' # str | Pysyvä yksilöivä tunnus kaava-asian vaiheelle.
+    plan_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Pysyvä yksilöivä tunnus kaava-asian vaiheelle.
     plan_matter_phase = ryhti_api_client.PlanMatterPhase() # PlanMatterPhase | Validoitava kaava-asian vaihe kokonaisuudessaan.
 
     try:
@@ -423,7 +423,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_plan_identifier** | **str**| Pysyvä yksilöivä tunnus kaava-asialle. | 
- **plan_matter_phase_key** | **str**| Pysyvä yksilöivä tunnus kaava-asian vaiheelle. | 
+ **plan_matter_phase_key** | **UUID**| Pysyvä yksilöivä tunnus kaava-asian vaiheelle. | 
  **plan_matter_phase** | [**PlanMatterPhase**](PlanMatterPhase.md)| Validoitava kaava-asian vaihe kokonaisuudessaan. | 
 
 ### Return type

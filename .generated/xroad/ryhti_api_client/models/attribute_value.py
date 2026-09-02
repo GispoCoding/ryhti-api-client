@@ -16,19 +16,40 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing import Set
-from typing_extensions import Self
+from typing import Any, ClassVar, Dict, List, Union
+from typing import Optional, Set
+from pydantic_core import to_jsonable_python
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ryhti_api_client.models.code_value import CodeValue
+    from ryhti_api_client.models.decimal_value import DecimalValue
+    from ryhti_api_client.models.decimal_range import DecimalRange
+    from ryhti_api_client.models.identifier_value import IdentifierValue
+    from ryhti_api_client.models.localized_text_value import LocalizedTextValue
+    from ryhti_api_client.models.numeric_value import NumericValue
+    from ryhti_api_client.models.numeric_range import NumericRange
+    from ryhti_api_client.models.positive_decimal_value import PositiveDecimalValue
+    from ryhti_api_client.models.positive_decimal_range import PositiveDecimalRange
+    from ryhti_api_client.models.positive_numeric_value import PositiveNumericValue
+    from ryhti_api_client.models.positive_numeric_range import PositiveNumericRange
+    from ryhti_api_client.models.spot_elevation import SpotElevation
+    from ryhti_api_client.models.text_value import TextValue
+    from ryhti_api_client.models.time_period_value import TimePeriodValue
+    from ryhti_api_client.models.time_period_date_only_value import (
+        TimePeriodDateOnlyValue,
+    )
 
 
 class AttributeValue(BaseModel):
     """
-    AttributeValue
+    Base class for attribute values representing typed values with units of measure.  Note: CustomSwaggerSchemaFilter overrides Swagger descriptions to show property-specific XML comments (#31650),  e.g., \"Positiivinen numeerinen arvo\" is replaced to be \"Rakentamisen määrä\".
     """  # noqa: E501
 
-    data_type: Optional[StrictStr] = Field(
-        default=None,
+    data_type: StrictStr = Field(
         description="Enumeraatio joka määrittää Arvo-luokkien (Domain.ValueObjects.AttributeValue) tyypin.  Jokaisella konkreettisella Arvo-luokan (Domain.ValueObjects.AttributeValue) toteutuksella tulee olla sitä vastaava DataType enumeraation arvo.",
         alias="dataType",
     )
@@ -37,9 +58,6 @@ class AttributeValue(BaseModel):
     @field_validator("data_type")
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(
             [
                 "LocalizedText",
@@ -65,10 +83,42 @@ class AttributeValue(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
+
+    # JSON field name that stores the object type
+    __discriminator_property_name: ClassVar[str] = "dataType"
+
+    # discriminator mappings
+    __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+        "Code": "CodeValue",
+        "Decimal": "DecimalValue",
+        "DecimalRange": "DecimalRange",
+        "Identifier": "IdentifierValue",
+        "LocalizedText": "LocalizedTextValue",
+        "Numeric": "NumericValue",
+        "NumericRange": "NumericRange",
+        "PositiveDecimal": "PositiveDecimalValue",
+        "PositiveDecimalRange": "PositiveDecimalRange",
+        "PositiveNumeric": "PositiveNumericValue",
+        "PositiveNumericRange": "PositiveNumericRange",
+        "SpotElevation": "SpotElevation",
+        "Text": "TextValue",
+        "TimePeriod": "TimePeriodValue",
+        "TimePeriodDateOnly": "TimePeriodDateOnlyValue",
+    }
+
+    @classmethod
+    def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:
+        """Returns the discriminator value (object type) of the data"""
+        discriminator_value = obj.get(cls.__discriminator_property_name)
+        if discriminator_value:
+            return cls.__discriminator_value_class_map.get(discriminator_value)
+        else:
+            return None
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -76,11 +126,30 @@ class AttributeValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(
+        cls, json_str: str
+    ) -> Optional[
+        Union[
+            CodeValue,
+            DecimalValue,
+            DecimalRange,
+            IdentifierValue,
+            LocalizedTextValue,
+            NumericValue,
+            NumericRange,
+            PositiveDecimalValue,
+            PositiveDecimalRange,
+            PositiveNumericValue,
+            PositiveNumericRange,
+            SpotElevation,
+            TextValue,
+            TimePeriodValue,
+            TimePeriodDateOnlyValue,
+        ]
+    ]:
         """Create an instance of AttributeValue from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -104,13 +173,96 @@ class AttributeValue(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(
+        cls, obj: Dict[str, Any]
+    ) -> Optional[
+        Union[
+            CodeValue,
+            DecimalValue,
+            DecimalRange,
+            IdentifierValue,
+            LocalizedTextValue,
+            NumericValue,
+            NumericRange,
+            PositiveDecimalValue,
+            PositiveDecimalRange,
+            PositiveNumericValue,
+            PositiveNumericRange,
+            SpotElevation,
+            TextValue,
+            TimePeriodValue,
+            TimePeriodDateOnlyValue,
+        ]
+    ]:
         """Create an instance of AttributeValue from a dict"""
-        if obj is None:
-            return None
+        # look up the object type based on discriminator mapping
+        object_type = cls.get_discriminator_value(obj)
+        if object_type == "CodeValue":
+            return import_module(
+                "ryhti_api_client.models.code_value"
+            ).CodeValue.from_dict(obj)
+        if object_type == "DecimalValue":
+            return import_module(
+                "ryhti_api_client.models.decimal_value"
+            ).DecimalValue.from_dict(obj)
+        if object_type == "DecimalRange":
+            return import_module(
+                "ryhti_api_client.models.decimal_range"
+            ).DecimalRange.from_dict(obj)
+        if object_type == "IdentifierValue":
+            return import_module(
+                "ryhti_api_client.models.identifier_value"
+            ).IdentifierValue.from_dict(obj)
+        if object_type == "LocalizedTextValue":
+            return import_module(
+                "ryhti_api_client.models.localized_text_value"
+            ).LocalizedTextValue.from_dict(obj)
+        if object_type == "NumericValue":
+            return import_module(
+                "ryhti_api_client.models.numeric_value"
+            ).NumericValue.from_dict(obj)
+        if object_type == "NumericRange":
+            return import_module(
+                "ryhti_api_client.models.numeric_range"
+            ).NumericRange.from_dict(obj)
+        if object_type == "PositiveDecimalValue":
+            return import_module(
+                "ryhti_api_client.models.positive_decimal_value"
+            ).PositiveDecimalValue.from_dict(obj)
+        if object_type == "PositiveDecimalRange":
+            return import_module(
+                "ryhti_api_client.models.positive_decimal_range"
+            ).PositiveDecimalRange.from_dict(obj)
+        if object_type == "PositiveNumericValue":
+            return import_module(
+                "ryhti_api_client.models.positive_numeric_value"
+            ).PositiveNumericValue.from_dict(obj)
+        if object_type == "PositiveNumericRange":
+            return import_module(
+                "ryhti_api_client.models.positive_numeric_range"
+            ).PositiveNumericRange.from_dict(obj)
+        if object_type == "SpotElevation":
+            return import_module(
+                "ryhti_api_client.models.spot_elevation"
+            ).SpotElevation.from_dict(obj)
+        if object_type == "TextValue":
+            return import_module(
+                "ryhti_api_client.models.text_value"
+            ).TextValue.from_dict(obj)
+        if object_type == "TimePeriodValue":
+            return import_module(
+                "ryhti_api_client.models.time_period_value"
+            ).TimePeriodValue.from_dict(obj)
+        if object_type == "TimePeriodDateOnlyValue":
+            return import_module(
+                "ryhti_api_client.models.time_period_date_only_value"
+            ).TimePeriodDateOnlyValue.from_dict(obj)
 
-        if not isinstance(obj, dict):
-            return cls.model_validate(obj)
-
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
-        return _obj
+        raise ValueError(
+            "AttributeValue failed to lookup discriminator value from "
+            + json.dumps(obj)
+            + ". Discriminator property name: "
+            + cls.__discriminator_property_name
+            + ", mapping: "
+            + json.dumps(cls.__discriminator_value_class_map)
+        )

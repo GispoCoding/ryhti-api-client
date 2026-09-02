@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_object_key** | **str** |  | [optional] 
-**plan_regulation_group_key** | **str** |  | [optional] 
+**plan_object_key** | **UUID** |  | [optional] 
+**plan_regulation_group_key** | **UUID** |  | [optional] 
 
 ## Example
 

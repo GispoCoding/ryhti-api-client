@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_matter_phase_key** | **str** |  | [optional] 
+**plan_matter_phase_key** | **UUID** |  | [optional] 
 **plan_matter_phase_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planmatterphase/{guid}) | [optional] [readonly] 
 **life_cycle_status** | **str** |  | [optional] 
 **geographical_area** | [**RyhtiGeometry**](RyhtiGeometry.md) |  | [optional] 

@@ -20,6 +20,7 @@ from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from ryhti_api_client.models.cancelled_by_response import CancelledByResponse
 from ryhti_api_client.models.language_string import LanguageString
 from ryhti_api_client.models.participation_and_assessment_scheme import (
     ParticipationAndAssessmentScheme,
@@ -30,8 +31,10 @@ from ryhti_api_client.models.plan_matter_phase_uri_response import (
 )
 from ryhti_api_client.models.plan_operator import PlanOperator
 from ryhti_api_client.models.plan_source_data import PlanSourceData
+from ryhti_api_client.models.time_period_date_only import TimePeriodDateOnly
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PlanMatterResponse(BaseModel):
@@ -108,8 +111,23 @@ class PlanMatterResponse(BaseModel):
         description="Liittyvät kaava asiat (URI)",
         alias="relatedPlanMatters",
     )
+    effective_life_cycle_status: Optional[StrictStr] = Field(
+        default=None,
+        description="Ajantasainen elinkaaren tila. Jos kaavan kaikki kaavakohteet on kumottu, palautetaan kumottu (14).",
+        alias="effectiveLifeCycleStatus",
+    )
+    period_of_validity: Optional[TimePeriodDateOnly] = Field(
+        default=None,
+        description="Ajantasainen voimassaoloaika (alku- ja loppupäivämäärä).",
+        alias="periodOfValidity",
+    )
     plan_matter_phases: List[PlanMatterPhaseUriResponse] = Field(
         alias="planMatterPhases"
+    )
+    cancelled_by: Optional[List[CancelledByResponse]] = Field(
+        default=None,
+        description="Kumoamistieto. Kuvaa kaavan kumoamista. Kumoamistieto voi kumota kaavan kokonaan tai osittain.",
+        alias="cancelledBy",
     )
     original_administrative_area_identifiers: List[StrictStr] = Field(
         alias="originalAdministrativeAreaIdentifiers"
@@ -137,7 +155,10 @@ class PlanMatterResponse(BaseModel):
         "participationAndAssessmentScheme",
         "sourceDatas",
         "relatedPlanMatters",
+        "effectiveLifeCycleStatus",
+        "periodOfValidity",
         "planMatterPhases",
+        "cancelledBy",
         "originalAdministrativeAreaIdentifiers",
         "planMatterUri",
     ]
@@ -188,7 +209,8 @@ class PlanMatterResponse(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -199,8 +221,7 @@ class PlanMatterResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -239,8 +260,11 @@ class PlanMatterResponse(BaseModel):
         _items = []
         if self.matter_annexes:
             for _item_matter_annexes in self.matter_annexes:
-                if _item_matter_annexes:
-                    _items.append(_item_matter_annexes.to_dict())
+                _items.append(
+                    _item_matter_annexes.to_dict()
+                    if _item_matter_annexes is not None
+                    else None
+                )
             _dict["matterAnnexes"] = _items
         # override the default output from pydantic by calling `to_dict()` of responsible_party
         if self.responsible_party:
@@ -254,16 +278,35 @@ class PlanMatterResponse(BaseModel):
         _items = []
         if self.source_datas:
             for _item_source_datas in self.source_datas:
-                if _item_source_datas:
-                    _items.append(_item_source_datas.to_dict())
+                _items.append(
+                    _item_source_datas.to_dict()
+                    if _item_source_datas is not None
+                    else None
+                )
             _dict["sourceDatas"] = _items
+        # override the default output from pydantic by calling `to_dict()` of period_of_validity
+        if self.period_of_validity:
+            _dict["periodOfValidity"] = self.period_of_validity.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in plan_matter_phases (list)
         _items = []
         if self.plan_matter_phases:
             for _item_plan_matter_phases in self.plan_matter_phases:
-                if _item_plan_matter_phases:
-                    _items.append(_item_plan_matter_phases.to_dict())
+                _items.append(
+                    _item_plan_matter_phases.to_dict()
+                    if _item_plan_matter_phases is not None
+                    else None
+                )
             _dict["planMatterPhases"] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cancelled_by (list)
+        _items = []
+        if self.cancelled_by:
+            for _item_cancelled_by in self.cancelled_by:
+                _items.append(
+                    _item_cancelled_by.to_dict()
+                    if _item_cancelled_by is not None
+                    else None
+                )
+            _dict["cancelledBy"] = _items
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
@@ -340,6 +383,22 @@ class PlanMatterResponse(BaseModel):
         ):
             _dict["relatedPlanMatters"] = None
 
+        # set to None if effective_life_cycle_status (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.effective_life_cycle_status is None
+            and "effective_life_cycle_status" in self.model_fields_set
+        ):
+            _dict["effectiveLifeCycleStatus"] = None
+
+        # set to None if period_of_validity (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.period_of_validity is None
+            and "period_of_validity" in self.model_fields_set
+        ):
+            _dict["periodOfValidity"] = None
+
         return _dict
 
     @classmethod
@@ -395,11 +454,22 @@ class PlanMatterResponse(BaseModel):
                 if obj.get("sourceDatas") is not None
                 else None,
                 "relatedPlanMatters": obj.get("relatedPlanMatters"),
+                "effectiveLifeCycleStatus": obj.get("effectiveLifeCycleStatus"),
+                "periodOfValidity": TimePeriodDateOnly.from_dict(
+                    obj["periodOfValidity"]
+                )
+                if obj.get("periodOfValidity") is not None
+                else None,
                 "planMatterPhases": [
                     PlanMatterPhaseUriResponse.from_dict(_item)
                     for _item in obj["planMatterPhases"]
                 ]
                 if obj.get("planMatterPhases") is not None
+                else None,
+                "cancelledBy": [
+                    CancelledByResponse.from_dict(_item) for _item in obj["cancelledBy"]
+                ]
+                if obj.get("cancelledBy") is not None
                 else None,
                 "originalAdministrativeAreaIdentifiers": obj.get(
                     "originalAdministrativeAreaIdentifiers"

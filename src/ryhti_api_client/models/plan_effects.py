@@ -19,43 +19,44 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from ryhti_api_client.models.related_plot_division_plot import RelatedPlotDivisionPlot
+from ryhti_api_client.models.plan_effects_plot import PlanEffectsPlot
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PlanEffects(BaseModel):
     """
-    KaavanVaikutukset
+    Kaavan vaikutukset
     """  # noqa: E501
 
-    type: Annotated[str, Field(min_length=1, strict=True)] = Field(
-        description='Kaavan vaikutuksen laji. Käytetään koodistoa <a href="http://uri.suomi.fi/codelist/rytj/kaavanVaikutuksenLaji">http://uri.suomi.fi/codelist/rytj/kaavanVaikutuksenLaji</a>'
+    not_in_accordance_with_plan: StrictBool = Field(
+        description="Onko kaavan mukainen", alias="notInAccordanceWithPlan"
     )
-    binding_plot_division_uri: Annotated[str, Field(min_length=1, strict=True)] = Field(
-        description="Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivision/{bindingplotdivisionkey}) sitovaan tonttijakoon.",
-        alias="bindingPlotDivisionUri",
-    )
-    fully_included: Optional[StrictBool] = Field(
-        default=None,
-        description="Jos arvo on true, kaavan vaikutus kohdistuu sitovaan tonttijakoon kokonaisuudessaan, muuten tonttijakotontti kohtaisesti.",
-        alias="fullyIncluded",
-    )
-    related_plot_division_plots: Annotated[
-        List[RelatedPlotDivisionPlot], Field(min_length=1)
+    binding_plot_division_permanent_identifier: Annotated[
+        str, Field(min_length=1, strict=True)
     ] = Field(
-        description="Tonttijakotontin yksilöivätunnus, jota vaikutus koskee.",
-        alias="relatedPlotDivisionPlots",
+        description="Tonttijaon tunniste",
+        alias="bindingPlotDivisionPermanentIdentifier",
+    )
+    permanent_plan_identifier: Annotated[str, Field(min_length=1, strict=True)] = Field(
+        description="Kaavan pysyvä tunniste", alias="permanentPlanIdentifier"
+    )
+    plan_effects_plots: Optional[List[PlanEffectsPlot]] = Field(
+        default=None,
+        description="Kaavan vaikutukset tonttijakotonttikohtaisesti",
+        alias="planEffectsPlots",
     )
     __properties: ClassVar[List[str]] = [
-        "type",
-        "bindingPlotDivisionUri",
-        "fullyIncluded",
-        "relatedPlotDivisionPlots",
+        "notInAccordanceWithPlan",
+        "bindingPlotDivisionPermanentIdentifier",
+        "permanentPlanIdentifier",
+        "planEffectsPlots",
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -66,8 +67,7 @@ class PlanEffects(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -91,17 +91,23 @@ class PlanEffects(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in related_plot_division_plots (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in plan_effects_plots (list)
         _items = []
-        if self.related_plot_division_plots:
-            for _item_related_plot_division_plots in self.related_plot_division_plots:
-                if _item_related_plot_division_plots:
-                    _items.append(_item_related_plot_division_plots.to_dict())
-            _dict["relatedPlotDivisionPlots"] = _items
-        # set to None if fully_included (nullable) is None
+        if self.plan_effects_plots:
+            for _item_plan_effects_plots in self.plan_effects_plots:
+                _items.append(
+                    _item_plan_effects_plots.to_dict()
+                    if _item_plan_effects_plots is not None
+                    else None
+                )
+            _dict["planEffectsPlots"] = _items
+        # set to None if plan_effects_plots (nullable) is None
         # and model_fields_set contains the field
-        if self.fully_included is None and "fully_included" in self.model_fields_set:
-            _dict["fullyIncluded"] = None
+        if (
+            self.plan_effects_plots is None
+            and "plan_effects_plots" in self.model_fields_set
+        ):
+            _dict["planEffectsPlots"] = None
 
         return _dict
 
@@ -116,14 +122,16 @@ class PlanEffects(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "type": obj.get("type"),
-                "bindingPlotDivisionUri": obj.get("bindingPlotDivisionUri"),
-                "fullyIncluded": obj.get("fullyIncluded"),
-                "relatedPlotDivisionPlots": [
-                    RelatedPlotDivisionPlot.from_dict(_item)
-                    for _item in obj["relatedPlotDivisionPlots"]
+                "notInAccordanceWithPlan": obj.get("notInAccordanceWithPlan"),
+                "bindingPlotDivisionPermanentIdentifier": obj.get(
+                    "bindingPlotDivisionPermanentIdentifier"
+                ),
+                "permanentPlanIdentifier": obj.get("permanentPlanIdentifier"),
+                "planEffectsPlots": [
+                    PlanEffectsPlot.from_dict(_item)
+                    for _item in obj["planEffectsPlots"]
                 ]
-                if obj.get("relatedPlotDivisionPlots") is not None
+                if obj.get("planEffectsPlots") is not None
                 else None,
             }
         )

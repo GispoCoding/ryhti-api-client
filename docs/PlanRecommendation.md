@@ -6,7 +6,7 @@ Kaavasuositus
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_recommendation_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_recommendation_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_recommendation_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planrecommendation/{guid}) | [optional] [readonly] 
 **value** | [**LanguageString**](LanguageString.md) | Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli. | 
 **life_cycle_status** | **str** | Kaavasuosituksen elinkaaren tila. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari\&quot;&gt;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari&lt;/a&gt; | 

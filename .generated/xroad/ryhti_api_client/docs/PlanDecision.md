@@ -6,7 +6,7 @@ Kaavapäätös
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_decision_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_decision_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_decision_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plandecision/{guid}) | [optional] [readonly] 
 **name** | **str** | Päätöksen nimitys, joka kertoo mitä päätös koskee. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/kaavpaatnimi\&quot;&gt;http://uri.suomi.fi/codelist/rytj/kaavpaatnimi&lt;/a&gt; | 
 **decision_date** | **date** | Päätöspäivämäärä | 
@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **date_of_validity** | **date** | Lainvoimaisuuspäivämäärä | [optional] 
 **decision_makers** | [**List[PlanOperator]**](PlanOperator.md) | Päätöksentekijä | [optional] 
 **plan_cancellation_infos** | [**List[PlanCancellationInfo]**](PlanCancellationInfo.md) | Kumoamistieto | [optional] 
+**binding_plot_division_cancellation_infos** | [**List[BindingPlotDivisionCancellationInfo]**](BindingPlotDivisionCancellationInfo.md) | Sitovan tonttijaon kumoutumistieto. | [optional] 
 
 ## Example
 

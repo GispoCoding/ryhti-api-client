@@ -6,7 +6,7 @@ GeoJson geometria (abstrakti luokka, katso toteutukset)
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Tuetut geometriatyypit | [optional] 
+**type** | **str** | Tuetut geometriatyypit | 
 
 ## Example
 

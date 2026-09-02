@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
 Ryhti API
 
@@ -15,6 +13,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from uuid import UUID
 from ryhti_api_client.models.land_use_restriction_matter_create import (
     LandUseRestrictionMatterCreate,
 )
@@ -305,7 +304,7 @@ class LandUseRestrictionMatterApi:
     def api_land_use_restriction_matter_permanent_land_use_restriction_identifier_phase_land_use_restriction_matter_phase_key_get(
         self,
         permanent_land_use_restriction_identifier: StrictStr,
-        land_use_restriction_matter_phase_key: StrictStr,
+        land_use_restriction_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -324,7 +323,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -374,7 +373,7 @@ class LandUseRestrictionMatterApi:
     def api_land_use_restriction_matter_permanent_land_use_restriction_identifier_phase_land_use_restriction_matter_phase_key_get_with_http_info(
         self,
         permanent_land_use_restriction_identifier: StrictStr,
-        land_use_restriction_matter_phase_key: StrictStr,
+        land_use_restriction_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -393,7 +392,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -443,7 +442,7 @@ class LandUseRestrictionMatterApi:
     def api_land_use_restriction_matter_permanent_land_use_restriction_identifier_phase_land_use_restriction_matter_phase_key_get_without_preload_content(
         self,
         permanent_land_use_restriction_identifier: StrictStr,
-        land_use_restriction_matter_phase_key: StrictStr,
+        land_use_restriction_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -462,7 +461,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -574,7 +573,7 @@ class LandUseRestrictionMatterApi:
             ),
         ],
         land_use_restriction_matter_phase_key: Annotated[
-            StrictStr, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
+            UUID, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
         ],
         land_use_restriction_matter_phase: Annotated[
             LandUseRestrictionMatterPhase,
@@ -599,7 +598,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: Pysyvä yksilöivä tunnus vaiheelle. (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase: Lisättävä vaihe kokonaisuudessaan. (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -658,7 +657,7 @@ class LandUseRestrictionMatterApi:
             ),
         ],
         land_use_restriction_matter_phase_key: Annotated[
-            StrictStr, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
+            UUID, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
         ],
         land_use_restriction_matter_phase: Annotated[
             LandUseRestrictionMatterPhase,
@@ -683,7 +682,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: Pysyvä yksilöivä tunnus vaiheelle. (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase: Lisättävä vaihe kokonaisuudessaan. (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -742,7 +741,7 @@ class LandUseRestrictionMatterApi:
             ),
         ],
         land_use_restriction_matter_phase_key: Annotated[
-            StrictStr, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
+            UUID, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
         ],
         land_use_restriction_matter_phase: Annotated[
             LandUseRestrictionMatterPhase,
@@ -767,7 +766,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: Pysyvä yksilöivä tunnus vaiheelle. (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase: Lisättävä vaihe kokonaisuudessaan. (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -889,7 +888,7 @@ class LandUseRestrictionMatterApi:
     def api_land_use_restriction_matter_permanent_land_use_restriction_identifier_phase_land_use_restriction_matter_phase_key_put(
         self,
         permanent_land_use_restriction_identifier: StrictStr,
-        land_use_restriction_matter_phase_key: StrictStr,
+        land_use_restriction_matter_phase_key: UUID,
         land_use_restriction_matter_phase: LandUseRestrictionMatterPhase,
         _request_timeout: Union[
             None,
@@ -909,7 +908,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier:  (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key:  (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase:  (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -963,7 +962,7 @@ class LandUseRestrictionMatterApi:
     def api_land_use_restriction_matter_permanent_land_use_restriction_identifier_phase_land_use_restriction_matter_phase_key_put_with_http_info(
         self,
         permanent_land_use_restriction_identifier: StrictStr,
-        land_use_restriction_matter_phase_key: StrictStr,
+        land_use_restriction_matter_phase_key: UUID,
         land_use_restriction_matter_phase: LandUseRestrictionMatterPhase,
         _request_timeout: Union[
             None,
@@ -983,7 +982,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier:  (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key:  (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase:  (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1037,7 +1036,7 @@ class LandUseRestrictionMatterApi:
     def api_land_use_restriction_matter_permanent_land_use_restriction_identifier_phase_land_use_restriction_matter_phase_key_put_without_preload_content(
         self,
         permanent_land_use_restriction_identifier: StrictStr,
-        land_use_restriction_matter_phase_key: StrictStr,
+        land_use_restriction_matter_phase_key: UUID,
         land_use_restriction_matter_phase: LandUseRestrictionMatterPhase,
         _request_timeout: Union[
             None,
@@ -1057,7 +1056,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier:  (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key:  (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase:  (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1186,7 +1185,7 @@ class LandUseRestrictionMatterApi:
             ),
         ],
         land_use_restriction_matter_phase_key: Annotated[
-            StrictStr, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
+            UUID, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
         ],
         land_use_restriction_matter_phase: Annotated[
             LandUseRestrictionMatterPhase,
@@ -1211,7 +1210,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: Pysyvä yksilöivä tunnus vaiheelle. (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase: Lisättävä vaihe kokonaisuudessaan. (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1270,7 +1269,7 @@ class LandUseRestrictionMatterApi:
             ),
         ],
         land_use_restriction_matter_phase_key: Annotated[
-            StrictStr, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
+            UUID, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
         ],
         land_use_restriction_matter_phase: Annotated[
             LandUseRestrictionMatterPhase,
@@ -1295,7 +1294,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: Pysyvä yksilöivä tunnus vaiheelle. (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase: Lisättävä vaihe kokonaisuudessaan. (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1354,7 +1353,7 @@ class LandUseRestrictionMatterApi:
             ),
         ],
         land_use_restriction_matter_phase_key: Annotated[
-            StrictStr, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
+            UUID, Field(description="Pysyvä yksilöivä tunnus vaiheelle.")
         ],
         land_use_restriction_matter_phase: Annotated[
             LandUseRestrictionMatterPhase,
@@ -1379,7 +1378,7 @@ class LandUseRestrictionMatterApi:
         :param permanent_land_use_restriction_identifier: Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. (required)
         :type permanent_land_use_restriction_identifier: str
         :param land_use_restriction_matter_phase_key: Pysyvä yksilöivä tunnus vaiheelle. (required)
-        :type land_use_restriction_matter_phase_key: str
+        :type land_use_restriction_matter_phase_key: UUID
         :param land_use_restriction_matter_phase: Lisättävä vaihe kokonaisuudessaan. (required)
         :type land_use_restriction_matter_phase: LandUseRestrictionMatterPhase
         :param _request_timeout: timeout setting for this request. If one

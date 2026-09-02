@@ -6,9 +6,10 @@ Muodostajakiinteistö
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**mother_property_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima muodostajakiinteistön versioriippumaton tunnus | 
 **property_identifier** | **str** | Kiinteistötunnus | [optional] 
 **unseparated_parcel_identifier** | **str** | Määräalatunnus | [optional] 
-**contained_area** | [**PositiveNumericValue**](PositiveNumericValue.md) | Positiivinen numeerinen arvo | 
+**contained_area** | [**PositiveNumericValue**](PositiveNumericValue.md) | Sisältyvä pinta-ala | 
 **fully_included** | **bool** | Sisältyy kokonaan | 
 
 ## Example

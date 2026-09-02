@@ -19,10 +19,12 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.land_use_restriction_object import LandUseRestrictionObject
 from ryhti_api_client.models.time_period_date_only import TimePeriodDateOnly
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class LandUseRestriction(BaseModel):
@@ -30,7 +32,7 @@ class LandUseRestriction(BaseModel):
     LandUseRestriction
     """  # noqa: E501
 
-    land_use_restriction_key: StrictStr = Field(
+    land_use_restriction_key: UUID = Field(
         description="Avain", alias="landUseRestrictionKey"
     )
     land_use_restriction_uri: Optional[StrictStr] = Field(
@@ -52,7 +54,8 @@ class LandUseRestriction(BaseModel):
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -63,8 +66,7 @@ class LandUseRestriction(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -100,8 +102,11 @@ class LandUseRestriction(BaseModel):
         _items = []
         if self.land_use_restriction_objects:
             for _item_land_use_restriction_objects in self.land_use_restriction_objects:
-                if _item_land_use_restriction_objects:
-                    _items.append(_item_land_use_restriction_objects.to_dict())
+                _items.append(
+                    _item_land_use_restriction_objects.to_dict()
+                    if _item_land_use_restriction_objects is not None
+                    else None
+                )
             _dict["landUseRestrictionObjects"] = _items
         return _dict
 

@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
 Ryhti API
 
@@ -15,6 +13,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from uuid import UUID
 
 from ryhti_api_client.api_client import ApiClient, RequestSerialized
 from ryhti_api_client.api_response import ApiResponse
@@ -37,7 +36,7 @@ class PlanAttachmentDocumentApi:
     def api_plan_attachment_document_attachment_document_key_file_get(
         self,
         attachment_document_key: Annotated[
-            StrictStr, Field(description="Liiteasiakirjan avain")
+            UUID, Field(description="Liiteasiakirjan avain")
         ],
         _request_timeout: Union[
             None,
@@ -55,7 +54,7 @@ class PlanAttachmentDocumentApi:
 
 
         :param attachment_document_key: Liiteasiakirjan avain (required)
-        :type attachment_document_key: str
+        :type attachment_document_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -102,7 +101,7 @@ class PlanAttachmentDocumentApi:
     def api_plan_attachment_document_attachment_document_key_file_get_with_http_info(
         self,
         attachment_document_key: Annotated[
-            StrictStr, Field(description="Liiteasiakirjan avain")
+            UUID, Field(description="Liiteasiakirjan avain")
         ],
         _request_timeout: Union[
             None,
@@ -120,7 +119,7 @@ class PlanAttachmentDocumentApi:
 
 
         :param attachment_document_key: Liiteasiakirjan avain (required)
-        :type attachment_document_key: str
+        :type attachment_document_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -167,7 +166,7 @@ class PlanAttachmentDocumentApi:
     def api_plan_attachment_document_attachment_document_key_file_get_without_preload_content(
         self,
         attachment_document_key: Annotated[
-            StrictStr, Field(description="Liiteasiakirjan avain")
+            UUID, Field(description="Liiteasiakirjan avain")
         ],
         _request_timeout: Union[
             None,
@@ -185,7 +184,7 @@ class PlanAttachmentDocumentApi:
 
 
         :param attachment_document_key: Liiteasiakirjan avain (required)
-        :type attachment_document_key: str
+        :type attachment_document_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of

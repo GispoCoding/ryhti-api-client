@@ -1,13 +1,12 @@
 # GeoJsonMultiPolygonGeometry
 
-MultiPolygon GeoJson    Esimerkki: { \"type\": \"multiPolygon\", \"coordinates\": [ [ [ [102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0 ] ] ], [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] ] }
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;MultiPolygon\&quot; | 
 **coordinates** | **List[List[List[List[float]]]]** | Koordinaatit | 
-**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;multiPolygon\&quot; | 
 
 ## Example
 

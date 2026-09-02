@@ -43,7 +43,7 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.UploadedFileApi(api_client)
-    file = None # bytearray | 
+    file = None # bytes | 
     municipality_id = 'municipality_id_example' # str | Jos käyttäjällä on oikeus useampaan kuntaan tulee pyynnön sisältää kuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu. (optional)
     region_id = 'region_id_example' # str | Jos käyttäjällä on oikeus useampaan maakuntaan tulee pyynnön sisältää maakuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu. (optional)
 
@@ -62,7 +62,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | **bytearray**|  | 
+ **file** | **bytes**|  | 
  **municipality_id** | **str**| Jos käyttäjällä on oikeus useampaan kuntaan tulee pyynnön sisältää kuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu. | [optional] 
  **region_id** | **str**| Jos käyttäjällä on oikeus useampaan maakuntaan tulee pyynnön sisältää maakuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu. | [optional] 
 

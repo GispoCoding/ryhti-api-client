@@ -1,19 +1,18 @@
 # PlanCancellationInfo
 
-Kaavan kumoamistieto
+Kumoamistieto. Kuvaa kaavan kumoamista. Kumoamistieto voi kumota kaavan kokonaan tai osittain.  On joko Plan- tai PlanDecision-luokan lapsi.                Jos kumotaan kaavalla niin:  1) Kaava kumotaan kokonaan.  Tällöin ei saa olla kumoamistietoja kaavakohteista, määräyksistä tai suosituksista.  Kumoaa aina koko kaavan. Jos se on Plan-luokalla niin kumotaan se plan, millä sijaitsee.  Jos se on PlanDecision-luokalla niin kumotaan se plan, mihin päätös liittyy.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_cancellation_info_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_cancellation_info_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_cancellation_info_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plancancellationinfo/{guid}) | [optional] [readonly] 
 **cancelled_plan_uri** | **str** | Kumottavan hyväkstytyn kaavan tunnus URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{planKey}) | 
 **cancels_entire_plan** | **bool** | Kumoaa kaavan kokonaan | 
-**cancelled_plan_object_uris** | **List[str]** | Kumottavan kaavakohteen tunnukset URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planobject/{planObjectKey}) | [optional] 
-**cancelled_regulation_uris** | **List[str]** | Kumottavan määräyksen tunnukset URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planRegulationKey}) | [optional] 
-**cancelled_recommendation_uris** | **List[str]** | Kumottavan suosituksen tunnukset URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planrecommendation/{planRecommendationKey}) | [optional] 
 **cancelled_group_relations** | [**List[CancelledGroupRelations]**](CancelledGroupRelations.md) | Kumottavan ryhmän kohdistus. Kuvaa kaavakohteesta kumoutuvat kaavamääräysryhmät. | [optional] 
+**plan_object_cancellation_infos** | [**List[PlanObjectCancellationInfo]**](PlanObjectCancellationInfo.md) | Kumottavat kaavakohteet | [optional] 
+**cancelled_general_regulation_group_uris** | **List[str]** | Kumottavat yleismääräysryhmät | [optional] 
 
 ## Example
 

@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
 Ryhti API
 
@@ -15,6 +13,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from uuid import UUID
 from ryhti_api_client.models.plan_matter_create import PlanMatterCreate
 from ryhti_api_client.models.plan_matter_phase import PlanMatterPhase
 from ryhti_api_client.models.plan_matter_phase_response import PlanMatterPhaseResponse
@@ -290,7 +289,7 @@ class LocalDetailedPlanMatterApi:
     def api_local_detailed_plan_matter_permanent_plan_identifier_phase_plan_matter_phase_key_get(
         self,
         permanent_plan_identifier: StrictStr,
-        plan_matter_phase_key: StrictStr,
+        plan_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -309,7 +308,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -359,7 +358,7 @@ class LocalDetailedPlanMatterApi:
     def api_local_detailed_plan_matter_permanent_plan_identifier_phase_plan_matter_phase_key_get_with_http_info(
         self,
         permanent_plan_identifier: StrictStr,
-        plan_matter_phase_key: StrictStr,
+        plan_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -378,7 +377,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -428,7 +427,7 @@ class LocalDetailedPlanMatterApi:
     def api_local_detailed_plan_matter_permanent_plan_identifier_phase_plan_matter_phase_key_get_without_preload_content(
         self,
         permanent_plan_identifier: StrictStr,
-        plan_matter_phase_key: StrictStr,
+        plan_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -447,7 +446,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -552,8 +551,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -578,7 +576,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Lisättävä kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -634,8 +632,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -660,7 +657,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Lisättävä kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -716,8 +713,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -742,7 +738,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Lisättävä kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -863,8 +859,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -889,7 +884,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Päivitettävä kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -946,8 +941,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -972,7 +966,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Päivitettävä kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1029,8 +1023,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -1055,7 +1048,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Päivitettävä kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1177,8 +1170,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -1203,7 +1195,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Validoitava kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1259,8 +1251,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -1285,7 +1276,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Validoitava kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1341,8 +1332,7 @@ class LocalDetailedPlanMatterApi:
             StrictStr, Field(description="Pysyvä yksilöivä tunnus kaava-asialle.")
         ],
         plan_matter_phase_key: Annotated[
-            StrictStr,
-            Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle."),
+            UUID, Field(description="Pysyvä yksilöivä tunnus kaava-asian vaiheelle.")
         ],
         plan_matter_phase: Annotated[
             PlanMatterPhase,
@@ -1367,7 +1357,7 @@ class LocalDetailedPlanMatterApi:
         :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaava-asialle. (required)
         :type permanent_plan_identifier: str
         :param plan_matter_phase_key: Pysyvä yksilöivä tunnus kaava-asian vaiheelle. (required)
-        :type plan_matter_phase_key: str
+        :type plan_matter_phase_key: UUID
         :param plan_matter_phase: Validoitava kaava-asian vaihe kokonaisuudessaan. (required)
         :type plan_matter_phase: PlanMatterPhase
         :param _request_timeout: timeout setting for this request. If one

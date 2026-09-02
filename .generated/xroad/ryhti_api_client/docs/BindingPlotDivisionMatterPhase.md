@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **life_cycle_status** | **str** | Tonttijakosuunnitelman elinkaaren tila. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/sitovanTonttijaonElinkaarenTila\&quot;&gt;http://uri.suomi.fi/codelist/rytj/sitovanTonttijaonElinkaarenTila&lt;/a&gt; | 
-**binding_plot_division_matter_phase_key** | **str** | Sitovan tonttijaon asian vaihe avain | 
+**binding_plot_division_matter_phase_key** | **UUID** | Sitovan tonttijaon asian vaihe avain | 
 **binding_plot_division_matter_phase_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivisionmatterphase/{guid}) | [optional] [readonly] 
 **decision** | [**BindingPlotDivisionMatterDecision**](BindingPlotDivisionMatterDecision.md) | Päätös | [optional] 
 **approved_plan_decision_uri** | **str** | Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/plandecision/{plandecisionkey}) hyväksytyn kaavan päätökseen. | [optional] 

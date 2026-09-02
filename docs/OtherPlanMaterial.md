@@ -6,10 +6,10 @@ MuuKaavaAineisto
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**other_plan_material_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**other_plan_material_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **other_plan_material_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/otherplanmaterial/{guid}) | [optional] [readonly] 
 **name** | [**LanguageString**](LanguageString.md) | Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli. | 
-**file_key** | **str** | Tiedosto | [optional] 
+**file_key** | **UUID** | Tiedosto | [optional] 
 **other_plan_material_link** | **str** | MuuKaavaAineistoLinkki | [optional] 
 **personal_data_content** | **str** | Kuvaa muun kaava-aineiston henkilötietosisällön. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/henkilotietosisalto\&quot;&gt;http://uri.suomi.fi/codelist/rytj/henkilotietosisalto&lt;/a&gt; | 
 **category_of_publicity** | **str** | Kuvaa muun kaava-aineiston julkisuusluokan. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/julkisuus\&quot;&gt;http://uri.suomi.fi/codelist/rytj/julkisuus&lt;/a&gt; | 

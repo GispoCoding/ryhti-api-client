@@ -6,7 +6,7 @@ Vuorovaikutustapahtuma
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**interaction_event_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**interaction_event_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **interaction_event_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/interactionevent/{guid}) | [optional] [readonly] 
 **interaction_event_type** | **str** | Vuorovaikutustapahtuman tyyppi. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/RY_KaavanVuorovaikutustapahtumanLaji\&quot;&gt;http://uri.suomi.fi/codelist/rytj/RY_KaavanVuorovaikutustapahtumanLaji&lt;/a&gt; | 
 **event_time** | [**TimePeriod**](TimePeriod.md) |  | 

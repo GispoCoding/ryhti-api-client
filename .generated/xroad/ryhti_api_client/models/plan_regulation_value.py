@@ -55,7 +55,7 @@ PLANREGULATIONVALUE_ONE_OF_SCHEMAS = [
 
 class PlanRegulationValue(BaseModel):
     """
-    PlanRegulationValue
+    Base class for attribute values representing typed values with units of measure.  Note: CustomSwaggerSchemaFilter overrides Swagger descriptions to show property-specific XML comments (#31650),  e.g., \"Positiivinen numeerinen arvo\" is replaced to be \"Rakentamisen määrä\".
     """
 
     # data type: CodeValue
@@ -129,6 +129,8 @@ class PlanRegulationValue(BaseModel):
         validate_assignment=True,
         protected_namespaces=(),
     )
+
+    discriminator_value_class_map: Dict[str, str] = {}
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -281,6 +283,89 @@ class PlanRegulationValue(BaseModel):
 
         error_messages = []
         match = 0
+
+        # use oneOf discriminator to lookup the data type
+        _discriminator_property = "dataType"
+        _data_type = json.loads(json_str).get(_discriminator_property)
+        if not _data_type:
+            raise ValueError(
+                f"Failed to lookup data type from the field `{_discriminator_property}` in the input."
+            )
+
+        # check if data type is `CodeValue`
+        if _data_type == "Code":
+            instance.actual_instance = CodeValue.from_json(json_str)
+            return instance
+
+        # check if data type is `DecimalValue`
+        if _data_type == "Decimal":
+            instance.actual_instance = DecimalValue.from_json(json_str)
+            return instance
+
+        # check if data type is `DecimalRange`
+        if _data_type == "DecimalRange":
+            instance.actual_instance = DecimalRange.from_json(json_str)
+            return instance
+
+        # check if data type is `IdentifierValue`
+        if _data_type == "Identifier":
+            instance.actual_instance = IdentifierValue.from_json(json_str)
+            return instance
+
+        # check if data type is `LocalizedTextValue`
+        if _data_type == "LocalizedText":
+            instance.actual_instance = LocalizedTextValue.from_json(json_str)
+            return instance
+
+        # check if data type is `NumericValue`
+        if _data_type == "Numeric":
+            instance.actual_instance = NumericValue.from_json(json_str)
+            return instance
+
+        # check if data type is `NumericRange`
+        if _data_type == "NumericRange":
+            instance.actual_instance = NumericRange.from_json(json_str)
+            return instance
+
+        # check if data type is `PositiveDecimalValue`
+        if _data_type == "PositiveDecimal":
+            instance.actual_instance = PositiveDecimalValue.from_json(json_str)
+            return instance
+
+        # check if data type is `PositiveDecimalRange`
+        if _data_type == "PositiveDecimalRange":
+            instance.actual_instance = PositiveDecimalRange.from_json(json_str)
+            return instance
+
+        # check if data type is `PositiveNumericValue`
+        if _data_type == "PositiveNumeric":
+            instance.actual_instance = PositiveNumericValue.from_json(json_str)
+            return instance
+
+        # check if data type is `PositiveNumericRange`
+        if _data_type == "PositiveNumericRange":
+            instance.actual_instance = PositiveNumericRange.from_json(json_str)
+            return instance
+
+        # check if data type is `SpotElevation`
+        if _data_type == "SpotElevation":
+            instance.actual_instance = SpotElevation.from_json(json_str)
+            return instance
+
+        # check if data type is `TextValue`
+        if _data_type == "Text":
+            instance.actual_instance = TextValue.from_json(json_str)
+            return instance
+
+        # check if data type is `TimePeriodValue`
+        if _data_type == "TimePeriod":
+            instance.actual_instance = TimePeriodValue.from_json(json_str)
+            return instance
+
+        # check if data type is `TimePeriodDateOnlyValue`
+        if _data_type == "TimePeriodDateOnly":
+            instance.actual_instance = TimePeriodDateOnlyValue.from_json(json_str)
+            return instance
 
         # deserialize data into CodeValue
         try:

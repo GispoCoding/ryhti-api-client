@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
 Ryhti API
 
@@ -15,6 +13,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from uuid import UUID
 from ryhti_api_client.models.binding_plot_division_matter_create import (
     BindingPlotDivisionMatterCreate,
 )
@@ -300,7 +299,7 @@ class BindingPlotDivisionMatterApi:
     def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_get(
         self,
         permanent_binding_plot_division_identifier: StrictStr,
-        binding_plot_division_matter_phase_key: StrictStr,
+        binding_plot_division_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -319,7 +318,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -369,7 +368,7 @@ class BindingPlotDivisionMatterApi:
     def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_get_with_http_info(
         self,
         permanent_binding_plot_division_identifier: StrictStr,
-        binding_plot_division_matter_phase_key: StrictStr,
+        binding_plot_division_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -388,7 +387,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -438,7 +437,7 @@ class BindingPlotDivisionMatterApi:
     def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_get_without_preload_content(
         self,
         permanent_binding_plot_division_identifier: StrictStr,
-        binding_plot_division_matter_phase_key: StrictStr,
+        binding_plot_division_matter_phase_key: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -457,7 +456,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -569,7 +568,7 @@ class BindingPlotDivisionMatterApi:
             ),
         ],
         binding_plot_division_matter_phase_key: Annotated[
-            StrictStr,
+            UUID,
             Field(
                 description="Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle."
             ),
@@ -599,7 +598,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase: Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -658,7 +657,7 @@ class BindingPlotDivisionMatterApi:
             ),
         ],
         binding_plot_division_matter_phase_key: Annotated[
-            StrictStr,
+            UUID,
             Field(
                 description="Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle."
             ),
@@ -688,7 +687,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase: Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -747,7 +746,7 @@ class BindingPlotDivisionMatterApi:
             ),
         ],
         binding_plot_division_matter_phase_key: Annotated[
-            StrictStr,
+            UUID,
             Field(
                 description="Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle."
             ),
@@ -777,7 +776,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase: Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -899,7 +898,7 @@ class BindingPlotDivisionMatterApi:
     def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_put(
         self,
         permanent_binding_plot_division_identifier: StrictStr,
-        binding_plot_division_matter_phase_key: StrictStr,
+        binding_plot_division_matter_phase_key: UUID,
         binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase,
         _request_timeout: Union[
             None,
@@ -919,7 +918,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier:  (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key:  (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase:  (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -973,7 +972,7 @@ class BindingPlotDivisionMatterApi:
     def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_put_with_http_info(
         self,
         permanent_binding_plot_division_identifier: StrictStr,
-        binding_plot_division_matter_phase_key: StrictStr,
+        binding_plot_division_matter_phase_key: UUID,
         binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase,
         _request_timeout: Union[
             None,
@@ -993,7 +992,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier:  (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key:  (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase:  (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1047,7 +1046,7 @@ class BindingPlotDivisionMatterApi:
     def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_put_without_preload_content(
         self,
         permanent_binding_plot_division_identifier: StrictStr,
-        binding_plot_division_matter_phase_key: StrictStr,
+        binding_plot_division_matter_phase_key: UUID,
         binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase,
         _request_timeout: Union[
             None,
@@ -1067,7 +1066,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier:  (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key:  (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase:  (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1196,7 +1195,7 @@ class BindingPlotDivisionMatterApi:
             ),
         ],
         binding_plot_division_matter_phase_key: Annotated[
-            StrictStr,
+            UUID,
             Field(
                 description="Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle."
             ),
@@ -1226,7 +1225,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase: Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1285,7 +1284,7 @@ class BindingPlotDivisionMatterApi:
             ),
         ],
         binding_plot_division_matter_phase_key: Annotated[
-            StrictStr,
+            UUID,
             Field(
                 description="Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle."
             ),
@@ -1315,7 +1314,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase: Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1374,7 +1373,7 @@ class BindingPlotDivisionMatterApi:
             ),
         ],
         binding_plot_division_matter_phase_key: Annotated[
-            StrictStr,
+            UUID,
             Field(
                 description="Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle."
             ),
@@ -1404,7 +1403,7 @@ class BindingPlotDivisionMatterApi:
         :param permanent_binding_plot_division_identifier: Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
         :param binding_plot_division_matter_phase_key: Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. (required)
-        :type binding_plot_division_matter_phase_key: str
+        :type binding_plot_division_matter_phase_key: UUID
         :param binding_plot_division_matter_phase: Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. (required)
         :type binding_plot_division_matter_phase: BindingPlotDivisionMatterPhase
         :param _request_timeout: timeout setting for this request. If one
@@ -1523,11 +1522,14 @@ class BindingPlotDivisionMatterApi:
         )
 
     @validate_call
-    def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post(
+    def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post(
         self,
         permanent_binding_plot_division_identifier: Annotated[
             StrictStr,
             Field(description="Pysyvä yksilöivä tunnus sitovan tonttijaon asialle."),
+        ],
+        permanent_plan_identifier: Annotated[
+            StrictStr, Field(description="Pysyvä yksilöivä tunnus kaavalle.")
         ],
         plan_effects: Annotated[PlanEffects, Field(description="Kaavan vaikutukset.")],
         _request_timeout: Union[
@@ -1541,12 +1543,14 @@ class BindingPlotDivisionMatterApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> str:
-        """Rajapinta kaavan vaikutusten luomiseen.
+    ) -> SuccessResponse:
+        """Rajapinta uusien kaavan vaikutusten luomiseen.
 
 
         :param permanent_binding_plot_division_identifier: Pysyvä yksilöivä tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
+        :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaavalle. (required)
+        :type permanent_plan_identifier: str
         :param plan_effects: Kaavan vaikutukset. (required)
         :type plan_effects: PlanEffects
         :param _request_timeout: timeout setting for this request. If one
@@ -1571,8 +1575,9 @@ class BindingPlotDivisionMatterApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post_serialize(
+        _param = self._api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post_serialize(
             permanent_binding_plot_division_identifier=permanent_binding_plot_division_identifier,
+            permanent_plan_identifier=permanent_plan_identifier,
             plan_effects=plan_effects,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1581,7 +1586,7 @@ class BindingPlotDivisionMatterApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "201": "str",
+            "201": "SuccessResponse",
             "400": "ProblemDetails",
             "422": "CustomValidationProblemDetails",
         }
@@ -1595,11 +1600,14 @@ class BindingPlotDivisionMatterApi:
         ).data
 
     @validate_call
-    def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post_with_http_info(
+    def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post_with_http_info(
         self,
         permanent_binding_plot_division_identifier: Annotated[
             StrictStr,
             Field(description="Pysyvä yksilöivä tunnus sitovan tonttijaon asialle."),
+        ],
+        permanent_plan_identifier: Annotated[
+            StrictStr, Field(description="Pysyvä yksilöivä tunnus kaavalle.")
         ],
         plan_effects: Annotated[PlanEffects, Field(description="Kaavan vaikutukset.")],
         _request_timeout: Union[
@@ -1613,12 +1621,14 @@ class BindingPlotDivisionMatterApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[str]:
-        """Rajapinta kaavan vaikutusten luomiseen.
+    ) -> ApiResponse[SuccessResponse]:
+        """Rajapinta uusien kaavan vaikutusten luomiseen.
 
 
         :param permanent_binding_plot_division_identifier: Pysyvä yksilöivä tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
+        :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaavalle. (required)
+        :type permanent_plan_identifier: str
         :param plan_effects: Kaavan vaikutukset. (required)
         :type plan_effects: PlanEffects
         :param _request_timeout: timeout setting for this request. If one
@@ -1643,8 +1653,9 @@ class BindingPlotDivisionMatterApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post_serialize(
+        _param = self._api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post_serialize(
             permanent_binding_plot_division_identifier=permanent_binding_plot_division_identifier,
+            permanent_plan_identifier=permanent_plan_identifier,
             plan_effects=plan_effects,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1653,7 +1664,7 @@ class BindingPlotDivisionMatterApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "201": "str",
+            "201": "SuccessResponse",
             "400": "ProblemDetails",
             "422": "CustomValidationProblemDetails",
         }
@@ -1667,11 +1678,14 @@ class BindingPlotDivisionMatterApi:
         )
 
     @validate_call
-    def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post_without_preload_content(
+    def api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post_without_preload_content(
         self,
         permanent_binding_plot_division_identifier: Annotated[
             StrictStr,
             Field(description="Pysyvä yksilöivä tunnus sitovan tonttijaon asialle."),
+        ],
+        permanent_plan_identifier: Annotated[
+            StrictStr, Field(description="Pysyvä yksilöivä tunnus kaavalle.")
         ],
         plan_effects: Annotated[PlanEffects, Field(description="Kaavan vaikutukset.")],
         _request_timeout: Union[
@@ -1686,11 +1700,13 @@ class BindingPlotDivisionMatterApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Rajapinta kaavan vaikutusten luomiseen.
+        """Rajapinta uusien kaavan vaikutusten luomiseen.
 
 
         :param permanent_binding_plot_division_identifier: Pysyvä yksilöivä tunnus sitovan tonttijaon asialle. (required)
         :type permanent_binding_plot_division_identifier: str
+        :param permanent_plan_identifier: Pysyvä yksilöivä tunnus kaavalle. (required)
+        :type permanent_plan_identifier: str
         :param plan_effects: Kaavan vaikutukset. (required)
         :type plan_effects: PlanEffects
         :param _request_timeout: timeout setting for this request. If one
@@ -1715,8 +1731,9 @@ class BindingPlotDivisionMatterApi:
         :return: Returns the result object.
         """  # noqa: E501
 
-        _param = self._api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post_serialize(
+        _param = self._api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post_serialize(
             permanent_binding_plot_division_identifier=permanent_binding_plot_division_identifier,
+            permanent_plan_identifier=permanent_plan_identifier,
             plan_effects=plan_effects,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1725,7 +1742,7 @@ class BindingPlotDivisionMatterApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "201": "str",
+            "201": "SuccessResponse",
             "400": "ProblemDetails",
             "422": "CustomValidationProblemDetails",
         }
@@ -1734,9 +1751,10 @@ class BindingPlotDivisionMatterApi:
         )
         return response_data.response
 
-    def _api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post_serialize(
+    def _api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post_serialize(
         self,
         permanent_binding_plot_division_identifier,
+        permanent_plan_identifier,
         plan_effects,
         _request_auth,
         _content_type,
@@ -1761,6 +1779,8 @@ class BindingPlotDivisionMatterApi:
             _path_params["permanentBindingPlotDivisionIdentifier"] = (
                 permanent_binding_plot_division_identifier
             )
+        if permanent_plan_identifier is not None:
+            _path_params["permanentPlanIdentifier"] = permanent_plan_identifier
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1789,7 +1809,7 @@ class BindingPlotDivisionMatterApi:
 
         return self.api_client.param_serialize(
             method="POST",
-            resource_path="/api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/planEffects",
+            resource_path="/api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/planEffects/{permanentPlanIdentifier}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

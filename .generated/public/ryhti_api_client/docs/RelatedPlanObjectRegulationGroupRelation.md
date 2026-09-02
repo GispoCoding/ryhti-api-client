@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **related_plan_object_uri** | **str** | Liittyvän kaavakohteen uri | 
-**regulation_group_key** | **str** | Sisäinen määräysryhmän avain | 
+**regulation_group_key** | **UUID** | Sisäinen määräysryhmän avain | 
 
 ## Example
 

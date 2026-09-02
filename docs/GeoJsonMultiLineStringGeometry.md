@@ -1,13 +1,13 @@
 # GeoJsonMultiLineStringGeometry
 
-LineString GeoJson    Esimerkki: { \"type\": \"lineString\", \"coordinates\": [ [100.0, 0.0], [101.0, 1.0] ] }
+GeoJSON MultiLineString
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**coordinates** | **List[List[List[float]]]** | Koordinaatit | 
-**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;lineString\&quot; | 
+**type** | **str** |  | 
+**coordinates** | **List[List[List[float]]]** |  | 
 
 ## Example
 

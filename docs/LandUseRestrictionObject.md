@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**land_use_restriction_object_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus. | 
+**land_use_restriction_object_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus. | 
 **land_use_restriction_object_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/landuserestrictionobject/{guid}) | [optional] [readonly] 
 **related_properties** | **List[str]** | Tieto liittyvistä kiinteistöistä, joita rajoitus koskee | [optional] 
 **related_plans** | [**List[RelatedPlan]**](RelatedPlan.md) | Alueidenkäytön rajoituskohteen alueelle kohdistuvan kaavan pysyvä kaavatunnus | [optional] 

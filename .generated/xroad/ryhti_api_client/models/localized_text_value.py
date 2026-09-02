@@ -16,56 +16,39 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from ryhti_api_client.models.attribute_value import AttributeValue
 from ryhti_api_client.models.language_string import LanguageString
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
-class LocalizedTextValue(BaseModel):
+class LocalizedTextValue(AttributeValue):
     """
-    Lokalisoitu teksti
+    LocalizedTextValue
     """  # noqa: E501
 
+    data_type: StrictStr = Field(
+        description='Pakollinen arvo: "LocalizedText"', alias="dataType"
+    )
     text: Optional[LanguageString] = Field(
         default=None, description="Kielistetty teksti"
     )
     syntax: Optional[StrictStr] = Field(default=None, description="Syntaksi")
-    data_type: StrictStr = Field(
-        description='Pakollinen arvo: "localizedText"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = ["dataType", "text", "syntax"]
 
     @field_validator("data_type")
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(
-            [
-                "LocalizedText",
-                "Text",
-                "Numeric",
-                "NumericRange",
-                "PositiveNumeric",
-                "PositiveNumericRange",
-                "Decimal",
-                "DecimalRange",
-                "PositiveDecimal",
-                "PositiveDecimalRange",
-                "Code",
-                "Identifier",
-                "SpotElevation",
-                "TimePeriod",
-                "TimePeriodDateOnly",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('LocalizedText', 'Text', 'Numeric', 'NumericRange', 'PositiveNumeric', 'PositiveNumericRange', 'Decimal', 'DecimalRange', 'PositiveDecimal', 'PositiveDecimalRange', 'Code', 'Identifier', 'SpotElevation', 'TimePeriod', 'TimePeriodDateOnly')"
-            )
+        if value not in set(["LocalizedText"]):
+            raise ValueError("must be one of enum values ('LocalizedText')")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -76,8 +59,7 @@ class LocalizedTextValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -101,6 +83,9 @@ class LocalizedTextValue(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of text
+        if self.text:
+            _dict["text"] = self.text.to_dict()
         return _dict
 
     @classmethod
@@ -112,5 +97,13 @@ class LocalizedTextValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "text": LanguageString.from_dict(obj["text"])
+                if obj.get("text") is not None
+                else None,
+                "syntax": obj.get("syntax"),
+            }
+        )
         return _obj

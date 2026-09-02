@@ -1,14 +1,13 @@
 # SpotElevation
 
-Korkeuspiste
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;SpotElevation\&quot; | 
 **number** | **int** | Arvo | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;spotElevation\&quot; | 
 
 ## Example
 

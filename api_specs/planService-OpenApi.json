@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "Ryhti API",
     "description": "Rakennetun ympäristön tietojärjestelmän rajapinta",
@@ -1115,17 +1115,26 @@
         }
       }
     },
-    "/api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/planEffects": {
+    "/api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/planEffects/{permanentPlanIdentifier}": {
       "post": {
         "tags": [
           "BindingPlotDivisionMatter"
         ],
-        "summary": "Rajapinta kaavan vaikutusten luomiseen.",
+        "summary": "Rajapinta uusien kaavan vaikutusten luomiseen.",
         "parameters": [
           {
             "name": "permanentBindingPlotDivisionIdentifier",
             "in": "path",
             "description": "Pysyvä yksilöivä tunnus sitovan tonttijaon asialle.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "permanentPlanIdentifier",
+            "in": "path",
+            "description": "Pysyvä yksilöivä tunnus kaavalle.",
             "required": true,
             "schema": {
               "type": "string"
@@ -1142,7 +1151,7 @@
                     "$ref": "#/components/schemas/PlanEffects"
                   }
                 ],
-                "description": "KaavanVaikutukset"
+                "description": "Kaavan vaikutukset"
               }
             },
             "text/json": {
@@ -1152,7 +1161,7 @@
                     "$ref": "#/components/schemas/PlanEffects"
                   }
                 ],
-                "description": "KaavanVaikutukset"
+                "description": "Kaavan vaikutukset"
               }
             },
             "application/*+json": {
@@ -1162,7 +1171,7 @@
                     "$ref": "#/components/schemas/PlanEffects"
                   }
                 ],
-                "description": "KaavanVaikutukset"
+                "description": "Kaavan vaikutukset"
               }
             }
           },
@@ -1174,20 +1183,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string",
-                  "format": "uri"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "uri"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "uri"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -6165,101 +6171,30 @@
               }
             ],
             "description": "Arvo",
-            "nullable": true
+            "nullable": true,
+            "discriminator": {
+              "propertyName": "dataType",
+              "mapping": {
+                "Code": "#/components/schemas/CodeValue",
+                "Numeric": "#/components/schemas/NumericValue",
+                "NumericRange": "#/components/schemas/NumericRange",
+                "PositiveNumeric": "#/components/schemas/PositiveNumericValue",
+                "PositiveNumericRange": "#/components/schemas/PositiveNumericRange",
+                "Decimal": "#/components/schemas/DecimalValue",
+                "DecimalRange": "#/components/schemas/DecimalRange",
+                "PositiveDecimal": "#/components/schemas/PositiveDecimalValue",
+                "PositiveDecimalRange": "#/components/schemas/PositiveDecimalRange",
+                "SpotElevation": "#/components/schemas/SpotElevation",
+                "Identifier": "#/components/schemas/IdentifierValue",
+                "LocalizedText": "#/components/schemas/LocalizedTextValue",
+                "Text": "#/components/schemas/TextValue",
+                "TimePeriod": "#/components/schemas/TimePeriodValue",
+                "TimePeriodDateOnly": "#/components/schemas/TimePeriodDateOnlyValue"
+              }
+            }
           }
         },
         "additionalProperties": false
-      },
-      "AttachmentDocument": {
-        "required": [
-          "accessibility",
-          "attachmentDocumentKey",
-          "categoryOfPublicity",
-          "documentDate",
-          "documentIdentifier",
-          "fileKey",
-          "languages",
-          "name",
-          "personalDataContent",
-          "retentionTime"
-        ],
-        "type": "object",
-        "properties": {
-          "attachmentDocumentKey": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
-            "format": "uuid"
-          },
-          "documentIdentifier": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Asiakirjan pysyvä tunnus, esim. diaarinumero tai muu dokumentinhallinnan tunnus."
-          },
-          "name": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LanguageString"
-              }
-            ],
-            "description": "Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli."
-          },
-          "personalDataContent": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Kuvaa asiakirjan henkilötietosisällön. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/henkilotietosisalto\">http://uri.suomi.fi/codelist/rytj/henkilotietosisalto</a>"
-          },
-          "categoryOfPublicity": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Kuvaa asiakirjan julkisuusluokan. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/julkisuus\">http://uri.suomi.fi/codelist/rytj/julkisuus</a>"
-          },
-          "accessibility": {
-            "type": "boolean"
-          },
-          "retentionTime": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Asiakirjan säilytysaika vuosina ennen sen hävittämistä. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/sailytysaika\">http://uri.suomi.fi/codelist/rytj/sailytysaika</a>"
-          },
-          "confirmationDate": {
-            "type": "string",
-            "format": "date",
-            "nullable": true
-          },
-          "languages": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Asiakirjan kieli tai sisältämät kielet. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/ryhtikielet\">http://uri.suomi.fi/codelist/rytj/ryhtikielet</a>"
-          },
-          "fileKey": {
-            "type": "string",
-            "description": "Erillisen rajapinnan kautta tallennetun tiedoston avain.",
-            "format": "uuid"
-          },
-          "descriptors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Descriptor"
-            },
-            "nullable": true
-          },
-          "documentDate": {
-            "minLength": 1,
-            "type": "string",
-            "format": "date"
-          },
-          "arrivedDate": {
-            "type": "string",
-            "format": "date",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Liiteasiakirja (base)"
       },
       "AttributeValue": {
         "type": "object",
@@ -6286,7 +6221,30 @@
             "description": "Enumeraatio joka määrittää Arvo-luokkien (Domain.ValueObjects.AttributeValue) tyypin.\r\nJokaisella konkreettisella Arvo-luokan (Domain.ValueObjects.AttributeValue) toteutuksella tulee olla sitä vastaava DataType enumeraation arvo."
           }
         },
-        "additionalProperties": false
+        "description": "Base class for attribute values representing typed values with units of measure.\r\nNote: CustomSwaggerSchemaFilter overrides Swagger descriptions to show property-specific XML comments (#31650),\r\ne.g., \"Positiivinen numeerinen arvo\" is replaced to be \"Rakentamisen määrä\".",
+        "discriminator": {
+          "propertyName": "dataType",
+          "mapping": {
+            "Code": "#/components/schemas/CodeValue",
+            "Numeric": "#/components/schemas/NumericValue",
+            "NumericRange": "#/components/schemas/NumericRange",
+            "PositiveNumeric": "#/components/schemas/PositiveNumericValue",
+            "PositiveNumericRange": "#/components/schemas/PositiveNumericRange",
+            "Decimal": "#/components/schemas/DecimalValue",
+            "DecimalRange": "#/components/schemas/DecimalRange",
+            "PositiveDecimal": "#/components/schemas/PositiveDecimalValue",
+            "PositiveDecimalRange": "#/components/schemas/PositiveDecimalRange",
+            "SpotElevation": "#/components/schemas/SpotElevation",
+            "Identifier": "#/components/schemas/IdentifierValue",
+            "LocalizedText": "#/components/schemas/LocalizedTextValue",
+            "Text": "#/components/schemas/TextValue",
+            "TimePeriod": "#/components/schemas/TimePeriodValue",
+            "TimePeriodDateOnly": "#/components/schemas/TimePeriodDateOnlyValue"
+          }
+        },
+        "required": [
+          "dataType"
+        ]
       },
       "BindingPlotDivision": {
         "required": [
@@ -6489,11 +6447,18 @@
       },
       "BindingPlotDivisionCancellationInfo": {
         "required": [
+          "bindingPlotDivisionCancellationInfoKey",
           "cancelledBindingPlotDivisionUri",
           "cancelsEntireBindingPlotDivision"
         ],
         "type": "object",
         "properties": {
+          "bindingPlotDivisionCancellationInfoKey": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Tiedon tuottajatahon tietojärjestelmän generoima kumoutumistiedon versioriippumaton tunnus",
+            "format": "uuid"
+          },
           "cancelledBindingPlotDivisionUri": {
             "minLength": 1,
             "type": "string",
@@ -6760,6 +6725,14 @@
               }
             ],
             "description": "Päätöksentekijä",
+            "nullable": true
+          },
+          "bindingPlotDivisionCancellations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BindingPlotDivisionCancellationInfo"
+            },
+            "description": "Kumoutumistieto",
             "nullable": true
           }
         },
@@ -7092,11 +7065,18 @@
       },
       "BoundaryPoint": {
         "required": [
+          "boundaryPointKey",
           "boundaryPointOrPegId",
           "geometry"
         ],
         "type": "object",
         "properties": {
+          "boundaryPointKey": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Tiedon tuottajatahon tietojärjestelmän generoima rajapisteen versioriippumaton tunnus",
+            "format": "uuid"
+          },
           "boundaryPointOrPegId": {
             "minLength": 1,
             "type": "string",
@@ -7371,6 +7351,29 @@
         "additionalProperties": false,
         "description": "Toimija"
       },
+      "CancelledByResponse": {
+        "type": "object",
+        "properties": {
+          "planCancellationKey": {
+            "type": "string",
+            "description": "Kumoamistiedon avain",
+            "format": "uuid"
+          },
+          "permanentPlanIdentifier": {
+            "type": "string",
+            "description": "Kumoavan kaavan pysyvä kaavatunnus",
+            "nullable": true
+          },
+          "dateOfValidity": {
+            "type": "string",
+            "description": "Voimaantulopäivämäärä",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Kuvaa kumoamistiedon, eli minkä kaavan toimesta tämä kaava-asia on kumottu."
+      },
       "CancelledGroupRelations": {
         "required": [
           "planObjectUri",
@@ -7403,6 +7406,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Code"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Code\""
+          },
           "code": {
             "type": "string",
             "description": "Koodiston arvo (uri)"
@@ -7418,27 +7428,6 @@
               }
             ],
             "description": "Nimi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"code\""
           }
         },
         "additionalProperties": false,
@@ -7453,6 +7442,14 @@
           },
           "message": {
             "type": "string",
+            "nullable": true
+          },
+          "localizedMessage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LocalizedMessage"
+              }
+            ],
             "nullable": true
           },
           "instance": {
@@ -7517,6 +7514,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "DecimalRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"DecimalRange\""
+          },
           "minimumValue": {
             "type": "number",
             "description": "Minimiarvo",
@@ -7530,27 +7534,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"decimalRange\""
           }
         },
         "additionalProperties": false,
@@ -7567,6 +7550,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Decimal"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Decimal\""
+          },
           "number": {
             "type": "number",
             "description": "Desimaaliluku",
@@ -7575,27 +7565,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"decimal\""
           }
         },
         "additionalProperties": false,
@@ -7672,26 +7641,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Yleiskaavamääräysryhmä"
-      },
-      "GeoJsonGeometry": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Tuetut geometriatyypit"
-          }
-        },
-        "additionalProperties": false,
-        "description": "GeoJson geometria (abstrakti luokka, katso toteutukset)"
+        "description": "Yleismääräysryhmä"
       },
       "GeoJsonLineStringGeometry": {
         "required": [
@@ -7699,12 +7649,14 @@
           "type"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GeoJsonGeometry"
-          }
-        ],
         "properties": {
+          "type": {
+            "enum": [
+              "LineString"
+            ],
+            "type": "string",
+            "description": null
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -7713,25 +7665,11 @@
                 "type": "number",
                 "format": "double"
               }
-            },
-            "description": "Koordinaatit",
-            "example": "[ [100.0, 0.0], [101.0, 1.0] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"lineString\""
+            }
           }
         },
         "additionalProperties": false,
-        "description": "LineString GeoJson\r\n\r\nEsimerkki: { \"type\": \"lineString\", \"coordinates\": [ [100.0, 0.0], [101.0, 1.0] ] }"
+        "description": "GeoJSON LineString"
       },
       "GeoJsonMultiLineStringGeometry": {
         "required": [
@@ -7739,12 +7677,14 @@
           "type"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GeoJsonGeometry"
-          }
-        ],
         "properties": {
+          "type": {
+            "enum": [
+              "MultiLineString"
+            ],
+            "type": "string",
+            "description": null
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -7756,25 +7696,11 @@
                   "format": "double"
                 }
               }
-            },
-            "description": "Koordinaatit",
-            "example": "[ [[100.0, 0.0], [101.0, 1.0]], [[101.0, 1.0], [100.0, 1.0]] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"lineString\""
+            }
           }
         },
         "additionalProperties": false,
-        "description": "LineString GeoJson\r\n\r\nEsimerkki: { \"type\": \"lineString\", \"coordinates\": [ [100.0, 0.0], [101.0, 1.0] ] }"
+        "description": "GeoJSON MultiLineString"
       },
       "GeoJsonMultiPointGeometry": {
         "required": [
@@ -7782,12 +7708,14 @@
           "type"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GeoJsonGeometry"
-          }
-        ],
         "properties": {
+          "type": {
+            "enum": [
+              "MultiPoint"
+            ],
+            "type": "string",
+            "description": null
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -7796,25 +7724,11 @@
                 "type": "number",
                 "format": "double"
               }
-            },
-            "description": "Koordinaatit",
-            "example": "[ [100.0, 0.0], [101.0, 1.0] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"multiPoint\""
+            }
           }
         },
         "additionalProperties": false,
-        "description": "MultiPoint GeoJson\r\n\r\nEsimerkki: { \"type\": \"multiPoint\", \"coordinates\": [ [100.0, 0.0], [101.0, 1.0] ] }"
+        "description": "GeoJSON MultiPoint"
       },
       "GeoJsonMultiPolygonGeometry": {
         "required": [
@@ -7822,12 +7736,14 @@
           "type"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GeoJsonGeometry"
-          }
-        ],
         "properties": {
+          "type": {
+            "enum": [
+              "MultiPolygon"
+            ],
+            "type": "string",
+            "description": null
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -7842,25 +7758,11 @@
                   }
                 }
               }
-            },
-            "description": "Koordinaatit",
-            "example": "[ [ [ [102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0 ] ] ], [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"multiPolygon\""
+            }
           }
         },
         "additionalProperties": false,
-        "description": "MultiPolygon GeoJson\r\n\r\nEsimerkki: { \"type\": \"multiPolygon\", \"coordinates\": [ [ [ [102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0 ] ] ], [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] ] }"
+        "description": "GeoJSON MultiPolygon"
       },
       "GeoJsonPointGeometry": {
         "required": [
@@ -7868,36 +7770,24 @@
           "type"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GeoJsonGeometry"
-          }
-        ],
         "properties": {
+          "type": {
+            "enum": [
+              "Point"
+            ],
+            "type": "string",
+            "description": null
+          },
           "coordinates": {
             "type": "array",
             "items": {
               "type": "number",
               "format": "double"
-            },
-            "description": "Koordinaatit",
-            "example": "[100.0, 0.0]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"point\""
+            }
           }
         },
         "additionalProperties": false,
-        "description": "Point GeoJson\r\n\r\nEsimerkki: { \"type\": \"point\", \"coordinates\": [100.0, 0.0] }"
+        "description": "GeoJSON Point"
       },
       "GeoJsonPolygonGeometry": {
         "required": [
@@ -7905,12 +7795,14 @@
           "type"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GeoJsonGeometry"
-          }
-        ],
         "properties": {
+          "type": {
+            "enum": [
+              "Polygon"
+            ],
+            "type": "string",
+            "description": null
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -7922,25 +7814,11 @@
                   "format": "double"
                 }
               }
-            },
-            "description": "Koordinaatit",
-            "example": " [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] }"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"polygon\""
+            }
           }
         },
         "additionalProperties": false,
-        "description": "Polygon GeoJson\r\n\r\nEsimerkki: { \"type\": \"polygon\", \"coordinates\": [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] }"
+        "description": "GeoJSON Polygon"
       },
       "HandlingEvent": {
         "required": [
@@ -8093,6 +7971,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Identifier"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Identifier\""
+          },
           "identifier": {
             "type": "string",
             "description": "Tunnus"
@@ -8108,27 +7993,6 @@
               }
             ],
             "description": "Järjestelmän nimi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"identifier\""
           }
         },
         "additionalProperties": false,
@@ -8544,6 +8408,14 @@
               "$ref": "#/components/schemas/LandUseRestrictionMatterPhase"
             },
             "description": "Vaiheet"
+          },
+          "originalAdministrativeAreaIdentifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Alkuperäiset hallinnollisen alueen tunnukset",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8722,6 +8594,7 @@
           "administrativeAreaIdentifiers",
           "landUseRestrictionType",
           "name",
+          "originalAdministrativeAreaIdentifiers",
           "permanentLandUseRestrictionIdentifier",
           "phases",
           "timeOfInitiation"
@@ -8818,6 +8691,13 @@
             "type": "string",
             "description": "Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/landuserestrictionmatter/{identifier})",
             "readOnly": true
+          },
+          "originalAdministrativeAreaIdentifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Alkuperäiset hallinnollisen alueen tunnukset"
           },
           "phases": {
             "type": "array",
@@ -9053,6 +8933,24 @@
         "additionalProperties": false,
         "description": "Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli."
       },
+      "LocalizedMessage": {
+        "type": "object",
+        "properties": {
+          "fi": {
+            "type": "string",
+            "nullable": true
+          },
+          "sv": {
+            "type": "string",
+            "nullable": true
+          },
+          "en": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LocalizedTextValue": {
         "required": [
           "dataType"
@@ -9064,6 +8962,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "LocalizedText"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"LocalizedText\""
+          },
           "text": {
             "allOf": [
               {
@@ -9075,27 +8980,6 @@
           "syntax": {
             "type": "string",
             "description": "Syntaksi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"localizedText\""
           }
         },
         "additionalProperties": false,
@@ -9104,10 +8988,17 @@
       "MotherProperty": {
         "required": [
           "containedArea",
-          "fullyIncluded"
+          "fullyIncluded",
+          "motherPropertyKey"
         ],
         "type": "object",
         "properties": {
+          "motherPropertyKey": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Tiedon tuottajatahon tietojärjestelmän generoima muodostajakiinteistön versioriippumaton tunnus",
+            "format": "uuid"
+          },
           "propertyIdentifier": {
             "minLength": 3,
             "type": "string",
@@ -9125,7 +9016,7 @@
                 "$ref": "#/components/schemas/PositiveNumericValue"
               }
             ],
-            "description": "Positiivinen numeerinen arvo"
+            "description": "Sisältyvä pinta-ala"
           },
           "fullyIncluded": {
             "type": "boolean",
@@ -9146,6 +9037,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "NumericRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"NumericRange\""
+          },
           "minimumValue": {
             "type": "integer",
             "description": "Minimiarvo",
@@ -9159,27 +9057,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"numericRange\""
           }
         },
         "additionalProperties": false,
@@ -9196,6 +9073,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Numeric"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Numeric\""
+          },
           "number": {
             "type": "integer",
             "description": "Numero",
@@ -9204,27 +9088,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"numeric\""
           }
         },
         "additionalProperties": false,
@@ -9420,6 +9283,14 @@
               "$ref": "#/components/schemas/PlanCancellationInfo"
             },
             "description": "Kumoamistieto",
+            "nullable": true
+          },
+          "bindingPlotDivisionCancellationInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BindingPlotDivisionCancellationInfo"
+            },
+            "description": "Sitovan tonttijaon kumoutumistieto.",
             "nullable": true
           },
           "planReport": {
@@ -9683,6 +9554,14 @@
             },
             "description": "Kumottavat kaavakohteet",
             "nullable": true
+          },
+          "cancelledGeneralRegulationGroupUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Kumottavat yleismääräysryhmät",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -9815,6 +9694,14 @@
             },
             "description": "Kumoamistieto",
             "nullable": true
+          },
+          "bindingPlotDivisionCancellationInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BindingPlotDivisionCancellationInfo"
+            },
+            "description": "Sitovan tonttijaon kumoutumistieto.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -9822,38 +9709,97 @@
       },
       "PlanEffects": {
         "required": [
-          "bindingPlotDivisionUri",
-          "relatedPlotDivisionPlots",
-          "type"
+          "bindingPlotDivisionPermanentIdentifier",
+          "notInAccordanceWithPlan",
+          "permanentPlanIdentifier"
         ],
         "type": "object",
         "properties": {
-          "type": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Kaavan vaikutuksen laji. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/kaavanVaikutuksenLaji\">http://uri.suomi.fi/codelist/rytj/kaavanVaikutuksenLaji</a>"
-          },
-          "bindingPlotDivisionUri": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivision/{bindingplotdivisionkey}) sitovaan tonttijakoon."
-          },
-          "fullyIncluded": {
+          "notInAccordanceWithPlan": {
             "type": "boolean",
-            "description": "Jos arvo on true, kaavan vaikutus kohdistuu sitovaan tonttijakoon kokonaisuudessaan, muuten tonttijakotontti kohtaisesti.",
-            "nullable": true
+            "description": "Onko kaavan mukainen"
           },
-          "relatedPlotDivisionPlots": {
-            "minItems": 1,
+          "bindingPlotDivisionPermanentIdentifier": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Tonttijaon tunniste"
+          },
+          "permanentPlanIdentifier": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Kaavan pysyvä tunniste"
+          },
+          "planEffectsPlots": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RelatedPlotDivisionPlot"
+              "$ref": "#/components/schemas/PlanEffectsPlot"
             },
-            "description": "Tonttijakotontin yksilöivätunnus, jota vaikutus koskee."
+            "description": "Kaavan vaikutukset tonttijakotonttikohtaisesti",
+            "nullable": true
           }
         },
         "additionalProperties": false,
-        "description": "KaavanVaikutukset"
+        "description": "Kaavan vaikutukset"
+      },
+      "PlanEffectsPlot": {
+        "required": [
+          "notInAccordanceWithPlan"
+        ],
+        "type": "object",
+        "properties": {
+          "notInAccordanceWithPlan": {
+            "type": "boolean",
+            "description": "Onko kaavan mukainen"
+          },
+          "areaReservationTypeUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Aluevaraus: kaavanmääräyslaji.\r\nLista kaavanmääräyslajin URI-tunnisteita koodistosta http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji",
+            "nullable": true
+          },
+          "areaReservationRegulationUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planregulationkey}) kaavassa osoitettuun aluevarauksen kaavamääräykseen.",
+            "nullable": true
+          },
+          "volumeOfBuildingRegulationUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planregulationkey})\r\nkaavassa osoitettuun rakentamisen määrän kaavamääräykseen.",
+            "nullable": true
+          },
+          "areaReservationLetterIdentifier": {
+            "type": "string",
+            "description": "Aluevarauksen kirjaintunnus",
+            "nullable": true
+          },
+          "permittedBuildingArea": {
+            "type": "integer",
+            "description": "Rakentamisen määrä, kerrosala m2",
+            "format": "int32",
+            "nullable": true
+          },
+          "permittedBuildingVolume": {
+            "type": "integer",
+            "description": "Rakentamisen määrä, rakennustilavuus m3",
+            "format": "int32",
+            "nullable": true
+          },
+          "plotDivisionPlotKey": {
+            "type": "string",
+            "description": "Tonttijakotontin tunniste (PlotDivisionPlotKey), johon kaavan vaikutus kohdistuu.\r\nPakollinen",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Liittyvä tonttijakotontti\r\nKaavanVaikutukset Tonttijakotonttikohtaisesti"
       },
       "PlanMap": {
         "required": [
@@ -9889,6 +9835,9 @@
           },
           "coordinateSystem": {
             "minLength": 1,
+            "enum": [
+              "http://uri.suomi.fi/codelist/rakrek/ETRS89/code/EPSG3067"
+            ],
             "type": "string"
           }
         },
@@ -10410,11 +10359,32 @@
             "description": "Liittyvät kaava asiat (URI)",
             "nullable": true
           },
+          "effectiveLifeCycleStatus": {
+            "type": "string",
+            "description": "Ajantasainen elinkaaren tila. Jos kaavan kaikki kaavakohteet on kumottu, palautetaan kumottu (14).",
+            "nullable": true
+          },
+          "periodOfValidity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimePeriodDateOnly"
+              }
+            ],
+            "description": "Ajantasainen voimassaoloaika (alku- ja loppupäivämäärä).",
+            "nullable": true
+          },
           "planMatterPhases": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PlanMatterPhaseUriResponse"
             }
+          },
+          "cancelledBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CancelledByResponse"
+            },
+            "description": "Kumoamistieto. Kuvaa kaavan kumoamista. Kumoamistieto voi kumota kaavan kokonaan tai osittain."
           },
           "originalAdministrativeAreaIdentifiers": {
             "type": "array",
@@ -10667,7 +10637,7 @@
                 "$ref": "#/components/schemas/DecimalRange"
               }
             ],
-            "description": "Desimaaliarvoväli",
+            "description": "PystysuuntainenRajaus",
             "nullable": true
           },
           "relatedPlanSourceDataKeys": {
@@ -10709,6 +10679,14 @@
               "format": "uuid"
             },
             "description": "LiittyväKohde UUID/localID",
+            "nullable": true
+          },
+          "relatedPlanObjectUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Liittyvä jo tallennetun kaavakohten Uri",
             "nullable": true
           }
         },
@@ -10943,7 +10921,28 @@
                 "$ref": "#/components/schemas/TimePeriodDateOnlyValue"
               }
             ],
-            "nullable": true
+            "description": "Base class for attribute values representing typed values with units of measure.\r\nNote: CustomSwaggerSchemaFilter overrides Swagger descriptions to show property-specific XML comments (#31650),\r\ne.g., \"Positiivinen numeerinen arvo\" is replaced to be \"Rakentamisen määrä\".",
+            "nullable": true,
+            "discriminator": {
+              "propertyName": "dataType",
+              "mapping": {
+                "Code": "#/components/schemas/CodeValue",
+                "Numeric": "#/components/schemas/NumericValue",
+                "NumericRange": "#/components/schemas/NumericRange",
+                "PositiveNumeric": "#/components/schemas/PositiveNumericValue",
+                "PositiveNumericRange": "#/components/schemas/PositiveNumericRange",
+                "Decimal": "#/components/schemas/DecimalValue",
+                "DecimalRange": "#/components/schemas/DecimalRange",
+                "PositiveDecimal": "#/components/schemas/PositiveDecimalValue",
+                "PositiveDecimalRange": "#/components/schemas/PositiveDecimalRange",
+                "SpotElevation": "#/components/schemas/SpotElevation",
+                "Identifier": "#/components/schemas/IdentifierValue",
+                "LocalizedText": "#/components/schemas/LocalizedTextValue",
+                "Text": "#/components/schemas/TextValue",
+                "TimePeriod": "#/components/schemas/TimePeriodValue",
+                "TimePeriodDateOnly": "#/components/schemas/TimePeriodDateOnlyValue"
+              }
+            }
           },
           "lifeCycleStatus": {
             "enum": [
@@ -11137,11 +11136,9 @@
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/arvokasGeologinenMuodostuma",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kulttuuriymparistoarvojenAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/merkittavaRakennettuKulttuuriymparisto",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaRakennettuKulttuuriymparisto",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunkiTaiKylakuvallisestiArvokasAlue",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/muuArkeologinenKohde",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaArkeologinenKohde",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/arkeologinenKohde",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/historiallinenKohde",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunkiTaiKylakuvallisestiArvokasAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/unesconMaailmanperintokohde",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/saamelaiskulttuurinKannaltaTarkeaAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/maisemallisestiArvokasAlue",
@@ -11157,6 +11154,7 @@
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/vaaraAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojavyohyke",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/konsultointivyohyke",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunginTaiKunnanosa",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kunnanTaiKaupunginOsa",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/korttelialueTaiKorttelialueenOsa",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/rakennuspaikka",
@@ -11232,7 +11230,13 @@
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/maaraAikainenKieltoRakennuksenRakentamiseksi",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suunnittelumaarays",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/rakentamismaarays",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojelumaarays"
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojelumaarays",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/talousrakennus",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/sauna",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/paivakoti",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaRakennettuKulttuuriymparisto",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaArkeologinenKohde",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/muuArkeologinenKohde"
             ],
             "type": "string",
             "description": "Määräys tai määräyksen osa, jolla ohjataan alueidenkäyttöä ja rakentamista. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji\">http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji</a>"
@@ -11497,8 +11501,7 @@
           "motherProperties",
           "plotDivisionPlotIdentifier",
           "plotDivisionPlotKey",
-          "relatedPlans",
-          "volumeOfBuilding"
+          "relatedPlans"
         ],
         "type": "object",
         "properties": {
@@ -11523,7 +11526,7 @@
                 "$ref": "#/components/schemas/PositiveNumericValue"
               }
             ],
-            "description": "Positiivinen numeerinen arvo",
+            "description": "Pinta-ala",
             "nullable": true
           },
           "projectedArea": {
@@ -11532,7 +11535,7 @@
                 "$ref": "#/components/schemas/PositiveNumericValue"
               }
             ],
-            "description": "Positiivinen numeerinen arvo",
+            "description": "Projisoitu pinta-ala",
             "nullable": true
           },
           "areaReservations": {
@@ -11707,11 +11710,9 @@
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/arvokasGeologinenMuodostuma",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kulttuuriymparistoarvojenAlue",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/merkittavaRakennettuKulttuuriymparisto",
-                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaRakennettuKulttuuriymparisto",
-                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunkiTaiKylakuvallisestiArvokasAlue",
-                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/muuArkeologinenKohde",
-                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaArkeologinenKohde",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/arkeologinenKohde",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/historiallinenKohde",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunkiTaiKylakuvallisestiArvokasAlue",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/unesconMaailmanperintokohde",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/saamelaiskulttuurinKannaltaTarkeaAlue",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/maisemallisestiArvokasAlue",
@@ -11727,6 +11728,7 @@
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/vaaraAlue",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojavyohyke",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/konsultointivyohyke",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunginTaiKunnanosa",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kunnanTaiKaupunginOsa",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/korttelialueTaiKorttelialueenOsa",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/rakennuspaikka",
@@ -11802,7 +11804,13 @@
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/maaraAikainenKieltoRakennuksenRakentamiseksi",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suunnittelumaarays",
                 "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/rakentamismaarays",
-                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojelumaarays"
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojelumaarays",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/talousrakennus",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/sauna",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/paivakoti",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaRakennettuKulttuuriymparisto",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaArkeologinenKohde",
+                "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/muuArkeologinenKohde"
               ],
               "type": "string"
             },
@@ -11819,7 +11827,27 @@
                 "$ref": "#/components/schemas/PositiveNumericValue"
               }
             ],
-            "description": "Positiivinen numeerinen arvo"
+            "description": "Rakentamisen määrä (vanhentunut, käytä PermittedBuildingArea tai PermittedBuildingVolume)",
+            "nullable": true,
+            "deprecated": true
+          },
+          "permittedBuildingArea": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PositiveNumericValue"
+              }
+            ],
+            "description": "Sallittu rakennusala (m²)",
+            "nullable": true
+          },
+          "permittedBuildingVolume": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PositiveNumericValue"
+              }
+            ],
+            "description": "Sallittu rakennustilavuus (m³)",
+            "nullable": true
           },
           "motherProperties": {
             "minItems": 1,
@@ -11856,7 +11884,7 @@
                 "$ref": "#/components/schemas/DecimalRange"
               }
             ],
-            "description": "Desimaaliarvoväli",
+            "description": "Pystysuuntainen rajaus",
             "nullable": true
           },
           "areaReservationRegulationUris": {
@@ -11889,6 +11917,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveDecimalRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveDecimalRange\""
+          },
           "minimumValue": {
             "type": "number",
             "description": "Minimiarvo",
@@ -11902,27 +11937,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveDecimalRange\""
           }
         },
         "additionalProperties": false,
@@ -11939,6 +11953,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveDecimal"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveDecimal\""
+          },
           "number": {
             "type": "number",
             "description": "Desimaali",
@@ -11947,27 +11968,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveDecimal\""
           }
         },
         "additionalProperties": false,
@@ -11984,6 +11984,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveNumericRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveNumericRange\""
+          },
           "minimumValue": {
             "type": "integer",
             "description": "Minimiarvo",
@@ -11997,27 +12004,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveNumericRange\""
           }
         },
         "additionalProperties": false,
@@ -12034,6 +12020,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveNumeric"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveNumeric\""
+          },
           "number": {
             "type": "integer",
             "description": "Numero",
@@ -12042,27 +12035,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveNumeric\""
           }
         },
         "additionalProperties": false,
@@ -12078,10 +12050,12 @@
         "properties": {
           "planObjectKey": {
             "type": "string",
+            "description": "Key of the plan object this presentation alignment is associated with.",
             "format": "uuid"
           },
           "planRegulationGroupKey": {
             "type": "string",
+            "description": "Key of the plan regulation group this presentation alignment is associated with.",
             "format": "uuid"
           },
           "geometry": {
@@ -12089,15 +12063,18 @@
               {
                 "$ref": "#/components/schemas/RyhtiGeometry"
               }
-            ]
+            ],
+            "description": "Geometry of the presentation alignment. Allowed types: Point, LineString."
           },
           "rotation": {
             "type": "integer",
+            "description": "Rotation of the presentation alignment in degrees. Allowed range: -360 to 360.",
             "format": "int32",
             "nullable": true
           },
           "language": {
             "type": "string",
+            "description": "Language of the presentation alignment.\r\nCode value from: http://uri.suomi.fi/codelist/rytj/ryhtikielet\r\n\r\nAllowed values:\r\n<list type=\"bullet\"><item><description>fi - suomi</description></item><item><description>sv - ruotsi</description></item><item><description>en - englanti</description></item><item><description>smn - inarinsaame</description></item><item><description>sms - koltansaame</description></item><item><description>se - pohjoissaame</description></item></list>",
             "nullable": true
           }
         },
@@ -12131,12 +12108,21 @@
         "additionalProperties": {}
       },
       "RelatedPlan": {
+        "required": [
+          "relatedPlanKey"
+        ],
         "type": "object",
         "properties": {
           "relatedPlanUri": {
             "type": "string",
             "description": "Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{plankey}) tonttijakotontin alueelle kohdistuvaan vaikuttavaan kaavaan.",
             "nullable": true
+          },
+          "relatedPlanKey": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Tiedon tuottajatahon tietojärjestelmän generoima vaikuttavan kaavan versioriippumaton tunnus",
+            "format": "uuid"
           },
           "relatedProducerPlanIdentifier": {
             "type": "string",
@@ -12165,46 +12151,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "RelatedPlotDivisionPlot": {
-        "required": [
-          "referenceUri",
-          "relatedPlans"
-        ],
-        "type": "object",
-        "properties": {
-          "referenceUri": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/plotdivisionplot/{plotdivisionplotkey}) sitovassa tonttijaossa osoitettuun tonttijakotonttiin."
-          },
-          "relatedPlans": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RelatedPlan"
-            },
-            "description": "Tonttijakotontin alueelle kohdistuvan vaikuttavan kaavan pysyvä kaavatunnus"
-          },
-          "areaReservationRegulationUris": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planregulationkey}) kaavassa osoitettuun aluevarauksen kaavamääräykseen.",
-            "nullable": true
-          },
-          "volumeOfBuildingRegulationUris": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planregulationkey}) kaavassa osoitettuun rakentamisen määrän kaavamääräykseen.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "LiittyväTonttijakotontti"
       },
       "RelatedRegulationGroupPlanObjectRelation": {
         "type": "object",
@@ -12289,7 +12235,7 @@
           },
           "projectName": {
             "type": "string",
-            "description": "Kaavahankkeen pysyvä nimi. Nimi on uniikki eikä sitä voi vaihtaa."
+            "description": "Hankkeen pysyvä nimi. Nimi on uniikki eikä sitä voi vaihtaa."
           }
         },
         "additionalProperties": false,
@@ -12359,7 +12305,18 @@
                 "$ref": "#/components/schemas/GeoJsonMultiPolygonGeometry"
               }
             ],
-            "description": "Geometria GeoJson rakenteella: https://geojson.org/"
+            "description": "Geometria GeoJSON rakenteella: https://geojson.org/",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "Point": "#/components/schemas/GeoJsonPointGeometry",
+                "MultiPoint": "#/components/schemas/GeoJsonMultiPointGeometry",
+                "LineString": "#/components/schemas/GeoJsonLineStringGeometry",
+                "MultiLineString": "#/components/schemas/GeoJsonMultiLineStringGeometry",
+                "Polygon": "#/components/schemas/GeoJsonPolygonGeometry",
+                "MultiPolygon": "#/components/schemas/GeoJsonMultiPolygonGeometry"
+              }
+            }
           }
         },
         "additionalProperties": false
@@ -12375,6 +12332,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "SpotElevation"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"SpotElevation\""
+          },
           "number": {
             "type": "integer",
             "description": "Arvo",
@@ -12383,27 +12347,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"spotElevation\""
           }
         },
         "additionalProperties": false,
@@ -12504,6 +12447,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Text"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Text\""
+          },
           "text": {
             "type": "string",
             "description": "Teksti"
@@ -12511,27 +12461,6 @@
           "syntax": {
             "type": "string",
             "description": "Syntaksi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"text\""
           }
         },
         "additionalProperties": false,
@@ -12579,6 +12508,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "TimePeriodDateOnly"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"TimePeriodDateOnly\""
+          },
           "begin": {
             "type": "string",
             "description": "Alkupäivä",
@@ -12590,27 +12526,6 @@
             "description": "Loppupäivä",
             "format": "date",
             "nullable": true
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"timePeriodDateOnly\""
           }
         },
         "additionalProperties": false,
@@ -12627,6 +12542,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "TimePeriod"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"TimePeriod\""
+          },
           "beginUtc": {
             "type": "string",
             "description": "Alkuaika",
@@ -12637,27 +12559,6 @@
             "description": "Loppuaika",
             "format": "date-time",
             "nullable": true
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"timePeriod\""
           }
         },
         "additionalProperties": false,

@@ -1,4 +1,5 @@
 from typing import Union
+
 from ryhti_api_client.models.code_value import CodeValue
 from ryhti_api_client.models.decimal_range import DecimalRange
 from ryhti_api_client.models.decimal_value import DecimalValue
@@ -14,7 +15,6 @@ from ryhti_api_client.models.spot_elevation import SpotElevation
 from ryhti_api_client.models.text_value import TextValue
 from ryhti_api_client.models.time_period_date_only_value import TimePeriodDateOnlyValue
 from ryhti_api_client.models.time_period_value import TimePeriodValue
-
 
 AttributeValue = Union[
     CodeValue,

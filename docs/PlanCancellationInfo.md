@@ -6,12 +6,13 @@ Kumoamistieto. Kuvaa kaavan kumoamista. Kumoamistieto voi kumota kaavan kokonaan
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_cancellation_info_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_cancellation_info_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_cancellation_info_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plancancellationinfo/{guid}) | [optional] [readonly] 
 **cancelled_plan_uri** | **str** | Kumottavan hyväkstytyn kaavan tunnus URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{planKey}) | 
 **cancels_entire_plan** | **bool** | Kumoaa kaavan kokonaan | 
 **cancelled_group_relations** | [**List[CancelledGroupRelations]**](CancelledGroupRelations.md) | Kumottavan ryhmän kohdistus. Kuvaa kaavakohteesta kumoutuvat kaavamääräysryhmät. | [optional] 
 **plan_object_cancellation_infos** | [**List[PlanObjectCancellationInfo]**](PlanObjectCancellationInfo.md) | Kumottavat kaavakohteet | [optional] 
+**cancelled_general_regulation_group_uris** | **List[str]** | Kumottavat yleismääräysryhmät | [optional] 
 
 ## Example
 

@@ -18,8 +18,10 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class RelatedRegulationGroupPlanObjectRelation(BaseModel):
@@ -32,13 +34,14 @@ class RelatedRegulationGroupPlanObjectRelation(BaseModel):
         description="Liittyvän määräysryhmän uri",
         alias="relatedRegulationGroupUri",
     )
-    plan_object_key: Optional[StrictStr] = Field(
+    plan_object_key: Optional[UUID] = Field(
         default=None, description="Sisäisen kaavakohteen avain", alias="planObjectKey"
     )
     __properties: ClassVar[List[str]] = ["relatedRegulationGroupUri", "planObjectKey"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +52,7 @@ class RelatedRegulationGroupPlanObjectRelation(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **responsible_party** | [**LandUseRestrictionOperator**](LandUseRestrictionOperator.md) | Vastuutaho | [optional] 
 **related_land_use_restriction_matters** | **List[str]** | Liittyvät alueidenkäytön rajoituksen asiat | [optional] 
 **phases** | [**List[LandUseRestrictionMatterPhase]**](LandUseRestrictionMatterPhase.md) | Vaiheet | 
+**original_administrative_area_identifiers** | **List[str]** | Alkuperäiset hallinnollisen alueen tunnukset | [optional] 
 
 ## Example
 

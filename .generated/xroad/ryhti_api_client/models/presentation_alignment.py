@@ -18,9 +18,11 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PresentationAlignment(BaseModel):
@@ -28,11 +30,25 @@ class PresentationAlignment(BaseModel):
     PresentationAlignment
     """  # noqa: E501
 
-    plan_object_key: StrictStr = Field(alias="planObjectKey")
-    plan_regulation_group_key: StrictStr = Field(alias="planRegulationGroupKey")
-    geometry: RyhtiGeometry
-    rotation: Optional[StrictInt] = None
-    language: Optional[StrictStr] = None
+    plan_object_key: UUID = Field(
+        description="Key of the plan object this presentation alignment is associated with.",
+        alias="planObjectKey",
+    )
+    plan_regulation_group_key: UUID = Field(
+        description="Key of the plan regulation group this presentation alignment is associated with.",
+        alias="planRegulationGroupKey",
+    )
+    geometry: RyhtiGeometry = Field(
+        description="Geometry of the presentation alignment. Allowed types: Point, LineString."
+    )
+    rotation: Optional[StrictInt] = Field(
+        default=None,
+        description="Rotation of the presentation alignment in degrees. Allowed range: -360 to 360.",
+    )
+    language: Optional[StrictStr] = Field(
+        default=None,
+        description='Language of the presentation alignment.  Code value from: http://uri.suomi.fi/codelist/rytj/ryhtikielet    Allowed values:  <list type="bullet"><item><description>fi - suomi</description></item><item><description>sv - ruotsi</description></item><item><description>en - englanti</description></item><item><description>smn - inarinsaame</description></item><item><description>sms - koltansaame</description></item><item><description>se - pohjoissaame</description></item></list>',
+    )
     __properties: ClassVar[List[str]] = [
         "planObjectKey",
         "planRegulationGroupKey",
@@ -42,7 +58,8 @@ class PresentationAlignment(BaseModel):
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +70,7 @@ class PresentationAlignment(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

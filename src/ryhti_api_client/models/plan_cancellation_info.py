@@ -19,12 +19,14 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.cancelled_group_relations import CancelledGroupRelations
 from ryhti_api_client.models.plan_object_cancellation_info import (
     PlanObjectCancellationInfo,
 )
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PlanCancellationInfo(BaseModel):
@@ -32,7 +34,7 @@ class PlanCancellationInfo(BaseModel):
     Kumoamistieto. Kuvaa kaavan kumoamista. Kumoamistieto voi kumota kaavan kokonaan tai osittain.  On joko Plan- tai PlanDecision-luokan lapsi.                Jos kumotaan kaavalla niin:  1) Kaava kumotaan kokonaan.  Tällöin ei saa olla kumoamistietoja kaavakohteista, määräyksistä tai suosituksista.  Kumoaa aina koko kaavan. Jos se on Plan-luokalla niin kumotaan se plan, millä sijaitsee.  Jos se on PlanDecision-luokalla niin kumotaan se plan, mihin päätös liittyy.
     """  # noqa: E501
 
-    plan_cancellation_info_key: StrictStr = Field(
+    plan_cancellation_info_key: UUID = Field(
         description="Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
         alias="planCancellationInfoKey",
     )
@@ -58,6 +60,11 @@ class PlanCancellationInfo(BaseModel):
         description="Kumottavat kaavakohteet",
         alias="planObjectCancellationInfos",
     )
+    cancelled_general_regulation_group_uris: Optional[List[StrictStr]] = Field(
+        default=None,
+        description="Kumottavat yleismääräysryhmät",
+        alias="cancelledGeneralRegulationGroupUris",
+    )
     __properties: ClassVar[List[str]] = [
         "planCancellationInfoKey",
         "planCancellationInfoUri",
@@ -65,10 +72,12 @@ class PlanCancellationInfo(BaseModel):
         "cancelsEntirePlan",
         "cancelledGroupRelations",
         "planObjectCancellationInfos",
+        "cancelledGeneralRegulationGroupUris",
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -79,8 +88,7 @@ class PlanCancellationInfo(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -113,8 +121,11 @@ class PlanCancellationInfo(BaseModel):
         _items = []
         if self.cancelled_group_relations:
             for _item_cancelled_group_relations in self.cancelled_group_relations:
-                if _item_cancelled_group_relations:
-                    _items.append(_item_cancelled_group_relations.to_dict())
+                _items.append(
+                    _item_cancelled_group_relations.to_dict()
+                    if _item_cancelled_group_relations is not None
+                    else None
+                )
             _dict["cancelledGroupRelations"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plan_object_cancellation_infos (list)
         _items = []
@@ -122,8 +133,11 @@ class PlanCancellationInfo(BaseModel):
             for (
                 _item_plan_object_cancellation_infos
             ) in self.plan_object_cancellation_infos:
-                if _item_plan_object_cancellation_infos:
-                    _items.append(_item_plan_object_cancellation_infos.to_dict())
+                _items.append(
+                    _item_plan_object_cancellation_infos.to_dict()
+                    if _item_plan_object_cancellation_infos is not None
+                    else None
+                )
             _dict["planObjectCancellationInfos"] = _items
         # set to None if cancelled_group_relations (nullable) is None
         # and model_fields_set contains the field
@@ -140,6 +154,14 @@ class PlanCancellationInfo(BaseModel):
             and "plan_object_cancellation_infos" in self.model_fields_set
         ):
             _dict["planObjectCancellationInfos"] = None
+
+        # set to None if cancelled_general_regulation_group_uris (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.cancelled_general_regulation_group_uris is None
+            and "cancelled_general_regulation_group_uris" in self.model_fields_set
+        ):
+            _dict["cancelledGeneralRegulationGroupUris"] = None
 
         return _dict
 
@@ -170,6 +192,9 @@ class PlanCancellationInfo(BaseModel):
                 ]
                 if obj.get("planObjectCancellationInfos") is not None
                 else None,
+                "cancelledGeneralRegulationGroupUris": obj.get(
+                    "cancelledGeneralRegulationGroupUris"
+                ),
             }
         )
         return _obj

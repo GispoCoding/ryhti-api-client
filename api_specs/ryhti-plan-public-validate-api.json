@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Ryhti API",
+    "title": "Ryhti Plan Public Validate API",
     "description": "Rakennetun ympäristön tietojärjestelmän rajapinta",
     "contact": {
       "name": "Feedback",
@@ -11,7 +11,7 @@
       "name": "CC BY 4.0",
       "url": "https://creativecommons.org/licenses/by/4.0/"
     },
-    "version": "1"
+    "version": "1.0"
   },
   "paths": {
     "/api/Plan/Validate": {
@@ -20,6 +20,8 @@
           "Plan"
         ],
         "summary": "Rajapinta yksittäisen kaavan validointiin ilman kaava-asiaa.",
+        "description": "Rajapinta yksittäisen kaavan validointiin ilman kaava-asiaa.",
+        "operationId": "post-api-plan-validate-plantype-plantype-administrativeareaidentifiers-admin",
         "parameters": [
           {
             "name": "planType",
@@ -29,15 +31,13 @@
             "schema": {
               "type": "string"
             },
-            "example": "21"
+            "example": 21
           },
           {
             "name": "administrativeAreaIdentifiers",
             "in": "query",
             "description": "Kunta- tai maakuntakoodi. \r\n\r\nEsimerkki : 049",
             "required": true,
-            "style": "form",
-            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -53,34 +53,2145 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Plan"
+                    "$ref": "#/components/schemas/ValidatePlan"
                   }
                 ],
                 "description": "Kaava"
+              },
+              "example": {
+                "planKey": "string",
+                "planUri": "string",
+                "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                "legalEffectOfLocalMasterPlans": [
+                  "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/1"
+                ],
+                "scale": 0,
+                "officialUseOnly": true,
+                "planMaps": [
+                  {
+                    "planMapKey": "string",
+                    "planMapUri": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "fileKey": "string",
+                    "coordinateSystem": "http://uri.suomi.fi/codelist/rakrek/ETRS89/code/EPSG3067"
+                  }
+                ],
+                "geographicalArea": {
+                  "srid": "3067",
+                  "geometry": {
+                    "coordinates": "[100.0, 0.0]",
+                    "type": "Point"
+                  }
+                },
+                "planDescription": "string",
+                "planAnnexes": [
+                  {
+                    "attachmentDocumentKey": "string",
+                    "documentIdentifier": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "personalDataContent": "string",
+                    "categoryOfPublicity": "string",
+                    "accessibility": true,
+                    "retentionTime": "string",
+                    "confirmationDate": "string",
+                    "languages": [
+                      "string"
+                    ],
+                    "fileKey": "string",
+                    "descriptors": [
+                      {
+                        "descriptorIdentifier": "string",
+                        "vocabulary": "string",
+                        "descriptor": "string"
+                      }
+                    ],
+                    "documentDate": "string",
+                    "arrivedDate": "string",
+                    "planAttachmentDocumentUri": "string",
+                    "typeOfAttachment": "string",
+                    "documentSpecification": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "documentCreatorOperators": [
+                      {
+                        "planOperatorKey": "string",
+                        "planOperatorUri": "string",
+                        "firstName": "string",
+                        "lastName": "string",
+                        "title": "string",
+                        "organizationName": "string",
+                        "businessId": "string"
+                      }
+                    ],
+                    "relatedPlanAttachmentDocuments": [
+                      "string"
+                    ]
+                  }
+                ],
+                "otherPlanMaterials": [
+                  {
+                    "otherPlanMaterialKey": "string",
+                    "otherPlanMaterialUri": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "fileKey": "string",
+                    "otherPlanMaterialLink": "string",
+                    "personalDataContent": "string",
+                    "categoryOfPublicity": "string"
+                  }
+                ],
+                "planCancellationInfos": [
+                  {
+                    "planCancellationInfoKey": "string",
+                    "planCancellationInfoUri": "string",
+                    "cancelledPlanUri": "string",
+                    "cancelsEntirePlan": true,
+                    "cancelledGroupRelations": [
+                      {
+                        "planRegulationGroupUri": "string",
+                        "planObjectUri": "string"
+                      }
+                    ],
+                    "planObjectCancellationInfos": [
+                      {
+                        "planObjectCancellationInfoKey": "string",
+                        "cancelledPlanObjectUri": "string",
+                        "cancelsEntirePlanObject": true,
+                        "validityGeometry": {
+                          "srid": "3067",
+                          "geometry": {
+                            "coordinates": "[100.0, 0.0]",
+                            "type": "Point"
+                          }
+                        }
+                      }
+                    ],
+                    "cancelledGeneralRegulationGroupUris": [
+                      "string"
+                    ]
+                  }
+                ],
+                "planReport": {
+                  "planReportKey": "string",
+                  "planReportUri": "string",
+                  "attachmentDocuments": [
+                    {
+                      "attachmentDocumentKey": "string",
+                      "documentIdentifier": "string",
+                      "name": {
+                        "fin": "string",
+                        "swe": "string",
+                        "smn": "string",
+                        "sms": "string",
+                        "sme": "string",
+                        "eng": "string"
+                      },
+                      "personalDataContent": "string",
+                      "categoryOfPublicity": "string",
+                      "accessibility": true,
+                      "retentionTime": "string",
+                      "confirmationDate": "string",
+                      "languages": [
+                        "string"
+                      ],
+                      "fileKey": "string",
+                      "descriptors": [
+                        {
+                          "descriptorIdentifier": "string",
+                          "vocabulary": "string",
+                          "descriptor": "string"
+                        }
+                      ],
+                      "documentDate": "string",
+                      "arrivedDate": "string",
+                      "planAttachmentDocumentUri": "string",
+                      "typeOfAttachment": "string",
+                      "documentSpecification": {
+                        "fin": "string",
+                        "swe": "string",
+                        "smn": "string",
+                        "sms": "string",
+                        "sme": "string",
+                        "eng": "string"
+                      },
+                      "documentCreatorOperators": [
+                        {
+                          "planOperatorKey": "string",
+                          "planOperatorUri": "string",
+                          "firstName": "string",
+                          "lastName": "string",
+                          "title": "string",
+                          "organizationName": "string",
+                          "businessId": "string"
+                        }
+                      ],
+                      "relatedPlanAttachmentDocuments": [
+                        "string"
+                      ]
+                    }
+                  ]
+                },
+                "generalRegulationGroups": [
+                  {
+                    "generalRegulationGroupKey": "string",
+                    "generalRegulationGroupUri": "string",
+                    "titleOfPlanRegulation": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "planRegulations": [
+                      {
+                        "planRegulationKey": "string",
+                        "planRegulationUri": "string",
+                        "value": {
+                          "code": "string",
+                          "codeList": "string",
+                          "title": {
+                            "fin": "string",
+                            "swe": "string",
+                            "smn": "string",
+                            "sms": "string",
+                            "sme": "string",
+                            "eng": "string"
+                          },
+                          "dataType": "LocalizedText"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/asumisenAlue",
+                        "verbalRegulations": [
+                          "http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji/code/rakentamistapa"
+                        ],
+                        "additionalInformations": [
+                          {
+                            "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji/code/tyyppi",
+                            "value": {
+                              "code": "string",
+                              "codeList": "string",
+                              "title": {
+                                "fin": "string",
+                                "swe": "string",
+                                "smn": "string",
+                                "sms": "string",
+                                "sme": "string",
+                                "eng": "string"
+                              },
+                              "dataType": "LocalizedText"
+                            }
+                          }
+                        ],
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "subjectIdentifiers": [
+                          "string"
+                        ],
+                        "regulationNumber": "string"
+                      }
+                    ],
+                    "planRecommendations": [
+                      {
+                        "planRecommendationKey": "string",
+                        "planRecommendationUri": "string",
+                        "value": {
+                          "fin": "string",
+                          "swe": "string",
+                          "smn": "string",
+                          "sms": "string",
+                          "sme": "string",
+                          "eng": "string"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "recommendationNumber": 0
+                      }
+                    ],
+                    "groupNumber": 0
+                  }
+                ],
+                "presentationAlignments": [
+                  {
+                    "planObjectKey": "string",
+                    "planRegulationGroupKey": "string",
+                    "geometry": {
+                      "srid": "3067",
+                      "geometry": {
+                        "coordinates": "[100.0, 0.0]",
+                        "type": "Point"
+                      }
+                    },
+                    "rotation": 0,
+                    "language": "string"
+                  }
+                ],
+                "periodOfValidity": {
+                  "begin": "string",
+                  "end": "string"
+                },
+                "approvalDate": "string",
+                "planners": [
+                  {
+                    "planOperatorKey": "string",
+                    "planOperatorUri": "string",
+                    "firstName": "string",
+                    "lastName": "string",
+                    "title": "string",
+                    "organizationName": "string",
+                    "businessId": "string"
+                  }
+                ],
+                "planObjects": [
+                  {
+                    "planObjectKey": "string",
+                    "planObjectUri": "string",
+                    "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                    "undergroundStatus": "string",
+                    "geometry": {
+                      "srid": "3067",
+                      "geometry": {
+                        "coordinates": "[100.0, 0.0]",
+                        "type": "Point"
+                      }
+                    },
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "description": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "verticalLimit": {
+                      "minimumValue": 0,
+                      "maximumValue": 0,
+                      "unitOfMeasure": "string",
+                      "dataType": "LocalizedText"
+                    },
+                    "relatedPlanSourceDataKeys": [
+                      "string"
+                    ],
+                    "relatedPlanSourceDataUris": [
+                      "string"
+                    ],
+                    "periodOfValidity": {
+                      "begin": "string",
+                      "end": "string"
+                    },
+                    "objectNumber": 0,
+                    "relatedPlanObjectKeys": [
+                      "string"
+                    ],
+                    "relatedPlanObjectUris": [
+                      "string"
+                    ]
+                  }
+                ],
+                "planRegulationGroups": [
+                  {
+                    "planRegulationGroupKey": "string",
+                    "planRegulationGroupUri": "string",
+                    "titleOfPlanRegulation": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "letterIdentifier": "string",
+                    "planRegulations": [
+                      {
+                        "planRegulationKey": "string",
+                        "planRegulationUri": "string",
+                        "value": {
+                          "code": "string",
+                          "codeList": "string",
+                          "title": {
+                            "fin": "string",
+                            "swe": "string",
+                            "smn": "string",
+                            "sms": "string",
+                            "sme": "string",
+                            "eng": "string"
+                          },
+                          "dataType": "LocalizedText"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/asumisenAlue",
+                        "verbalRegulations": [
+                          "http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji/code/rakentamistapa"
+                        ],
+                        "additionalInformations": [
+                          {
+                            "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji/code/tyyppi",
+                            "value": {
+                              "code": "string",
+                              "codeList": "string",
+                              "title": {
+                                "fin": "string",
+                                "swe": "string",
+                                "smn": "string",
+                                "sms": "string",
+                                "sme": "string",
+                                "eng": "string"
+                              },
+                              "dataType": "LocalizedText"
+                            }
+                          }
+                        ],
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "subjectIdentifiers": [
+                          "string"
+                        ],
+                        "regulationNumber": "string"
+                      }
+                    ],
+                    "planRecommendations": [
+                      {
+                        "planRecommendationKey": "string",
+                        "planRecommendationUri": "string",
+                        "value": {
+                          "fin": "string",
+                          "swe": "string",
+                          "smn": "string",
+                          "sms": "string",
+                          "sme": "string",
+                          "eng": "string"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "recommendationNumber": 0
+                      }
+                    ],
+                    "colorNumber": "string",
+                    "groupNumber": 0
+                  }
+                ],
+                "planRegulationGroupRelations": [
+                  {
+                    "planObjectKey": "string",
+                    "planRegulationGroupKey": "string"
+                  }
+                ],
+                "relatedPlanObjectRegulationGroupRelations": [
+                  {
+                    "relatedPlanObjectUri": "string",
+                    "regulationGroupKey": "string"
+                  }
+                ]
               }
             },
             "text/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Plan"
+                    "$ref": "#/components/schemas/ValidatePlan"
                   }
                 ],
                 "description": "Kaava"
+              },
+              "example": {
+                "planKey": "string",
+                "planUri": "string",
+                "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                "legalEffectOfLocalMasterPlans": [
+                  "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/1"
+                ],
+                "scale": 0,
+                "officialUseOnly": true,
+                "planMaps": [
+                  {
+                    "planMapKey": "string",
+                    "planMapUri": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "fileKey": "string",
+                    "coordinateSystem": "http://uri.suomi.fi/codelist/rakrek/ETRS89/code/EPSG3067"
+                  }
+                ],
+                "geographicalArea": {
+                  "srid": "3067",
+                  "geometry": {
+                    "coordinates": "[100.0, 0.0]",
+                    "type": "Point"
+                  }
+                },
+                "planDescription": "string",
+                "planAnnexes": [
+                  {
+                    "attachmentDocumentKey": "string",
+                    "documentIdentifier": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "personalDataContent": "string",
+                    "categoryOfPublicity": "string",
+                    "accessibility": true,
+                    "retentionTime": "string",
+                    "confirmationDate": "string",
+                    "languages": [
+                      "string"
+                    ],
+                    "fileKey": "string",
+                    "descriptors": [
+                      {
+                        "descriptorIdentifier": "string",
+                        "vocabulary": "string",
+                        "descriptor": "string"
+                      }
+                    ],
+                    "documentDate": "string",
+                    "arrivedDate": "string",
+                    "planAttachmentDocumentUri": "string",
+                    "typeOfAttachment": "string",
+                    "documentSpecification": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "documentCreatorOperators": [
+                      {
+                        "planOperatorKey": "string",
+                        "planOperatorUri": "string",
+                        "firstName": "string",
+                        "lastName": "string",
+                        "title": "string",
+                        "organizationName": "string",
+                        "businessId": "string"
+                      }
+                    ],
+                    "relatedPlanAttachmentDocuments": [
+                      "string"
+                    ]
+                  }
+                ],
+                "otherPlanMaterials": [
+                  {
+                    "otherPlanMaterialKey": "string",
+                    "otherPlanMaterialUri": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "fileKey": "string",
+                    "otherPlanMaterialLink": "string",
+                    "personalDataContent": "string",
+                    "categoryOfPublicity": "string"
+                  }
+                ],
+                "planCancellationInfos": [
+                  {
+                    "planCancellationInfoKey": "string",
+                    "planCancellationInfoUri": "string",
+                    "cancelledPlanUri": "string",
+                    "cancelsEntirePlan": true,
+                    "cancelledGroupRelations": [
+                      {
+                        "planRegulationGroupUri": "string",
+                        "planObjectUri": "string"
+                      }
+                    ],
+                    "planObjectCancellationInfos": [
+                      {
+                        "planObjectCancellationInfoKey": "string",
+                        "cancelledPlanObjectUri": "string",
+                        "cancelsEntirePlanObject": true,
+                        "validityGeometry": {
+                          "srid": "3067",
+                          "geometry": {
+                            "coordinates": "[100.0, 0.0]",
+                            "type": "Point"
+                          }
+                        }
+                      }
+                    ],
+                    "cancelledGeneralRegulationGroupUris": [
+                      "string"
+                    ]
+                  }
+                ],
+                "planReport": {
+                  "planReportKey": "string",
+                  "planReportUri": "string",
+                  "attachmentDocuments": [
+                    {
+                      "attachmentDocumentKey": "string",
+                      "documentIdentifier": "string",
+                      "name": {
+                        "fin": "string",
+                        "swe": "string",
+                        "smn": "string",
+                        "sms": "string",
+                        "sme": "string",
+                        "eng": "string"
+                      },
+                      "personalDataContent": "string",
+                      "categoryOfPublicity": "string",
+                      "accessibility": true,
+                      "retentionTime": "string",
+                      "confirmationDate": "string",
+                      "languages": [
+                        "string"
+                      ],
+                      "fileKey": "string",
+                      "descriptors": [
+                        {
+                          "descriptorIdentifier": "string",
+                          "vocabulary": "string",
+                          "descriptor": "string"
+                        }
+                      ],
+                      "documentDate": "string",
+                      "arrivedDate": "string",
+                      "planAttachmentDocumentUri": "string",
+                      "typeOfAttachment": "string",
+                      "documentSpecification": {
+                        "fin": "string",
+                        "swe": "string",
+                        "smn": "string",
+                        "sms": "string",
+                        "sme": "string",
+                        "eng": "string"
+                      },
+                      "documentCreatorOperators": [
+                        {
+                          "planOperatorKey": "string",
+                          "planOperatorUri": "string",
+                          "firstName": "string",
+                          "lastName": "string",
+                          "title": "string",
+                          "organizationName": "string",
+                          "businessId": "string"
+                        }
+                      ],
+                      "relatedPlanAttachmentDocuments": [
+                        "string"
+                      ]
+                    }
+                  ]
+                },
+                "generalRegulationGroups": [
+                  {
+                    "generalRegulationGroupKey": "string",
+                    "generalRegulationGroupUri": "string",
+                    "titleOfPlanRegulation": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "planRegulations": [
+                      {
+                        "planRegulationKey": "string",
+                        "planRegulationUri": "string",
+                        "value": {
+                          "code": "string",
+                          "codeList": "string",
+                          "title": {
+                            "fin": "string",
+                            "swe": "string",
+                            "smn": "string",
+                            "sms": "string",
+                            "sme": "string",
+                            "eng": "string"
+                          },
+                          "dataType": "LocalizedText"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/asumisenAlue",
+                        "verbalRegulations": [
+                          "http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji/code/rakentamistapa"
+                        ],
+                        "additionalInformations": [
+                          {
+                            "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji/code/tyyppi",
+                            "value": {
+                              "code": "string",
+                              "codeList": "string",
+                              "title": {
+                                "fin": "string",
+                                "swe": "string",
+                                "smn": "string",
+                                "sms": "string",
+                                "sme": "string",
+                                "eng": "string"
+                              },
+                              "dataType": "LocalizedText"
+                            }
+                          }
+                        ],
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "subjectIdentifiers": [
+                          "string"
+                        ],
+                        "regulationNumber": "string"
+                      }
+                    ],
+                    "planRecommendations": [
+                      {
+                        "planRecommendationKey": "string",
+                        "planRecommendationUri": "string",
+                        "value": {
+                          "fin": "string",
+                          "swe": "string",
+                          "smn": "string",
+                          "sms": "string",
+                          "sme": "string",
+                          "eng": "string"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "recommendationNumber": 0
+                      }
+                    ],
+                    "groupNumber": 0
+                  }
+                ],
+                "presentationAlignments": [
+                  {
+                    "planObjectKey": "string",
+                    "planRegulationGroupKey": "string",
+                    "geometry": {
+                      "srid": "3067",
+                      "geometry": {
+                        "coordinates": "[100.0, 0.0]",
+                        "type": "Point"
+                      }
+                    },
+                    "rotation": 0,
+                    "language": "string"
+                  }
+                ],
+                "periodOfValidity": {
+                  "begin": "string",
+                  "end": "string"
+                },
+                "approvalDate": "string",
+                "planners": [
+                  {
+                    "planOperatorKey": "string",
+                    "planOperatorUri": "string",
+                    "firstName": "string",
+                    "lastName": "string",
+                    "title": "string",
+                    "organizationName": "string",
+                    "businessId": "string"
+                  }
+                ],
+                "planObjects": [
+                  {
+                    "planObjectKey": "string",
+                    "planObjectUri": "string",
+                    "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                    "undergroundStatus": "string",
+                    "geometry": {
+                      "srid": "3067",
+                      "geometry": {
+                        "coordinates": "[100.0, 0.0]",
+                        "type": "Point"
+                      }
+                    },
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "description": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "verticalLimit": {
+                      "minimumValue": 0,
+                      "maximumValue": 0,
+                      "unitOfMeasure": "string",
+                      "dataType": "LocalizedText"
+                    },
+                    "relatedPlanSourceDataKeys": [
+                      "string"
+                    ],
+                    "relatedPlanSourceDataUris": [
+                      "string"
+                    ],
+                    "periodOfValidity": {
+                      "begin": "string",
+                      "end": "string"
+                    },
+                    "objectNumber": 0,
+                    "relatedPlanObjectKeys": [
+                      "string"
+                    ],
+                    "relatedPlanObjectUris": [
+                      "string"
+                    ]
+                  }
+                ],
+                "planRegulationGroups": [
+                  {
+                    "planRegulationGroupKey": "string",
+                    "planRegulationGroupUri": "string",
+                    "titleOfPlanRegulation": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "letterIdentifier": "string",
+                    "planRegulations": [
+                      {
+                        "planRegulationKey": "string",
+                        "planRegulationUri": "string",
+                        "value": {
+                          "code": "string",
+                          "codeList": "string",
+                          "title": {
+                            "fin": "string",
+                            "swe": "string",
+                            "smn": "string",
+                            "sms": "string",
+                            "sme": "string",
+                            "eng": "string"
+                          },
+                          "dataType": "LocalizedText"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/asumisenAlue",
+                        "verbalRegulations": [
+                          "http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji/code/rakentamistapa"
+                        ],
+                        "additionalInformations": [
+                          {
+                            "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji/code/tyyppi",
+                            "value": {
+                              "code": "string",
+                              "codeList": "string",
+                              "title": {
+                                "fin": "string",
+                                "swe": "string",
+                                "smn": "string",
+                                "sms": "string",
+                                "sme": "string",
+                                "eng": "string"
+                              },
+                              "dataType": "LocalizedText"
+                            }
+                          }
+                        ],
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "subjectIdentifiers": [
+                          "string"
+                        ],
+                        "regulationNumber": "string"
+                      }
+                    ],
+                    "planRecommendations": [
+                      {
+                        "planRecommendationKey": "string",
+                        "planRecommendationUri": "string",
+                        "value": {
+                          "fin": "string",
+                          "swe": "string",
+                          "smn": "string",
+                          "sms": "string",
+                          "sme": "string",
+                          "eng": "string"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "recommendationNumber": 0
+                      }
+                    ],
+                    "colorNumber": "string",
+                    "groupNumber": 0
+                  }
+                ],
+                "planRegulationGroupRelations": [
+                  {
+                    "planObjectKey": "string",
+                    "planRegulationGroupKey": "string"
+                  }
+                ],
+                "relatedPlanObjectRegulationGroupRelations": [
+                  {
+                    "relatedPlanObjectUri": "string",
+                    "regulationGroupKey": "string"
+                  }
+                ]
               }
             },
             "application/*+json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Plan"
+                    "$ref": "#/components/schemas/ValidatePlan"
                   }
                 ],
                 "description": "Kaava"
+              },
+              "example": {
+                "planKey": "string",
+                "planUri": "string",
+                "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                "legalEffectOfLocalMasterPlans": [
+                  "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/1"
+                ],
+                "scale": 0,
+                "officialUseOnly": true,
+                "planMaps": [
+                  {
+                    "planMapKey": "string",
+                    "planMapUri": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "fileKey": "string",
+                    "coordinateSystem": "http://uri.suomi.fi/codelist/rakrek/ETRS89/code/EPSG3067"
+                  }
+                ],
+                "geographicalArea": {
+                  "srid": "3067",
+                  "geometry": {
+                    "coordinates": "[100.0, 0.0]",
+                    "type": "Point"
+                  }
+                },
+                "planDescription": "string",
+                "planAnnexes": [
+                  {
+                    "attachmentDocumentKey": "string",
+                    "documentIdentifier": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "personalDataContent": "string",
+                    "categoryOfPublicity": "string",
+                    "accessibility": true,
+                    "retentionTime": "string",
+                    "confirmationDate": "string",
+                    "languages": [
+                      "string"
+                    ],
+                    "fileKey": "string",
+                    "descriptors": [
+                      {
+                        "descriptorIdentifier": "string",
+                        "vocabulary": "string",
+                        "descriptor": "string"
+                      }
+                    ],
+                    "documentDate": "string",
+                    "arrivedDate": "string",
+                    "planAttachmentDocumentUri": "string",
+                    "typeOfAttachment": "string",
+                    "documentSpecification": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "documentCreatorOperators": [
+                      {
+                        "planOperatorKey": "string",
+                        "planOperatorUri": "string",
+                        "firstName": "string",
+                        "lastName": "string",
+                        "title": "string",
+                        "organizationName": "string",
+                        "businessId": "string"
+                      }
+                    ],
+                    "relatedPlanAttachmentDocuments": [
+                      "string"
+                    ]
+                  }
+                ],
+                "otherPlanMaterials": [
+                  {
+                    "otherPlanMaterialKey": "string",
+                    "otherPlanMaterialUri": "string",
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "fileKey": "string",
+                    "otherPlanMaterialLink": "string",
+                    "personalDataContent": "string",
+                    "categoryOfPublicity": "string"
+                  }
+                ],
+                "planCancellationInfos": [
+                  {
+                    "planCancellationInfoKey": "string",
+                    "planCancellationInfoUri": "string",
+                    "cancelledPlanUri": "string",
+                    "cancelsEntirePlan": true,
+                    "cancelledGroupRelations": [
+                      {
+                        "planRegulationGroupUri": "string",
+                        "planObjectUri": "string"
+                      }
+                    ],
+                    "planObjectCancellationInfos": [
+                      {
+                        "planObjectCancellationInfoKey": "string",
+                        "cancelledPlanObjectUri": "string",
+                        "cancelsEntirePlanObject": true,
+                        "validityGeometry": {
+                          "srid": "3067",
+                          "geometry": {
+                            "coordinates": "[100.0, 0.0]",
+                            "type": "Point"
+                          }
+                        }
+                      }
+                    ],
+                    "cancelledGeneralRegulationGroupUris": [
+                      "string"
+                    ]
+                  }
+                ],
+                "planReport": {
+                  "planReportKey": "string",
+                  "planReportUri": "string",
+                  "attachmentDocuments": [
+                    {
+                      "attachmentDocumentKey": "string",
+                      "documentIdentifier": "string",
+                      "name": {
+                        "fin": "string",
+                        "swe": "string",
+                        "smn": "string",
+                        "sms": "string",
+                        "sme": "string",
+                        "eng": "string"
+                      },
+                      "personalDataContent": "string",
+                      "categoryOfPublicity": "string",
+                      "accessibility": true,
+                      "retentionTime": "string",
+                      "confirmationDate": "string",
+                      "languages": [
+                        "string"
+                      ],
+                      "fileKey": "string",
+                      "descriptors": [
+                        {
+                          "descriptorIdentifier": "string",
+                          "vocabulary": "string",
+                          "descriptor": "string"
+                        }
+                      ],
+                      "documentDate": "string",
+                      "arrivedDate": "string",
+                      "planAttachmentDocumentUri": "string",
+                      "typeOfAttachment": "string",
+                      "documentSpecification": {
+                        "fin": "string",
+                        "swe": "string",
+                        "smn": "string",
+                        "sms": "string",
+                        "sme": "string",
+                        "eng": "string"
+                      },
+                      "documentCreatorOperators": [
+                        {
+                          "planOperatorKey": "string",
+                          "planOperatorUri": "string",
+                          "firstName": "string",
+                          "lastName": "string",
+                          "title": "string",
+                          "organizationName": "string",
+                          "businessId": "string"
+                        }
+                      ],
+                      "relatedPlanAttachmentDocuments": [
+                        "string"
+                      ]
+                    }
+                  ]
+                },
+                "generalRegulationGroups": [
+                  {
+                    "generalRegulationGroupKey": "string",
+                    "generalRegulationGroupUri": "string",
+                    "titleOfPlanRegulation": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "planRegulations": [
+                      {
+                        "planRegulationKey": "string",
+                        "planRegulationUri": "string",
+                        "value": {
+                          "code": "string",
+                          "codeList": "string",
+                          "title": {
+                            "fin": "string",
+                            "swe": "string",
+                            "smn": "string",
+                            "sms": "string",
+                            "sme": "string",
+                            "eng": "string"
+                          },
+                          "dataType": "LocalizedText"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/asumisenAlue",
+                        "verbalRegulations": [
+                          "http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji/code/rakentamistapa"
+                        ],
+                        "additionalInformations": [
+                          {
+                            "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji/code/tyyppi",
+                            "value": {
+                              "code": "string",
+                              "codeList": "string",
+                              "title": {
+                                "fin": "string",
+                                "swe": "string",
+                                "smn": "string",
+                                "sms": "string",
+                                "sme": "string",
+                                "eng": "string"
+                              },
+                              "dataType": "LocalizedText"
+                            }
+                          }
+                        ],
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "subjectIdentifiers": [
+                          "string"
+                        ],
+                        "regulationNumber": "string"
+                      }
+                    ],
+                    "planRecommendations": [
+                      {
+                        "planRecommendationKey": "string",
+                        "planRecommendationUri": "string",
+                        "value": {
+                          "fin": "string",
+                          "swe": "string",
+                          "smn": "string",
+                          "sms": "string",
+                          "sme": "string",
+                          "eng": "string"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "recommendationNumber": 0
+                      }
+                    ],
+                    "groupNumber": 0
+                  }
+                ],
+                "presentationAlignments": [
+                  {
+                    "planObjectKey": "string",
+                    "planRegulationGroupKey": "string",
+                    "geometry": {
+                      "srid": "3067",
+                      "geometry": {
+                        "coordinates": "[100.0, 0.0]",
+                        "type": "Point"
+                      }
+                    },
+                    "rotation": 0,
+                    "language": "string"
+                  }
+                ],
+                "periodOfValidity": {
+                  "begin": "string",
+                  "end": "string"
+                },
+                "approvalDate": "string",
+                "planners": [
+                  {
+                    "planOperatorKey": "string",
+                    "planOperatorUri": "string",
+                    "firstName": "string",
+                    "lastName": "string",
+                    "title": "string",
+                    "organizationName": "string",
+                    "businessId": "string"
+                  }
+                ],
+                "planObjects": [
+                  {
+                    "planObjectKey": "string",
+                    "planObjectUri": "string",
+                    "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                    "undergroundStatus": "string",
+                    "geometry": {
+                      "srid": "3067",
+                      "geometry": {
+                        "coordinates": "[100.0, 0.0]",
+                        "type": "Point"
+                      }
+                    },
+                    "name": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "description": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "verticalLimit": {
+                      "minimumValue": 0,
+                      "maximumValue": 0,
+                      "unitOfMeasure": "string",
+                      "dataType": "LocalizedText"
+                    },
+                    "relatedPlanSourceDataKeys": [
+                      "string"
+                    ],
+                    "relatedPlanSourceDataUris": [
+                      "string"
+                    ],
+                    "periodOfValidity": {
+                      "begin": "string",
+                      "end": "string"
+                    },
+                    "objectNumber": 0,
+                    "relatedPlanObjectKeys": [
+                      "string"
+                    ],
+                    "relatedPlanObjectUris": [
+                      "string"
+                    ]
+                  }
+                ],
+                "planRegulationGroups": [
+                  {
+                    "planRegulationGroupKey": "string",
+                    "planRegulationGroupUri": "string",
+                    "titleOfPlanRegulation": {
+                      "fin": "string",
+                      "swe": "string",
+                      "smn": "string",
+                      "sms": "string",
+                      "sme": "string",
+                      "eng": "string"
+                    },
+                    "letterIdentifier": "string",
+                    "planRegulations": [
+                      {
+                        "planRegulationKey": "string",
+                        "planRegulationUri": "string",
+                        "value": {
+                          "code": "string",
+                          "codeList": "string",
+                          "title": {
+                            "fin": "string",
+                            "swe": "string",
+                            "smn": "string",
+                            "sms": "string",
+                            "sme": "string",
+                            "eng": "string"
+                          },
+                          "dataType": "LocalizedText"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/asumisenAlue",
+                        "verbalRegulations": [
+                          "http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji/code/rakentamistapa"
+                        ],
+                        "additionalInformations": [
+                          {
+                            "type": "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji/code/tyyppi",
+                            "value": {
+                              "code": "string",
+                              "codeList": "string",
+                              "title": {
+                                "fin": "string",
+                                "swe": "string",
+                                "smn": "string",
+                                "sms": "string",
+                                "sme": "string",
+                                "eng": "string"
+                              },
+                              "dataType": "LocalizedText"
+                            }
+                          }
+                        ],
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "subjectIdentifiers": [
+                          "string"
+                        ],
+                        "regulationNumber": "string"
+                      }
+                    ],
+                    "planRecommendations": [
+                      {
+                        "planRecommendationKey": "string",
+                        "planRecommendationUri": "string",
+                        "value": {
+                          "fin": "string",
+                          "swe": "string",
+                          "smn": "string",
+                          "sms": "string",
+                          "sme": "string",
+                          "eng": "string"
+                        },
+                        "lifeCycleStatus": "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+                        "relatedDocuments": [
+                          {
+                            "attachmentDocumentKey": "string",
+                            "documentIdentifier": "string",
+                            "name": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "personalDataContent": "string",
+                            "categoryOfPublicity": "string",
+                            "accessibility": true,
+                            "retentionTime": "string",
+                            "confirmationDate": "string",
+                            "languages": [
+                              "string"
+                            ],
+                            "fileKey": "string",
+                            "descriptors": [
+                              {
+                                "descriptorIdentifier": "string",
+                                "vocabulary": "string",
+                                "descriptor": "string"
+                              }
+                            ],
+                            "documentDate": "string",
+                            "arrivedDate": "string",
+                            "planAttachmentDocumentUri": "string",
+                            "typeOfAttachment": "string",
+                            "documentSpecification": {
+                              "fin": "string",
+                              "swe": "string",
+                              "smn": "string",
+                              "sms": "string",
+                              "sme": "string",
+                              "eng": "string"
+                            },
+                            "documentCreatorOperators": [
+                              {
+                                "planOperatorKey": "string",
+                                "planOperatorUri": "string",
+                                "firstName": "string",
+                                "lastName": "string",
+                                "title": "string",
+                                "organizationName": "string",
+                                "businessId": "string"
+                              }
+                            ],
+                            "relatedPlanAttachmentDocuments": [
+                              "string"
+                            ]
+                          }
+                        ],
+                        "planThemes": [
+                          "string"
+                        ],
+                        "periodOfValidity": {
+                          "begin": "string",
+                          "end": "string"
+                        },
+                        "recommendationNumber": 0
+                      }
+                    ],
+                    "colorNumber": "string",
+                    "groupNumber": 0
+                  }
+                ],
+                "planRegulationGroupRelations": [
+                  {
+                    "planObjectKey": "string",
+                    "planRegulationGroupKey": "string"
+                  }
+                ],
+                "relatedPlanObjectRegulationGroupRelations": [
+                  {
+                    "relatedPlanObjectUri": "string",
+                    "regulationGroupKey": "string"
+                  }
+                ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -92,16 +2203,35 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "type": "string",
+                  "title": "string",
+                  "status": 0,
+                  "detail": "string",
+                  "instance": "string"
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
+                },
+                "example": {
+                  "type": "string",
+                  "title": "string",
+                  "status": 0,
+                  "detail": "string",
+                  "instance": "string"
                 }
               }
             }
@@ -112,16 +2242,37 @@
               "text/plain": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationProblemDetails"
+                },
+                "examples": {
+                  "default": {
+                    "value": null
+                  }
                 }
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationProblemDetails"
+                },
+                "example": {
+                  "type": "string",
+                  "title": "string",
+                  "status": 0,
+                  "detail": "string",
+                  "instance": "string",
+                  "errors": {}
                 }
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationProblemDetails"
+                },
+                "example": {
+                  "type": "string",
+                  "title": "string",
+                  "status": 0,
+                  "detail": "string",
+                  "instance": "string",
+                  "errors": {}
                 }
               }
             }
@@ -245,7 +2396,27 @@
               }
             ],
             "description": "Arvo",
-            "nullable": true
+            "nullable": true,
+            "discriminator": {
+              "propertyName": "dataType",
+              "mapping": {
+                "Code": "#/components/schemas/CodeValue",
+                "Numeric": "#/components/schemas/NumericValue",
+                "NumericRange": "#/components/schemas/NumericRange",
+                "PositiveNumeric": "#/components/schemas/PositiveNumericValue",
+                "PositiveNumericRange": "#/components/schemas/PositiveNumericRange",
+                "Decimal": "#/components/schemas/DecimalValue",
+                "DecimalRange": "#/components/schemas/DecimalRange",
+                "PositiveDecimal": "#/components/schemas/PositiveDecimalValue",
+                "PositiveDecimalRange": "#/components/schemas/PositiveDecimalRange",
+                "SpotElevation": "#/components/schemas/SpotElevation",
+                "Identifier": "#/components/schemas/IdentifierValue",
+                "LocalizedText": "#/components/schemas/LocalizedTextValue",
+                "Text": "#/components/schemas/TextValue",
+                "TimePeriod": "#/components/schemas/TimePeriodValue",
+                "TimePeriodDateOnly": "#/components/schemas/TimePeriodDateOnlyValue"
+              }
+            }
           }
         },
         "additionalProperties": false
@@ -275,7 +2446,29 @@
             "description": "Enumeraatio joka määrittää Arvo-luokkien (Domain.ValueObjects.AttributeValue) tyypin.\r\nJokaisella konkreettisella Arvo-luokan (Domain.ValueObjects.AttributeValue) toteutuksella tulee olla sitä vastaava DataType enumeraation arvo."
           }
         },
-        "additionalProperties": false
+        "discriminator": {
+          "propertyName": "dataType",
+          "mapping": {
+            "Code": "#/components/schemas/CodeValue",
+            "Numeric": "#/components/schemas/NumericValue",
+            "NumericRange": "#/components/schemas/NumericRange",
+            "PositiveNumeric": "#/components/schemas/PositiveNumericValue",
+            "PositiveNumericRange": "#/components/schemas/PositiveNumericRange",
+            "Decimal": "#/components/schemas/DecimalValue",
+            "DecimalRange": "#/components/schemas/DecimalRange",
+            "PositiveDecimal": "#/components/schemas/PositiveDecimalValue",
+            "PositiveDecimalRange": "#/components/schemas/PositiveDecimalRange",
+            "SpotElevation": "#/components/schemas/SpotElevation",
+            "Identifier": "#/components/schemas/IdentifierValue",
+            "LocalizedText": "#/components/schemas/LocalizedTextValue",
+            "Text": "#/components/schemas/TextValue",
+            "TimePeriod": "#/components/schemas/TimePeriodValue",
+            "TimePeriodDateOnly": "#/components/schemas/TimePeriodDateOnlyValue"
+          }
+        },
+        "required": [
+          "dataType"
+        ]
       },
       "CancelledGroupRelations": {
         "required": [
@@ -309,6 +2502,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Code"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Code\""
+          },
           "code": {
             "type": "string",
             "description": "Koodiston arvo (uri)"
@@ -324,27 +2524,6 @@
               }
             ],
             "description": "Nimi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"code\""
           }
         },
         "additionalProperties": false,
@@ -361,6 +2540,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "DecimalRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"DecimalRange\""
+          },
           "minimumValue": {
             "type": "number",
             "description": "Minimiarvo",
@@ -374,27 +2560,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"decimalRange\""
           }
         },
         "additionalProperties": false,
@@ -411,6 +2576,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Decimal"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Decimal\""
+          },
           "number": {
             "type": "number",
             "description": "Desimaaliluku",
@@ -419,27 +2591,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"decimal\""
           }
         },
         "additionalProperties": false,
@@ -512,7 +2663,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "Yleiskaavamääräysryhmä"
+        "description": "Yleismääräysryhmä"
       },
       "GeoJsonGeometry": {
         "type": "object",
@@ -530,8 +2681,21 @@
             "description": "Tuetut geometriatyypit"
           }
         },
-        "additionalProperties": false,
-        "description": "GeoJson geometria (abstrakti luokka, katso toteutukset)"
+        "description": "GeoJson geometria (abstrakti luokka, katso toteutukset)",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "Point": "#/components/schemas/GeoJsonPointGeometry",
+            "MultiPoint": "#/components/schemas/GeoJsonMultiPointGeometry",
+            "LineString": "#/components/schemas/GeoJsonLineStringGeometry",
+            "MultiLineString": "#/components/schemas/GeoJsonMultiLineStringGeometry",
+            "Polygon": "#/components/schemas/GeoJsonPolygonGeometry",
+            "MultiPolygon": "#/components/schemas/GeoJsonMultiPolygonGeometry"
+          }
+        },
+        "required": [
+          "type"
+        ]
       },
       "GeoJsonLineStringGeometry": {
         "required": [
@@ -545,6 +2709,13 @@
           }
         ],
         "properties": {
+          "type": {
+            "enum": [
+              "LineString"
+            ],
+            "type": "string",
+            "description": "Geometriatyyppi. Pakollinen arvo: \"LineString\""
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -556,18 +2727,6 @@
             },
             "description": "Koordinaatit",
             "example": "[ [100.0, 0.0], [101.0, 1.0] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"lineString\""
           }
         },
         "additionalProperties": false,
@@ -585,6 +2744,13 @@
           }
         ],
         "properties": {
+          "type": {
+            "enum": [
+              "MultiLineString"
+            ],
+            "type": "string",
+            "description": "Geometriatyyppi. Pakollinen arvo: \"MultiLineString\""
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -599,18 +2765,6 @@
             },
             "description": "Koordinaatit",
             "example": "[ [[100.0, 0.0], [101.0, 1.0]], [[101.0, 1.0], [100.0, 1.0]] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"lineString\""
           }
         },
         "additionalProperties": false,
@@ -628,6 +2782,13 @@
           }
         ],
         "properties": {
+          "type": {
+            "enum": [
+              "MultiPoint"
+            ],
+            "type": "string",
+            "description": "Geometriatyyppi. Pakollinen arvo: \"MultiPoint\""
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -639,18 +2800,6 @@
             },
             "description": "Koordinaatit",
             "example": "[ [100.0, 0.0], [101.0, 1.0] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"multiPoint\""
           }
         },
         "additionalProperties": false,
@@ -668,6 +2817,13 @@
           }
         ],
         "properties": {
+          "type": {
+            "enum": [
+              "MultiPolygon"
+            ],
+            "type": "string",
+            "description": "Geometriatyyppi. Pakollinen arvo: \"MultiPolygon\""
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -685,18 +2841,6 @@
             },
             "description": "Koordinaatit",
             "example": "[ [ [ [102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0 ] ] ], [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] ]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"multiPolygon\""
           }
         },
         "additionalProperties": false,
@@ -714,6 +2858,13 @@
           }
         ],
         "properties": {
+          "type": {
+            "enum": [
+              "Point"
+            ],
+            "type": "string",
+            "description": "Geometriatyyppi. Pakollinen arvo: \"Point\""
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -722,18 +2873,6 @@
             },
             "description": "Koordinaatit",
             "example": "[100.0, 0.0]"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"point\""
           }
         },
         "additionalProperties": false,
@@ -751,6 +2890,13 @@
           }
         ],
         "properties": {
+          "type": {
+            "enum": [
+              "Polygon"
+            ],
+            "type": "string",
+            "description": "Geometriatyyppi. Pakollinen arvo: \"Polygon\""
+          },
           "coordinates": {
             "type": "array",
             "items": {
@@ -765,18 +2911,6 @@
             },
             "description": "Koordinaatit",
             "example": " [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] }"
-          },
-          "type": {
-            "enum": [
-              "Point",
-              "MultiPoint",
-              "LineString",
-              "MultiLineString",
-              "Polygon",
-              "MultiPolygon"
-            ],
-            "type": "string",
-            "description": "Geometriatyyppi. Pakollinen arvo: \"polygon\""
           }
         },
         "additionalProperties": false,
@@ -793,6 +2927,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Identifier"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Identifier\""
+          },
           "identifier": {
             "type": "string",
             "description": "Tunnus"
@@ -808,27 +2949,6 @@
               }
             ],
             "description": "Järjestelmän nimi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"identifier\""
           }
         },
         "additionalProperties": false,
@@ -882,6 +3002,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "LocalizedText"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"LocalizedText\""
+          },
           "text": {
             "allOf": [
               {
@@ -893,27 +3020,6 @@
           "syntax": {
             "type": "string",
             "description": "Syntaksi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"localizedText\""
           }
         },
         "additionalProperties": false,
@@ -930,6 +3036,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "NumericRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"NumericRange\""
+          },
           "minimumValue": {
             "type": "integer",
             "description": "Minimiarvo",
@@ -943,27 +3056,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"numericRange\""
           }
         },
         "additionalProperties": false,
@@ -980,6 +3072,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Numeric"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Numeric\""
+          },
           "number": {
             "type": "integer",
             "description": "Numero",
@@ -988,27 +3087,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"numeric\""
           }
         },
         "additionalProperties": false,
@@ -1065,228 +3143,6 @@
         },
         "additionalProperties": false,
         "description": "MuuKaavaAineisto"
-      },
-      "PartiallyCancelledPlanObjectInfo": {
-        "required": [
-          "cancelledPlanUri",
-          "partiallyCancelledPlanObjectUri",
-          "validityGeometry"
-        ],
-        "type": "object",
-        "properties": {
-          "cancelledPlanUri": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Kumottavan hyväkstytyn kaavan tunnus URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{planKey})"
-          },
-          "partiallyCancelledPlanObjectUri": {
-            "minLength": 1,
-            "type": "string",
-            "description": "Kumottavan kaavakohteen tunnus uri-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planobject/{planObjectKey})"
-          },
-          "validityGeometry": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RyhtiGeometry"
-              }
-            ],
-            "description": "Osittain kumottavan kaavakohteen voimaan jäävän alueen geometria."
-          }
-        },
-        "additionalProperties": false,
-        "description": "OsittainKumottavanKaavakohteenTieto"
-      },
-      "Plan": {
-        "required": [
-          "geographicalArea",
-          "lifeCycleStatus",
-          "planKey",
-          "planObjects",
-          "planRegulationGroups"
-        ],
-        "type": "object",
-        "properties": {
-          "planKey": {
-            "type": "string",
-            "description": "Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
-            "format": "uuid"
-          },
-          "planUri": {
-            "type": "string",
-            "description": "Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{guid})",
-            "readOnly": true
-          },
-          "lifeCycleStatus": {
-            "enum": [
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/02",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/03",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/04",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/05",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/06",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/07",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/08",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/09",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/10",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/11",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/12",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/13",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/14",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/15",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/16",
-              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/17"
-            ],
-            "type": "string",
-            "description": "Kaavan elinkaaren tila. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/kaavaelinkaari\">http://uri.suomi.fi/codelist/rytj/kaavaelinkaari</a>"
-          },
-          "legalEffectOfLocalMasterPlans": {
-            "type": "array",
-            "items": {
-              "enum": [
-                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/1",
-                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/11",
-                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/12",
-                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/13",
-                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/2"
-              ],
-              "type": "string"
-            },
-            "description": "Yleiskaavan oikeusvaikutteisuuden määritykset. Käytössä ainoastaan yleiskaavan yhteydessä. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK\">http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK</a>",
-            "nullable": true
-          },
-          "scale": {
-            "type": "integer",
-            "description": "Mittakaava",
-            "format": "int32",
-            "nullable": true
-          },
-          "planMaps": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlanMap"
-            },
-            "description": "Kaavakartat",
-            "nullable": true
-          },
-          "geographicalArea": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RyhtiGeometry"
-              }
-            ],
-            "description": "Aluerajaus"
-          },
-          "planDescription": {
-            "type": "string",
-            "description": "Kaavan kuvaus",
-            "nullable": true
-          },
-          "planAnnexes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlanAttachmentDocument"
-            },
-            "description": "Kaavan liittet",
-            "nullable": true
-          },
-          "otherPlanMaterials": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OtherPlanMaterial"
-            },
-            "description": "Muu kaava-aineisto",
-            "nullable": true
-          },
-          "planCancellationInfos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlanCancellationInfo"
-            },
-            "description": "Kumoamistieto",
-            "nullable": true
-          },
-          "planReport": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanReport"
-              }
-            ],
-            "description": "Kaavaselostus",
-            "nullable": true
-          },
-          "generalRegulationGroups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GeneralRegulationGroup"
-            },
-            "description": "Kaavamääräysryhmät",
-            "nullable": true
-          },
-          "periodOfValidity": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TimePeriodDateOnly"
-              }
-            ],
-            "description": "Voimassaoloaika",
-            "nullable": true
-          },
-          "approvalDate": {
-            "type": "string",
-            "description": "Hyväksymispäivämäärä",
-            "format": "date",
-            "nullable": true
-          },
-          "planners": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlanOperator"
-            },
-            "description": "Laatija",
-            "nullable": true
-          },
-          "partiallyCancelledPlanObjects": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PartiallyCancelledPlanObjectInfo"
-            },
-            "description": "// Osittain kumottavat kaavakohteet",
-            "nullable": true
-          },
-          "planObjects": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlanObject"
-            },
-            "description": "Kaavakohteet"
-          },
-          "planRegulationGroups": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlanRegulationGroup"
-            },
-            "description": "Kaavakohteen määräysryhmät"
-          },
-          "planRegulationGroupRelations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlanRegulationGroupRelations"
-            },
-            "description": "Kaavakohteen ja määräysryhmän väliset suhteet",
-            "nullable": true
-          },
-          "relatedPlanObjectRegulationGroupRelations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RelatedPlanObjectRegulationGroupRelation"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Kaava"
       },
       "PlanAttachmentDocument": {
         "required": [
@@ -1441,37 +3297,33 @@
             "type": "boolean",
             "description": "Kumoaa kaavan kokonaan"
           },
-          "cancelledPlanObjectUris": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Kumottavan kaavakohteen tunnukset URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planobject/{planObjectKey})"
-          },
-          "cancelledRegulationUris": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Kumottavan määräyksen tunnukset URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planRegulationKey})"
-          },
-          "cancelledRecommendationUris": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Kumottavan suosituksen tunnukset URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planrecommendation/{planRecommendationKey})"
-          },
           "cancelledGroupRelations": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CancelledGroupRelations"
             },
-            "description": "Kumottavan ryhmän kohdistus. Kuvaa kaavakohteesta kumoutuvat kaavamääräysryhmät."
+            "description": "Kumottavan ryhmän kohdistus. Kuvaa kaavakohteesta kumoutuvat kaavamääräysryhmät.",
+            "nullable": true
+          },
+          "planObjectCancellationInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanObjectCancellationInfo"
+            },
+            "description": "Kumottavat kaavakohteet",
+            "nullable": true
+          },
+          "cancelledGeneralRegulationGroupUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Kumottavat yleismääräysryhmät",
+            "nullable": true
           }
         },
         "additionalProperties": false,
-        "description": "Kaavan kumoamistieto"
+        "description": "Kumoamistieto. Kuvaa kaavan kumoamista. Kumoamistieto voi kumota kaavan kokonaan tai osittain.\r\nOn joko Plan- tai PlanDecision-luokan lapsi.\r\n            \r\nJos kumotaan kaavalla niin:\r\n1) Kaava kumotaan kokonaan.\r\nTällöin ei saa olla kumoamistietoja kaavakohteista, määräyksistä tai suosituksista.\r\nKumoaa aina koko kaavan. Jos se on Plan-luokalla niin kumotaan se plan, millä sijaitsee.\r\nJos se on PlanDecision-luokalla niin kumotaan se plan, mihin päätös liittyy."
       },
       "PlanMap": {
         "required": [
@@ -1507,6 +3359,9 @@
           },
           "coordinateSystem": {
             "minLength": 1,
+            "enum": [
+              "http://uri.suomi.fi/codelist/rakrek/ETRS89/code/EPSG3067"
+            ],
             "type": "string"
           }
         },
@@ -1635,10 +3490,51 @@
             },
             "description": "LiittyväKohde UUID/localID",
             "nullable": true
+          },
+          "relatedPlanObjectUris": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Liittyvä jo tallennetun kaavakohten Uri",
+            "nullable": true
           }
         },
         "additionalProperties": false,
         "description": "Kaavakohde"
+      },
+      "PlanObjectCancellationInfo": {
+        "required": [
+          "cancelledPlanObjectUri",
+          "cancelsEntirePlanObject",
+          "planObjectCancellationInfoKey"
+        ],
+        "type": "object",
+        "properties": {
+          "planObjectCancellationInfoKey": {
+            "type": "string",
+            "description": "Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
+            "format": "uuid"
+          },
+          "cancelledPlanObjectUri": {
+            "type": "string",
+            "description": "Kumottavan kaavakohteen tunnus URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planobject/{planObjectKey})"
+          },
+          "cancelsEntirePlanObject": {
+            "type": "boolean",
+            "description": "Kumoaa kohteen kokonaan"
+          },
+          "validityGeometry": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RyhtiGeometry"
+              }
+            ],
+            "description": "Osittain kumottaessa kohteen voimaan jäävä geometria",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "PlanOperator": {
         "required": [
@@ -1835,7 +3731,27 @@
                 "$ref": "#/components/schemas/TimePeriodDateOnlyValue"
               }
             ],
-            "nullable": true
+            "nullable": true,
+            "discriminator": {
+              "propertyName": "dataType",
+              "mapping": {
+                "Code": "#/components/schemas/CodeValue",
+                "Numeric": "#/components/schemas/NumericValue",
+                "NumericRange": "#/components/schemas/NumericRange",
+                "PositiveNumeric": "#/components/schemas/PositiveNumericValue",
+                "PositiveNumericRange": "#/components/schemas/PositiveNumericRange",
+                "Decimal": "#/components/schemas/DecimalValue",
+                "DecimalRange": "#/components/schemas/DecimalRange",
+                "PositiveDecimal": "#/components/schemas/PositiveDecimalValue",
+                "PositiveDecimalRange": "#/components/schemas/PositiveDecimalRange",
+                "SpotElevation": "#/components/schemas/SpotElevation",
+                "Identifier": "#/components/schemas/IdentifierValue",
+                "LocalizedText": "#/components/schemas/LocalizedTextValue",
+                "Text": "#/components/schemas/TextValue",
+                "TimePeriod": "#/components/schemas/TimePeriodValue",
+                "TimePeriodDateOnly": "#/components/schemas/TimePeriodDateOnlyValue"
+              }
+            }
           },
           "lifeCycleStatus": {
             "enum": [
@@ -2029,11 +3945,9 @@
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/arvokasGeologinenMuodostuma",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kulttuuriymparistoarvojenAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/merkittavaRakennettuKulttuuriymparisto",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaRakennettuKulttuuriymparisto",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunkiTaiKylakuvallisestiArvokasAlue",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/muuArkeologinenKohde",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaArkeologinenKohde",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/arkeologinenKohde",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/historiallinenKohde",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunkiTaiKylakuvallisestiArvokasAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/unesconMaailmanperintokohde",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/saamelaiskulttuurinKannaltaTarkeaAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/maisemallisestiArvokasAlue",
@@ -2049,6 +3963,7 @@
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/vaaraAlue",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojavyohyke",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/konsultointivyohyke",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kaupunginTaiKunnanosa",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/kunnanTaiKaupunginOsa",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/korttelialueTaiKorttelialueenOsa",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/rakennuspaikka",
@@ -2124,7 +4039,13 @@
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/maaraAikainenKieltoRakennuksenRakentamiseksi",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suunnittelumaarays",
               "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/rakentamismaarays",
-              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojelumaarays"
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/suojelumaarays",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/talousrakennus",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/sauna",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/paivakoti",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaRakennettuKulttuuriymparisto",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/valtakunnallisestiMerkittavaArkeologinenKohde",
+              "http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji/code/muuArkeologinenKohde"
             ],
             "type": "string",
             "description": "Määräys tai määräyksen osa, jolla ohjataan alueidenkäyttöä ja rakentamista. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji\">http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji</a>"
@@ -2337,6 +4258,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveDecimalRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveDecimalRange\""
+          },
           "minimumValue": {
             "type": "number",
             "description": "Minimiarvo",
@@ -2350,27 +4278,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveDecimalRange\""
           }
         },
         "additionalProperties": false,
@@ -2387,6 +4294,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveDecimal"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveDecimal\""
+          },
           "number": {
             "type": "number",
             "description": "Desimaali",
@@ -2395,27 +4309,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveDecimal\""
           }
         },
         "additionalProperties": false,
@@ -2432,6 +4325,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveNumericRange"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveNumericRange\""
+          },
           "minimumValue": {
             "type": "integer",
             "description": "Minimiarvo",
@@ -2445,27 +4345,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveNumericRange\""
           }
         },
         "additionalProperties": false,
@@ -2482,6 +4361,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "PositiveNumeric"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"PositiveNumeric\""
+          },
           "number": {
             "type": "integer",
             "description": "Numero",
@@ -2490,31 +4376,45 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"positiveNumeric\""
           }
         },
         "additionalProperties": false,
         "description": "Positiivinen numeerinen arvo"
+      },
+      "PresentationAlignment": {
+        "required": [
+          "geometry",
+          "planObjectKey",
+          "planRegulationGroupKey"
+        ],
+        "type": "object",
+        "properties": {
+          "planObjectKey": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planRegulationGroupKey": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "geometry": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RyhtiGeometry"
+              }
+            ]
+          },
+          "rotation": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ProblemDetails": {
         "type": "object",
@@ -2584,7 +4484,8 @@
               "3882",
               "3883",
               "3884",
-              "3885"
+              "3885",
+              "4326"
             ],
             "type": "string",
             "description": "Gauss Krüger projektio; SRID koodi; SRID nimi\r\n\r\n   19;3873;ETRS89 / GK19FIN EPSG:3873\r\n\r\n   20;3874;ETRS89 / GK20FIN EPSG:3874\r\n\r\n   21;3875;ETRS89 / GK21FIN EPSG:3875\r\n\r\n   22;3876;ETRS89 / GK22FIN EPSG:3876\r\n\r\n   23;3877;ETRS89 / GK23FIN EPSG:3877\r\n\r\n   24;3878;ETRS89 / GK24FIN EPSG:3878\r\n\r\n   25;3879;ETRS89 / GK25FIN EPSG:3879\r\n\r\n   26;3880;ETRS89 / GK26FIN EPSG:3880\r\n\r\n   27;3881;ETRS89 / GK27FIN EPSG:3881\r\n\r\n   28;3882;ETRS89 / GK28FIN EPSG:3882\r\n\r\n   29;3883;ETRS89 / GK29FIN EPSG:3883\r\n\r\n   30;3884;ETRS89 / GK30FIN EPSG:3884\r\n\r\n   31;3885;ETRS89 / GK31FIN EPSG:3885\r\n\r\n   3067 TM35FIN\r\n"
@@ -2610,7 +4511,18 @@
                 "$ref": "#/components/schemas/GeoJsonMultiPolygonGeometry"
               }
             ],
-            "description": "Geometria GeoJson rakenteella: https://geojson.org/"
+            "description": "Geometria GeoJson rakenteella: https://geojson.org/",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "Point": "#/components/schemas/GeoJsonPointGeometry",
+                "MultiPoint": "#/components/schemas/GeoJsonMultiPointGeometry",
+                "LineString": "#/components/schemas/GeoJsonLineStringGeometry",
+                "MultiLineString": "#/components/schemas/GeoJsonMultiLineStringGeometry",
+                "Polygon": "#/components/schemas/GeoJsonPolygonGeometry",
+                "MultiPolygon": "#/components/schemas/GeoJsonMultiPolygonGeometry"
+              }
+            }
           }
         },
         "additionalProperties": false
@@ -2626,6 +4538,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "SpotElevation"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"SpotElevation\""
+          },
           "number": {
             "type": "integer",
             "description": "Arvo",
@@ -2634,27 +4553,6 @@
           "unitOfMeasure": {
             "type": "string",
             "description": "Mittayksikkö"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"spotElevation\""
           }
         },
         "additionalProperties": false,
@@ -2671,6 +4569,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "Text"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"Text\""
+          },
           "text": {
             "type": "string",
             "description": "Teksti"
@@ -2678,27 +4583,6 @@
           "syntax": {
             "type": "string",
             "description": "Syntaksi"
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"text\""
           }
         },
         "additionalProperties": false,
@@ -2731,6 +4615,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "TimePeriodDateOnly"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"TimePeriodDateOnly\""
+          },
           "begin": {
             "type": "string",
             "description": "Alkupäivä",
@@ -2742,27 +4633,6 @@
             "description": "Loppupäivä",
             "format": "date",
             "nullable": true
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"timePeriodDateOnly\""
           }
         },
         "additionalProperties": false,
@@ -2779,6 +4649,13 @@
           }
         ],
         "properties": {
+          "dataType": {
+            "enum": [
+              "TimePeriod"
+            ],
+            "type": "string",
+            "description": "Pakollinen arvo: \"TimePeriod\""
+          },
           "beginUtc": {
             "type": "string",
             "description": "Alkuaika",
@@ -2789,31 +4666,207 @@
             "description": "Loppuaika",
             "format": "date-time",
             "nullable": true
-          },
-          "dataType": {
-            "enum": [
-              "LocalizedText",
-              "Text",
-              "Numeric",
-              "NumericRange",
-              "PositiveNumeric",
-              "PositiveNumericRange",
-              "Decimal",
-              "DecimalRange",
-              "PositiveDecimal",
-              "PositiveDecimalRange",
-              "Code",
-              "Identifier",
-              "SpotElevation",
-              "TimePeriod",
-              "TimePeriodDateOnly"
-            ],
-            "type": "string",
-            "description": "Pakollinen arvo: \"timePeriod\""
           }
         },
         "additionalProperties": false,
         "description": "TimePeriod"
+      },
+      "ValidatePlan": {
+        "required": [
+          "geographicalArea",
+          "lifeCycleStatus",
+          "planKey",
+          "planObjects",
+          "planRegulationGroups"
+        ],
+        "type": "object",
+        "properties": {
+          "planKey": {
+            "type": "string",
+            "description": "Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
+            "format": "uuid"
+          },
+          "planUri": {
+            "type": "string",
+            "description": "Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{guid})",
+            "readOnly": true
+          },
+          "lifeCycleStatus": {
+            "enum": [
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/01",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/02",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/03",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/04",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/05",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/06",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/07",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/08",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/09",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/10",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/11",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/12",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/13",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/14",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/15",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/16",
+              "http://uri.suomi.fi/codelist/rytj/kaavaelinkaari/code/17"
+            ],
+            "type": "string",
+            "description": "Kaavan elinkaaren tila. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/kaavaelinkaari\">http://uri.suomi.fi/codelist/rytj/kaavaelinkaari</a>"
+          },
+          "legalEffectOfLocalMasterPlans": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/1",
+                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/11",
+                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/12",
+                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/13",
+                "http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK/code/2"
+              ],
+              "type": "string"
+            },
+            "description": "Yleiskaavan oikeusvaikutteisuuden määritykset. Käytössä ainoastaan yleiskaavan yhteydessä. Käytetään koodistoa <a href=\"http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK\">http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK</a>",
+            "nullable": true
+          },
+          "scale": {
+            "type": "integer",
+            "description": "Mittakaava",
+            "format": "int32",
+            "nullable": true
+          },
+          "officialUseOnly": {
+            "type": "boolean",
+            "description": "Vain viranomaiskäyttöön",
+            "nullable": true
+          },
+          "planMaps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanMap"
+            },
+            "description": "Kaavakartat",
+            "nullable": true
+          },
+          "geographicalArea": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RyhtiGeometry"
+              }
+            ],
+            "description": "Aluerajaus"
+          },
+          "planDescription": {
+            "type": "string",
+            "description": "Kaavan kuvaus",
+            "nullable": true
+          },
+          "planAnnexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanAttachmentDocument"
+            },
+            "description": "Kaavan liittet",
+            "nullable": true
+          },
+          "otherPlanMaterials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OtherPlanMaterial"
+            },
+            "description": "Muu kaava-aineisto",
+            "nullable": true
+          },
+          "planCancellationInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanCancellationInfo"
+            },
+            "description": "Kumoamistieto",
+            "nullable": true
+          },
+          "planReport": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanReport"
+              }
+            ],
+            "description": "Kaavaselostus",
+            "nullable": true
+          },
+          "generalRegulationGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GeneralRegulationGroup"
+            },
+            "description": "Kaavamääräysryhmät",
+            "nullable": true
+          },
+          "presentationAlignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PresentationAlignment"
+            },
+            "description": "Esitystavankohdistus",
+            "nullable": true
+          },
+          "periodOfValidity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TimePeriodDateOnly"
+              }
+            ],
+            "description": "Voimassaoloaika",
+            "nullable": true
+          },
+          "approvalDate": {
+            "type": "string",
+            "description": "Hyväksymispäivämäärä",
+            "format": "date",
+            "nullable": true
+          },
+          "planners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanOperator"
+            },
+            "description": "Laatija",
+            "nullable": true
+          },
+          "planObjects": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanObject"
+            },
+            "description": "Kaavakohteet"
+          },
+          "planRegulationGroups": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanRegulationGroup"
+            },
+            "description": "Kaavakohteen määräysryhmät"
+          },
+          "planRegulationGroupRelations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanRegulationGroupRelations"
+            },
+            "description": "Kaavakohteen ja määräysryhmän väliset suhteet",
+            "nullable": true
+          },
+          "relatedPlanObjectRegulationGroupRelations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedPlanObjectRegulationGroupRelation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Kaava"
       },
       "ValidationProblemDetails": {
         "type": "object",
@@ -2853,29 +4906,24 @@
       }
     },
     "securitySchemes": {
-      "Bearer": {
+      "apiKeyHeader": {
         "type": "apiKey",
-        "description": "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\"",
-        "name": "Authorization",
+        "name": "Ocp-Apim-Subscription-Key",
         "in": "header"
       },
-      "oauth2": {
-        "type": "oauth2",
-        "flows": {
-          "clientCredentials": {
-            "tokenUrl": "https://identitytest.ymparisto.fi/connect/token",
-            "scopes": {}
-          }
-        }
+      "apiKeyQuery": {
+        "type": "apiKey",
+        "name": "subscription-key",
+        "in": "query"
       }
     }
   },
   "security": [
     {
-      "Bearer": []
+      "apiKeyHeader": []
     },
     {
-      "oauth2": []
+      "apiKeyQuery": []
     }
   ]
 }

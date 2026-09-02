@@ -21,26 +21,28 @@ from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Literal, Optional
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class TimePeriodValue(BaseModel):
     """
-    TimePeriod
+    TimePeriodValue
     """  # noqa: E501
 
+    data_type: Literal["TimePeriod"] = Field(
+        description='Pakollinen arvo: "TimePeriod"', alias="dataType"
+    )
     begin_utc: Optional[datetime] = Field(
         default=None, description="Alkuaika", alias="beginUtc"
     )
     end_utc: Optional[datetime] = Field(
         default=None, description="Loppuaika", alias="endUtc"
     )
-    data_type: Literal["TimePeriod"] = Field(
-        description='Pakollinen arvo: "timePeriod"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = ["dataType", "beginUtc", "endUtc"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -51,8 +53,7 @@ class TimePeriodValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -76,6 +77,11 @@ class TimePeriodValue(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if end_utc (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_utc is None and "end_utc" in self.model_fields_set:
+            _dict["endUtc"] = None
+
         return _dict
 
     @classmethod
@@ -87,5 +93,11 @@ class TimePeriodValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "beginUtc": obj.get("beginUtc"),
+                "endUtc": obj.get("endUtc"),
+            }
+        )
         return _obj

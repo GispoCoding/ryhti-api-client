@@ -1,15 +1,14 @@
 # CodeValue
 
-Koodiston arvo
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;Code\&quot; | 
 **code** | **str** | Koodiston arvo (uri) | [optional] 
 **code_list** | **str** | Koodisto | [optional] 
 **title** | [**LanguageString**](LanguageString.md) | Nimi | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;code\&quot; | 
 
 ## Example
 

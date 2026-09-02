@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
 Ryhti API
 
@@ -66,7 +64,7 @@ class UploadedFileApi:
 
 
         :param file: (required)
-        :type file: bytearray
+        :type file: bytes
         :param municipality_id: Jos käyttäjällä on oikeus useampaan kuntaan tulee pyynnön sisältää kuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu.
         :type municipality_id: str
         :param region_id: Jos käyttäjällä on oikeus useampaan maakuntaan tulee pyynnön sisältää maakuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu.
@@ -147,7 +145,7 @@ class UploadedFileApi:
 
 
         :param file: (required)
-        :type file: bytearray
+        :type file: bytes
         :param municipality_id: Jos käyttäjällä on oikeus useampaan kuntaan tulee pyynnön sisältää kuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu.
         :type municipality_id: str
         :param region_id: Jos käyttäjällä on oikeus useampaan maakuntaan tulee pyynnön sisältää maakuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu.
@@ -228,7 +226,7 @@ class UploadedFileApi:
 
 
         :param file: (required)
-        :type file: bytearray
+        :type file: bytes
         :param municipality_id: Jos käyttäjällä on oikeus useampaan kuntaan tulee pyynnön sisältää kuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu.
         :type municipality_id: str
         :param region_id: Jos käyttäjällä on oikeus useampaan maakuntaan tulee pyynnön sisältää maakuntaId, jolle tiedosto tuodaan. Vain toinen id on sallittu.

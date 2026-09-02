@@ -16,37 +16,32 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-    StrictFloat,
-    StrictInt,
-    StrictStr,
-)
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Literal, Optional, Union
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class DecimalValue(BaseModel):
     """
-    Desimaaliluku
+    DecimalValue
     """  # noqa: E501
 
+    data_type: Literal["Decimal"] = Field(
+        description='Pakollinen arvo: "Decimal"', alias="dataType"
+    )
     number: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Desimaaliluku"
     )
     unit_of_measure: Optional[StrictStr] = Field(
         default=None, description="Mittayksikkö", alias="unitOfMeasure"
     )
-    data_type: Literal["Decimal"] = Field(
-        description='Pakollinen arvo: "decimal"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = ["dataType", "number", "unitOfMeasure"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -57,8 +52,7 @@ class DecimalValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -93,5 +87,11 @@ class DecimalValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "number": obj.get("number"),
+                "unitOfMeasure": obj.get("unitOfMeasure"),
+            }
+        )
         return _obj

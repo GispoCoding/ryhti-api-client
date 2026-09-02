@@ -6,9 +6,9 @@ Kaavamääräys
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_regulation_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_regulation_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_regulation_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{guid}) | [optional] [readonly] 
-**value** | [**PlanRegulationValue**](PlanRegulationValue.md) |  | [optional] 
+**value** | [**AttributeValue**](AttributeValue.md) |  | [optional] 
 **life_cycle_status** | **str** | Kaavamääräyksen elinkaaren tila. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari\&quot;&gt;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari&lt;/a&gt; | 
 **type** | **str** | Määräys tai määräyksen osa, jolla ohjataan alueidenkäyttöä ja rakentamista. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji\&quot;&gt;http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayslaji&lt;/a&gt; | 
 **verbal_regulations** | **List[str]** | Sanallisen kaavamääräyksen luokittelu. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji\&quot;&gt;http://uri.suomi.fi/codelist/rytj/RY_Sanallisen_Kaavamaarayksen_Laji&lt;/a&gt; | [optional] 

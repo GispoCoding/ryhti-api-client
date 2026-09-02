@@ -5,19 +5,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plot_division_plot_key** | **str** | Tonttijakotontin avain | 
+**plot_division_plot_key** | **UUID** | Tonttijakotontin avain | 
 **plot_division_plot_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plotdivisionplot/{guid}) | [optional] [readonly] 
 **plot_division_plot_identifier** | **str** | Tonttijakotontin tunnus | 
-**area** | [**PositiveNumericValue**](PositiveNumericValue.md) | Positiivinen numeerinen arvo | [optional] 
-**projected_area** | [**PositiveNumericValue**](PositiveNumericValue.md) | Positiivinen numeerinen arvo | [optional] 
+**area** | [**PositiveNumericValue**](PositiveNumericValue.md) | Pinta-ala | [optional] 
+**projected_area** | [**PositiveNumericValue**](PositiveNumericValue.md) | Projisoitu pinta-ala | [optional] 
 **area_reservations** | **List[str]** | Aluvaraukset | 
 **area_reservation_letter_identifier** | **str** | Aluevarauksen kirjaintunnus | 
-**volume_of_building** | [**PositiveNumericValue**](PositiveNumericValue.md) | Positiivinen numeerinen arvo | 
+**volume_of_building** | [**PositiveNumericValue**](PositiveNumericValue.md) | Rakentamisen määrä (vanhentunut, käytä PermittedBuildingArea tai PermittedBuildingVolume) | [optional] 
+**permitted_building_area** | [**PositiveNumericValue**](PositiveNumericValue.md) | Sallittu rakennusala (m²) | [optional] 
+**permitted_building_volume** | [**PositiveNumericValue**](PositiveNumericValue.md) | Sallittu rakennustilavuus (m³) | [optional] 
 **mother_properties** | [**List[MotherProperty]**](MotherProperty.md) | Muodostajakiinteistöt | 
 **relation_to_basic_property** | **str** | Suhde peruskiinteistöön. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/RY_SuhdePeruskiinteistoon\&quot; /&gt; | [optional] 
 **related_plans** | [**List[RelatedPlan]**](RelatedPlan.md) | Liittyvät kaavat | 
 **geometry** | [**RyhtiGeometry**](RyhtiGeometry.md) | Geometria | 
-**vertical_limit** | [**DecimalRange**](DecimalRange.md) | Desimaaliarvoväli | [optional] 
+**vertical_limit** | [**DecimalRange**](DecimalRange.md) | Pystysuuntainen rajaus | [optional] 
 **area_reservation_regulation_uris** | **List[str]** | Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planregulationkey}) kaavassa osoitettuun aluevarauksen kaavamääräykseen. | [optional] 
 **volume_of_building_regulation_uris** | **List[str]** | Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/planregulation/{planregulationkey}) kaavassa osoitettuun rakentamisen määrän kaavamääräykseen. | [optional] 
 

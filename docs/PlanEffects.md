@@ -1,15 +1,15 @@
 # PlanEffects
 
-KaavanVaikutukset
+Kaavan vaikutukset
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | Kaavan vaikutuksen laji. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/kaavanVaikutuksenLaji\&quot;&gt;http://uri.suomi.fi/codelist/rytj/kaavanVaikutuksenLaji&lt;/a&gt; | 
-**binding_plot_division_uri** | **str** | Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivision/{bindingplotdivisionkey}) sitovaan tonttijakoon. | 
-**fully_included** | **bool** | Jos arvo on true, kaavan vaikutus kohdistuu sitovaan tonttijakoon kokonaisuudessaan, muuten tonttijakotontti kohtaisesti. | [optional] 
-**related_plot_division_plots** | [**List[RelatedPlotDivisionPlot]**](RelatedPlotDivisionPlot.md) | Tonttijakotontin yksilöivätunnus, jota vaikutus koskee. | 
+**not_in_accordance_with_plan** | **bool** | Onko kaavan mukainen | 
+**binding_plot_division_permanent_identifier** | **str** | Tonttijaon tunniste | 
+**permanent_plan_identifier** | **str** | Kaavan pysyvä tunniste | 
+**plan_effects_plots** | [**List[PlanEffectsPlot]**](PlanEffectsPlot.md) | Kaavan vaikutukset tonttijakotonttikohtaisesti | [optional] 
 
 ## Example
 

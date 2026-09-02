@@ -137,7 +137,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LandUseRestrictionMatterApi(api_client)
     permanent_land_use_restriction_identifier = 'permanent_land_use_restriction_identifier_example' # str | 
-    land_use_restriction_matter_phase_key = 'land_use_restriction_matter_phase_key_example' # str | 
+    land_use_restriction_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Alueidenkäytön rajoituksen vaiheen hakeminen avaimella.
@@ -156,7 +156,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_land_use_restriction_identifier** | **str**|  | 
- **land_use_restriction_matter_phase_key** | **str**|  | 
+ **land_use_restriction_matter_phase_key** | **UUID**|  | 
 
 ### Return type
 
@@ -224,7 +224,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LandUseRestrictionMatterApi(api_client)
     permanent_land_use_restriction_identifier = 'permanent_land_use_restriction_identifier_example' # str | Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia.
-    land_use_restriction_matter_phase_key = 'land_use_restriction_matter_phase_key_example' # str | Pysyvä yksilöivä tunnus vaiheelle.
+    land_use_restriction_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Pysyvä yksilöivä tunnus vaiheelle.
     land_use_restriction_matter_phase = ryhti_api_client.LandUseRestrictionMatterPhase() # LandUseRestrictionMatterPhase | Lisättävä vaihe kokonaisuudessaan.
 
     try:
@@ -244,7 +244,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_land_use_restriction_identifier** | **str**| Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. | 
- **land_use_restriction_matter_phase_key** | **str**| Pysyvä yksilöivä tunnus vaiheelle. | 
+ **land_use_restriction_matter_phase_key** | **UUID**| Pysyvä yksilöivä tunnus vaiheelle. | 
  **land_use_restriction_matter_phase** | [**LandUseRestrictionMatterPhase**](LandUseRestrictionMatterPhase.md)| Lisättävä vaihe kokonaisuudessaan. | 
 
 ### Return type
@@ -310,7 +310,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LandUseRestrictionMatterApi(api_client)
     permanent_land_use_restriction_identifier = 'permanent_land_use_restriction_identifier_example' # str | 
-    land_use_restriction_matter_phase_key = 'land_use_restriction_matter_phase_key_example' # str | 
+    land_use_restriction_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     land_use_restriction_matter_phase = ryhti_api_client.LandUseRestrictionMatterPhase() # LandUseRestrictionMatterPhase | 
 
     try:
@@ -328,7 +328,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_land_use_restriction_identifier** | **str**|  | 
- **land_use_restriction_matter_phase_key** | **str**|  | 
+ **land_use_restriction_matter_phase_key** | **UUID**|  | 
  **land_use_restriction_matter_phase** | [**LandUseRestrictionMatterPhase**](LandUseRestrictionMatterPhase.md)|  | 
 
 ### Return type
@@ -398,7 +398,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.LandUseRestrictionMatterApi(api_client)
     permanent_land_use_restriction_identifier = 'permanent_land_use_restriction_identifier_example' # str | Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia.
-    land_use_restriction_matter_phase_key = 'land_use_restriction_matter_phase_key_example' # str | Pysyvä yksilöivä tunnus vaiheelle.
+    land_use_restriction_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Pysyvä yksilöivä tunnus vaiheelle.
     land_use_restriction_matter_phase = ryhti_api_client.LandUseRestrictionMatterPhase() # LandUseRestrictionMatterPhase | Lisättävä vaihe kokonaisuudessaan.
 
     try:
@@ -418,7 +418,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_land_use_restriction_identifier** | **str**| Pysyvä yksilöivä tunnus alueidenkäytön rajoituksen asia. | 
- **land_use_restriction_matter_phase_key** | **str**| Pysyvä yksilöivä tunnus vaiheelle. | 
+ **land_use_restriction_matter_phase_key** | **UUID**| Pysyvä yksilöivä tunnus vaiheelle. | 
  **land_use_restriction_matter_phase** | [**LandUseRestrictionMatterPhase**](LandUseRestrictionMatterPhase.md)| Lisättävä vaihe kokonaisuudessaan. | 
 
 ### Return type

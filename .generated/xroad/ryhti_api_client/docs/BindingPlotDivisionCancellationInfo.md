@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**binding_plot_division_cancellation_info_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kumoutumistiedon versioriippumaton tunnus | 
 **cancelled_binding_plot_division_uri** | **str** | Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivision/{bindingplotdivisionkey}) kumoutuvaan sitovaan tonttijakoon. | 
 **cancels_entire_binding_plot_division** | **bool** | Kumoaa sitovan tonttijaon kokonaan | 
 **cancelled_plot_division_plot_uris** | **List[str]** | Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/plotdivisionplot/{plotdivisionplotkey}) kumoutuviin tonttijakotontteihin. | [optional] 

@@ -6,7 +6,7 @@ Sitova tonttijako
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**binding_plot_division_key** | **str** | Sitova tonttijako avain | 
+**binding_plot_division_key** | **UUID** | Sitova tonttijako avain | 
 **binding_plot_division_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivision/{guid}) | [optional] [readonly] 
 **binding_plot_division_cancellation_infos** | [**List[BindingPlotDivisionCancellationInfo]**](BindingPlotDivisionCancellationInfo.md) | Sitovan tonttijaon kumoutumistieto | [optional] 
 **plot_division_plots** | [**List[PlotDivisionPlot]**](PlotDivisionPlot.md) | Tonttijakotontit | 

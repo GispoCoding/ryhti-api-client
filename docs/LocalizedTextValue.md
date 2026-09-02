@@ -1,14 +1,13 @@
 # LocalizedTextValue
 
-Lokalisoitu teksti
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;LocalizedText\&quot; | 
 **text** | [**LanguageString**](LanguageString.md) | Kielistetty teksti | [optional] 
 **syntax** | **str** | Syntaksi | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;localizedText\&quot; | 
 
 ## Example
 

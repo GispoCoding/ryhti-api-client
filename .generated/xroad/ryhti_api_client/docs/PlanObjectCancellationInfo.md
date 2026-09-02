@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_object_cancellation_info_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_object_cancellation_info_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **cancelled_plan_object_uri** | **str** | Kumottavan kaavakohteen tunnus URI-muodossa (https://uri.rakennetunymparistontietojarjestelma.fi/planobject/{planObjectKey}) | 
 **cancels_entire_plan_object** | **bool** | Kumoaa kohteen kokonaan | 
 **validity_geometry** | [**RyhtiGeometry**](RyhtiGeometry.md) | Osittain kumottaessa kohteen voimaan jäävä geometria | [optional] 

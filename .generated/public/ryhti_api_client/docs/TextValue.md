@@ -1,14 +1,13 @@
 # TextValue
 
-Teksti
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;Text\&quot; | 
 **text** | **str** | Teksti | [optional] 
 **syntax** | **str** | Syntaksi | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;text\&quot; | 
 
 ## Example
 

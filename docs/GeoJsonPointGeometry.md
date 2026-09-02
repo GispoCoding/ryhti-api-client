@@ -1,13 +1,13 @@
 # GeoJsonPointGeometry
 
-Point GeoJson    Esimerkki: { \"type\": \"point\", \"coordinates\": [100.0, 0.0] }
+GeoJSON Point
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**coordinates** | **List[float]** | Koordinaatit | 
-**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;point\&quot; | 
+**type** | **str** |  | 
+**coordinates** | **List[float]** |  | 
 
 ## Example
 

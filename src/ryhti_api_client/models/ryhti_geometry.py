@@ -17,24 +17,12 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Union
+from typing import Any, ClassVar, Dict, List
+from ryhti_api_client.models.geo_json_geometry import GeoJsonGeometry
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
-from ryhti_api_client.models.geo_json_line_string_geometry import (
-    GeoJsonLineStringGeometry,
-)
-from ryhti_api_client.models.geo_json_multi_line_string_geometry import (
-    GeoJsonMultiLineStringGeometry,
-)
-from ryhti_api_client.models.geo_json_multi_point_geometry import (
-    GeoJsonMultiPointGeometry,
-)
-from ryhti_api_client.models.geo_json_multi_polygon_geometry import (
-    GeoJsonMultiPolygonGeometry,
-)
-from ryhti_api_client.models.geo_json_point_geometry import GeoJsonPointGeometry
-from ryhti_api_client.models.geo_json_polygon_geometry import GeoJsonPolygonGeometry
 
 class RyhtiGeometry(BaseModel):
     """
@@ -44,14 +32,7 @@ class RyhtiGeometry(BaseModel):
     srid: StrictStr = Field(
         description="Gauss Krüger projektio; SRID koodi; SRID nimi       19;3873;ETRS89 / GK19FIN EPSG:3873       20;3874;ETRS89 / GK20FIN EPSG:3874       21;3875;ETRS89 / GK21FIN EPSG:3875       22;3876;ETRS89 / GK22FIN EPSG:3876       23;3877;ETRS89 / GK23FIN EPSG:3877       24;3878;ETRS89 / GK24FIN EPSG:3878       25;3879;ETRS89 / GK25FIN EPSG:3879       26;3880;ETRS89 / GK26FIN EPSG:3880       27;3881;ETRS89 / GK27FIN EPSG:3881       28;3882;ETRS89 / GK28FIN EPSG:3882       29;3883;ETRS89 / GK29FIN EPSG:3883       30;3884;ETRS89 / GK30FIN EPSG:3884       31;3885;ETRS89 / GK31FIN EPSG:3885       3067 TM35FIN  "
     )
-    geometry: Union[
-            GeoJsonLineStringGeometry,
-            GeoJsonMultiLineStringGeometry,
-            GeoJsonMultiPointGeometry,
-            GeoJsonMultiPolygonGeometry,
-            GeoJsonPointGeometry,
-            GeoJsonPolygonGeometry,
-        ] = Field(discriminator="type")
+    geometry: GeoJsonGeometry = Field(discriminator="type")
     __properties: ClassVar[List[str]] = ["srid", "geometry"]
 
     @field_validator("srid")
@@ -82,7 +63,8 @@ class RyhtiGeometry(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -93,8 +75,7 @@ class RyhtiGeometry(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**land_use_restriction_key** | **str** | Avain | 
+**land_use_restriction_key** | **UUID** | Avain | 
 **land_use_restriction_uri** | **str** |  | [optional] [readonly] 
 **period_of_validity** | [**TimePeriodDateOnly**](TimePeriodDateOnly.md) | Voimassaoloaika | 
 **land_use_restriction_objects** | [**List[LandUseRestrictionObject]**](LandUseRestrictionObject.md) | Alueidenkäytön rajoituskohde | 

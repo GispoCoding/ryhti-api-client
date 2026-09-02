@@ -1,14 +1,13 @@
 # PositiveNumericValue
 
-Positiivinen numeerinen arvo
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;PositiveNumeric\&quot; | 
 **number** | **int** | Numero | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;positiveNumeric\&quot; | 
 
 ## Example
 

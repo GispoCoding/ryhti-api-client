@@ -18,12 +18,14 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from ryhti_api_client.models.binding_plot_division import BindingPlotDivision
 from ryhti_api_client.models.binding_plot_division_matter_decision import (
     BindingPlotDivisionMatterDecision,
 )
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class BindingPlotDivisionMatterPhase(BaseModel):
@@ -35,7 +37,7 @@ class BindingPlotDivisionMatterPhase(BaseModel):
         description='Tonttijakosuunnitelman elinkaaren tila. Käytetään koodistoa <a href="http://uri.suomi.fi/codelist/rytj/sitovanTonttijaonElinkaarenTila">http://uri.suomi.fi/codelist/rytj/sitovanTonttijaonElinkaarenTila</a>',
         alias="lifeCycleStatus",
     )
-    binding_plot_division_matter_phase_key: StrictStr = Field(
+    binding_plot_division_matter_phase_key: UUID = Field(
         description="Sitovan tonttijaon asian vaihe avain",
         alias="bindingPlotDivisionMatterPhaseKey",
     )
@@ -84,7 +86,8 @@ class BindingPlotDivisionMatterPhase(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -95,8 +98,7 @@ class BindingPlotDivisionMatterPhase(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

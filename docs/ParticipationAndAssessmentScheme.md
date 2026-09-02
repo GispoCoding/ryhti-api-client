@@ -6,7 +6,7 @@ OsallistumisJaArviointiSuunnitelma
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**participation_and_assessment_scheme_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**participation_and_assessment_scheme_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **participation_and_assessment_scheme_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/participationandassessmentscheme/{guid}) | [optional] [readonly] 
 **attachment_documents** | [**List[PlanAttachmentDocument]**](PlanAttachmentDocument.md) |  | 
 

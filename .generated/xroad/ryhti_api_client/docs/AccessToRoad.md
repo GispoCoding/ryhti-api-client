@@ -6,10 +6,10 @@ Kulkuyhteys
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_to_road_key** | **str** | Kulkuyhteyden avain | 
+**access_to_road_key** | **UUID** | Kulkuyhteyden avain | 
 **access_to_road_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/accesstoroad/{guid}) | [optional] [readonly] 
 **geometry** | [**RyhtiGeometry**](RyhtiGeometry.md) | Aluegeometria (Geometriatyypin oltava Polygon tai MultiPolygon) | 
-**plot_division_plot_keys** | **List[str]** | Tonttijakotontit joille kulkuyhteys | 
+**plot_division_plot_keys** | **List[UUID]** | Tonttijakotontit joille kulkuyhteys | 
 
 ## Example
 

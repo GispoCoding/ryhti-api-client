@@ -1,14 +1,13 @@
 # TimePeriodDateOnlyValue
 
-TimePeriodDateOnly
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;TimePeriodDateOnly\&quot; | 
 **begin** | **date** | Alkupäivä | [optional] 
 **end** | **date** | Loppupäivä | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;timePeriodDateOnly\&quot; | 
 
 ## Example
 

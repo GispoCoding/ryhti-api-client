@@ -32,7 +32,7 @@ uv run pytest
 
 ```shell
 
-uv run bash scripts/generate_client.sh v2025-release-23
+uv run bash scripts/generate_client.sh v2026-release-8
 uv run bash scripts/copy_generated_client.sh public
 # Inspect modified files and commit changes
 uv run bash scripts/copy_generated_client.sh xroad

@@ -1,15 +1,14 @@
 # IdentifierValue
 
-Tunnus
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;Identifier\&quot; | 
 **identifier** | **str** | Tunnus | [optional] 
 **register_identifier** | **str** | Järjestelmän tunnus | [optional] 
 **register_name** | [**LanguageString**](LanguageString.md) | Järjestelmän nimi | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;identifier\&quot; | 
 
 ## Example
 

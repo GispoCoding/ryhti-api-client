@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rule_id** | **str** |  | [optional] 
 **message** | **str** |  | [optional] 
+**localized_message** | [**LocalizedMessage**](LocalizedMessage.md) |  | [optional] 
 **instance** | **str** |  | [optional] 
-**class_key** | **str** |  | [optional] 
+**class_key** | **UUID** |  | [optional] 
 
 ## Example
 
