@@ -39,4 +39,10 @@ uv run bash scripts/copy_generated_client.sh public
 # Inspect modified files and commit (Amend) changes
 ```
 
+`generate_client.sh` patches the downloaded specs before generation: besides the description and
+server tweaks it runs `scripts/add_discriminators.jq`, which adds `discriminator` mappings to the
+`oneOf` properties, narrows each subclass' `dataType`/`type` enum to its own value and keeps that
+tag property first so the generated models and docs keep their field order. The upstream specs
+leave the unions ambiguous, which makes the generated client fail with "Multiple matches found".
+
 ### 
