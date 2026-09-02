@@ -33,9 +33,9 @@ uv run pytest
 ```shell
 
 uv run bash scripts/generate_client.sh v2025-release-23
-uv run bash scripts/copy_generated_client.sh xroad
-# Inspect modified files and commit changes
 uv run bash scripts/copy_generated_client.sh public
+# Inspect modified files and commit changes
+uv run bash scripts/copy_generated_client.sh xroad
 # Inspect modified files and commit (Amend) changes
 ```
 
@@ -44,5 +44,13 @@ server tweaks it runs `scripts/add_discriminators.jq`, which adds `discriminator
 `oneOf` properties, narrows each subclass' `dataType`/`type` enum to its own value and keeps that
 tag property first so the generated models and docs keep their field order. The upstream specs
 leave the unions ambiguous, which makes the generated client fail with "Multiple matches found".
+
+`copy_generated_client.sh` ends by running `scripts/fix_discriminated_unions.py`, which replaces the
+generated `oneOf` wrapper classes (`PlanRegulationValue`, `AdditionalInformationValue`,
+`RyhtiGeometryGeometry`) with pydantic discriminated unions: `AttributeValue` and `GeoJsonGeometry`
+become `typing.Union` aliases of the concrete classes, the tag fields become `Literal[...]`, and the
+consuming fields use `Field(discriminator=...)`. So `PlanRegulation.value` is a plain `CodeValue`,
+`TextValue`, etc. instead of a wrapper with `actual_instance`. The copy script then runs
+`ruff check --fix` and `ruff format` on the package. Both scripts are idempotent.
 
 ### 
