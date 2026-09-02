@@ -19,9 +19,11 @@ import json
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class BoundaryPoint(BaseModel):
@@ -29,16 +31,25 @@ class BoundaryPoint(BaseModel):
     Rajapiste
     """  # noqa: E501
 
+    boundary_point_key: UUID = Field(
+        description="Tiedon tuottajatahon tietojärjestelmän generoima rajapisteen versioriippumaton tunnus",
+        alias="boundaryPointKey",
+    )
     boundary_point_or_peg_id: Annotated[str, Field(min_length=1, strict=True)] = Field(
         description="Rajapisteen tai rajapyykin tunnus", alias="boundaryPointOrPegId"
     )
     geometry: RyhtiGeometry = Field(
         description="Pistegeometria (Geometriatyypin oltava GeoJsonPointGeometryGeoJsonPointGeometry)"
     )
-    __properties: ClassVar[List[str]] = ["boundaryPointOrPegId", "geometry"]
+    __properties: ClassVar[List[str]] = [
+        "boundaryPointKey",
+        "boundaryPointOrPegId",
+        "geometry",
+    ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -49,8 +60,7 @@ class BoundaryPoint(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -90,6 +100,7 @@ class BoundaryPoint(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "boundaryPointKey": obj.get("boundaryPointKey"),
                 "boundaryPointOrPegId": obj.get("boundaryPointOrPegId"),
                 "geometry": RyhtiGeometry.from_dict(obj["geometry"])
                 if obj.get("geometry") is not None

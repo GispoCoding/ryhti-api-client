@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**land_use_restriction_matter_phase_key** | **str** | Avain | 
+**land_use_restriction_matter_phase_key** | **UUID** | Avain | 
 **land_use_restriction_matter_phase_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/landuserestrictionmatterphase/{guid}) | [optional] [readonly] 
 **life_cycle_status** | **str** | Elinkaaritila. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/alueidenkaytonRajoituksenElinkaarenTila\&quot;&gt;http://uri.suomi.fi/codelist/rytj/alueidenkaytonRajoituksenElinkaarenTila&lt;/a&gt; | 
 **handling_event** | [**LandUseRestrictionHandlingEvent**](LandUseRestrictionHandlingEvent.md) | Käsittelytapahtuma | 

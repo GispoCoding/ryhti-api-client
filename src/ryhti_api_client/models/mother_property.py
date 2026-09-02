@@ -19,9 +19,11 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.positive_numeric_value import PositiveNumericValue
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class MotherProperty(BaseModel):
@@ -29,6 +31,10 @@ class MotherProperty(BaseModel):
     Muodostajakiinteistö
     """  # noqa: E501
 
+    mother_property_key: UUID = Field(
+        description="Tiedon tuottajatahon tietojärjestelmän generoima muodostajakiinteistön versioriippumaton tunnus",
+        alias="motherPropertyKey",
+    )
     property_identifier: Optional[Annotated[str, Field(min_length=3, strict=True)]] = (
         Field(default=None, description="Kiinteistötunnus", alias="propertyIdentifier")
     )
@@ -36,12 +42,13 @@ class MotherProperty(BaseModel):
         default=None, description="Määräalatunnus", alias="unseparatedParcelIdentifier"
     )
     contained_area: PositiveNumericValue = Field(
-        description="Positiivinen numeerinen arvo", alias="containedArea"
+        description="Sisältyvä pinta-ala", alias="containedArea"
     )
     fully_included: StrictBool = Field(
         description="Sisältyy kokonaan", alias="fullyIncluded"
     )
     __properties: ClassVar[List[str]] = [
+        "motherPropertyKey",
         "propertyIdentifier",
         "unseparatedParcelIdentifier",
         "containedArea",
@@ -49,7 +56,8 @@ class MotherProperty(BaseModel):
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -60,8 +68,7 @@ class MotherProperty(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -117,6 +124,7 @@ class MotherProperty(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "motherPropertyKey": obj.get("motherPropertyKey"),
                 "propertyIdentifier": obj.get("propertyIdentifier"),
                 "unseparatedParcelIdentifier": obj.get("unseparatedParcelIdentifier"),
                 "containedArea": PositiveNumericValue.from_dict(obj["containedArea"])

@@ -19,7 +19,6 @@ import json
 from pydantic import (
     BaseModel,
     ConfigDict,
-    Field,
     StrictFloat,
     StrictInt,
     StrictStr,
@@ -28,41 +27,28 @@ from pydantic import (
 from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class GeoJsonMultiPolygonGeometry(BaseModel):
     """
-    MultiPolygon GeoJson    Esimerkki: { \"type\": \"multiPolygon\", \"coordinates\": [ [ [ [102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0 ] ] ], [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] ] }
+    GeoJSON MultiPolygon
     """  # noqa: E501
 
-    coordinates: List[List[List[List[Union[StrictFloat, StrictInt]]]]] = Field(
-        description="Koordinaatit"
-    )
-    type: StrictStr = Field(
-        description='Geometriatyyppi. Pakollinen arvo: "multiPolygon"'
-    )
-    __properties: ClassVar[List[str]] = ["type"]
+    type: StrictStr
+    coordinates: List[List[List[List[Union[StrictFloat, StrictInt]]]]]
+    __properties: ClassVar[List[str]] = ["type", "coordinates"]
 
     @field_validator("type")
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(
-            [
-                "Point",
-                "MultiPoint",
-                "LineString",
-                "MultiLineString",
-                "Polygon",
-                "MultiPolygon",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('Point', 'MultiPoint', 'LineString', 'MultiLineString', 'Polygon', 'MultiPolygon')"
-            )
+        if value not in set(["MultiPolygon"]):
+            raise ValueError("must be one of enum values ('MultiPolygon')")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -73,8 +59,7 @@ class GeoJsonMultiPolygonGeometry(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -109,5 +94,7 @@ class GeoJsonMultiPolygonGeometry(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"type": obj.get("type")})
+        _obj = cls.model_validate(
+            {"type": obj.get("type"), "coordinates": obj.get("coordinates")}
+        )
         return _obj

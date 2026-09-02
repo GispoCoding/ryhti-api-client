@@ -6,7 +6,7 @@ Liiteasiakirja
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attachment_document_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**attachment_document_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **document_identifier** | **str** | Asiakirjan pysyvä tunnus, esim. diaarinumero tai muu dokumentinhallinnan tunnus. | 
 **name** | [**LanguageString**](LanguageString.md) | Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli. | 
 **personal_data_content** | **str** | Kuvaa asiakirjan henkilötietosisällön. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/henkilotietosisalto\&quot;&gt;http://uri.suomi.fi/codelist/rytj/henkilotietosisalto&lt;/a&gt; | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **retention_time** | **str** | Asiakirjan säilytysaika vuosina ennen sen hävittämistä. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/sailytysaika\&quot;&gt;http://uri.suomi.fi/codelist/rytj/sailytysaika&lt;/a&gt; | 
 **confirmation_date** | **date** |  | [optional] 
 **languages** | **List[str]** | Asiakirjan kieli tai sisältämät kielet. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/ryhtikielet\&quot;&gt;http://uri.suomi.fi/codelist/rytj/ryhtikielet&lt;/a&gt; | 
-**file_key** | **str** | Erillisen rajapinnan kautta tallennetun tiedoston avain. | 
+**file_key** | **UUID** | Erillisen rajapinnan kautta tallennetun tiedoston avain. | 
 **descriptors** | [**List[Descriptor]**](Descriptor.md) |  | [optional] 
 **document_date** | **date** |  | 
 **arrived_date** | **date** |  | [optional] 

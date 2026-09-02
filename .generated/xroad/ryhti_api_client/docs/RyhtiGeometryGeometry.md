@@ -1,13 +1,13 @@
 # RyhtiGeometryGeometry
 
-Geometria GeoJson rakenteella: https://geojson.org/
+Geometria GeoJSON rakenteella: https://geojson.org/
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**coordinates** | **List[List[List[List[float]]]]** | Koordinaatit | 
-**type** | **str** | Tuetut geometriatyypit | 
+**type** | **str** |  | 
+**coordinates** | **List[List[List[List[float]]]]** |  | 
 
 ## Example
 

@@ -6,10 +6,10 @@ Kaavakartta
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_map_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_map_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_map_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planmap/{guid}) | [optional] [readonly] 
 **name** | [**LanguageString**](LanguageString.md) | Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli. | 
-**file_key** | **str** |  | 
+**file_key** | **UUID** |  | 
 **coordinate_system** | **str** |  | 
 
 ## Example

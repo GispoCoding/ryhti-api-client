@@ -1,14 +1,13 @@
 # PositiveDecimalValue
 
-Positiivinen desimaali
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;PositiveDecimal\&quot; | 
 **number** | **float** | Desimaali | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;positiveDecimal\&quot; | 
 
 ## Example
 

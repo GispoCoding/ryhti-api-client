@@ -7,6 +7,7 @@ Liittyvä kaava
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **related_plan_uri** | **str** | Viittaustunnus (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{plankey}) tonttijakotontin alueelle kohdistuvaan vaikuttavaan kaavaan. | [optional] 
+**related_plan_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima vaikuttavan kaavan versioriippumaton tunnus | 
 **related_producer_plan_identifier** | **str** | Alueelle kohdistuvan vaikuttavan kaavan tuottajan kaavatunnus. | [optional] 
 
 ## Example

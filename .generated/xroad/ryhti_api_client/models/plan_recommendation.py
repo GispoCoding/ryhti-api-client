@@ -18,11 +18,13 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from ryhti_api_client.models.language_string import LanguageString
 from ryhti_api_client.models.plan_attachment_document import PlanAttachmentDocument
 from ryhti_api_client.models.time_period_date_only import TimePeriodDateOnly
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PlanRecommendation(BaseModel):
@@ -30,7 +32,7 @@ class PlanRecommendation(BaseModel):
     Kaavasuositus
     """  # noqa: E501
 
-    plan_recommendation_key: StrictStr = Field(
+    plan_recommendation_key: UUID = Field(
         description="Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
         alias="planRecommendationKey",
     )
@@ -101,7 +103,8 @@ class PlanRecommendation(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -112,8 +115,7 @@ class PlanRecommendation(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -149,8 +151,11 @@ class PlanRecommendation(BaseModel):
         _items = []
         if self.related_documents:
             for _item_related_documents in self.related_documents:
-                if _item_related_documents:
-                    _items.append(_item_related_documents.to_dict())
+                _items.append(
+                    _item_related_documents.to_dict()
+                    if _item_related_documents is not None
+                    else None
+                )
             _dict["relatedDocuments"] = _items
         # override the default output from pydantic by calling `to_dict()` of period_of_validity
         if self.period_of_validity:

@@ -21,13 +21,17 @@ from typing import Any, ClassVar, Dict, List, Literal, Optional
 from ryhti_api_client.models.language_string import LanguageString
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class IdentifierValue(BaseModel):
     """
-    Tunnus
+    IdentifierValue
     """  # noqa: E501
 
+    data_type: Literal["Identifier"] = Field(
+        description='Pakollinen arvo: "Identifier"', alias="dataType"
+    )
     identifier: Optional[StrictStr] = Field(default=None, description="Tunnus")
     register_identifier: Optional[StrictStr] = Field(
         default=None, description="Järjestelmän tunnus", alias="registerIdentifier"
@@ -35,13 +39,16 @@ class IdentifierValue(BaseModel):
     register_name: Optional[LanguageString] = Field(
         default=None, description="Järjestelmän nimi", alias="registerName"
     )
-    data_type: Literal["Identifier"] = Field(
-        description='Pakollinen arvo: "identifier"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = [
+        "dataType",
+        "identifier",
+        "registerIdentifier",
+        "registerName",
+    ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -52,8 +59,7 @@ class IdentifierValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -77,6 +83,9 @@ class IdentifierValue(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of register_name
+        if self.register_name:
+            _dict["registerName"] = self.register_name.to_dict()
         return _dict
 
     @classmethod
@@ -88,5 +97,14 @@ class IdentifierValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "identifier": obj.get("identifier"),
+                "registerIdentifier": obj.get("registerIdentifier"),
+                "registerName": LanguageString.from_dict(obj["registerName"])
+                if obj.get("registerName") is not None
+                else None,
+            }
+        )
         return _obj

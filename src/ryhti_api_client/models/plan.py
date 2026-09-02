@@ -27,6 +27,10 @@ from pydantic import (
     field_validator,
 )
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
+from ryhti_api_client.models.binding_plot_division_cancellation_info import (
+    BindingPlotDivisionCancellationInfo,
+)
 from ryhti_api_client.models.general_regulation_group import GeneralRegulationGroup
 from ryhti_api_client.models.other_plan_material import OtherPlanMaterial
 from ryhti_api_client.models.plan_attachment_document import PlanAttachmentDocument
@@ -50,6 +54,7 @@ from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
 from ryhti_api_client.models.time_period_date_only import TimePeriodDateOnly
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class Plan(BaseModel):
@@ -57,7 +62,7 @@ class Plan(BaseModel):
     Kaava
     """  # noqa: E501
 
-    plan_key: StrictStr = Field(
+    plan_key: UUID = Field(
         description="Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
         alias="planKey",
     )
@@ -96,6 +101,13 @@ class Plan(BaseModel):
     )
     plan_cancellation_infos: Optional[List[PlanCancellationInfo]] = Field(
         default=None, description="Kumoamistieto", alias="planCancellationInfos"
+    )
+    binding_plot_division_cancellation_infos: Optional[
+        List[BindingPlotDivisionCancellationInfo]
+    ] = Field(
+        default=None,
+        description="Sitovan tonttijaon kumoutumistieto.",
+        alias="bindingPlotDivisionCancellationInfos",
     )
     plan_report: Optional[PlanReport] = Field(
         default=None, description="Kaavaselostus", alias="planReport"
@@ -155,6 +167,7 @@ class Plan(BaseModel):
         "planAnnexes",
         "otherPlanMaterials",
         "planCancellationInfos",
+        "bindingPlotDivisionCancellationInfos",
         "planReport",
         "generalRegulationGroups",
         "presentationAlignments",
@@ -219,7 +232,8 @@ class Plan(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -230,8 +244,7 @@ class Plan(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -266,8 +279,9 @@ class Plan(BaseModel):
         _items = []
         if self.plan_maps:
             for _item_plan_maps in self.plan_maps:
-                if _item_plan_maps:
-                    _items.append(_item_plan_maps.to_dict())
+                _items.append(
+                    _item_plan_maps.to_dict() if _item_plan_maps is not None else None
+                )
             _dict["planMaps"] = _items
         # override the default output from pydantic by calling `to_dict()` of geographical_area
         if self.geographical_area:
@@ -276,23 +290,44 @@ class Plan(BaseModel):
         _items = []
         if self.plan_annexes:
             for _item_plan_annexes in self.plan_annexes:
-                if _item_plan_annexes:
-                    _items.append(_item_plan_annexes.to_dict())
+                _items.append(
+                    _item_plan_annexes.to_dict()
+                    if _item_plan_annexes is not None
+                    else None
+                )
             _dict["planAnnexes"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in other_plan_materials (list)
         _items = []
         if self.other_plan_materials:
             for _item_other_plan_materials in self.other_plan_materials:
-                if _item_other_plan_materials:
-                    _items.append(_item_other_plan_materials.to_dict())
+                _items.append(
+                    _item_other_plan_materials.to_dict()
+                    if _item_other_plan_materials is not None
+                    else None
+                )
             _dict["otherPlanMaterials"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plan_cancellation_infos (list)
         _items = []
         if self.plan_cancellation_infos:
             for _item_plan_cancellation_infos in self.plan_cancellation_infos:
-                if _item_plan_cancellation_infos:
-                    _items.append(_item_plan_cancellation_infos.to_dict())
+                _items.append(
+                    _item_plan_cancellation_infos.to_dict()
+                    if _item_plan_cancellation_infos is not None
+                    else None
+                )
             _dict["planCancellationInfos"] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in binding_plot_division_cancellation_infos (list)
+        _items = []
+        if self.binding_plot_division_cancellation_infos:
+            for (
+                _item_binding_plot_division_cancellation_infos
+            ) in self.binding_plot_division_cancellation_infos:
+                _items.append(
+                    _item_binding_plot_division_cancellation_infos.to_dict()
+                    if _item_binding_plot_division_cancellation_infos is not None
+                    else None
+                )
+            _dict["bindingPlotDivisionCancellationInfos"] = _items
         # override the default output from pydantic by calling `to_dict()` of plan_report
         if self.plan_report:
             _dict["planReport"] = self.plan_report.to_dict()
@@ -300,15 +335,21 @@ class Plan(BaseModel):
         _items = []
         if self.general_regulation_groups:
             for _item_general_regulation_groups in self.general_regulation_groups:
-                if _item_general_regulation_groups:
-                    _items.append(_item_general_regulation_groups.to_dict())
+                _items.append(
+                    _item_general_regulation_groups.to_dict()
+                    if _item_general_regulation_groups is not None
+                    else None
+                )
             _dict["generalRegulationGroups"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in presentation_alignments (list)
         _items = []
         if self.presentation_alignments:
             for _item_presentation_alignments in self.presentation_alignments:
-                if _item_presentation_alignments:
-                    _items.append(_item_presentation_alignments.to_dict())
+                _items.append(
+                    _item_presentation_alignments.to_dict()
+                    if _item_presentation_alignments is not None
+                    else None
+                )
             _dict["presentationAlignments"] = _items
         # override the default output from pydantic by calling `to_dict()` of period_of_validity
         if self.period_of_validity:
@@ -317,22 +358,29 @@ class Plan(BaseModel):
         _items = []
         if self.planners:
             for _item_planners in self.planners:
-                if _item_planners:
-                    _items.append(_item_planners.to_dict())
+                _items.append(
+                    _item_planners.to_dict() if _item_planners is not None else None
+                )
             _dict["planners"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plan_objects (list)
         _items = []
         if self.plan_objects:
             for _item_plan_objects in self.plan_objects:
-                if _item_plan_objects:
-                    _items.append(_item_plan_objects.to_dict())
+                _items.append(
+                    _item_plan_objects.to_dict()
+                    if _item_plan_objects is not None
+                    else None
+                )
             _dict["planObjects"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plan_regulation_groups (list)
         _items = []
         if self.plan_regulation_groups:
             for _item_plan_regulation_groups in self.plan_regulation_groups:
-                if _item_plan_regulation_groups:
-                    _items.append(_item_plan_regulation_groups.to_dict())
+                _items.append(
+                    _item_plan_regulation_groups.to_dict()
+                    if _item_plan_regulation_groups is not None
+                    else None
+                )
             _dict["planRegulationGroups"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plan_regulation_group_relations (list)
         _items = []
@@ -340,8 +388,11 @@ class Plan(BaseModel):
             for (
                 _item_plan_regulation_group_relations
             ) in self.plan_regulation_group_relations:
-                if _item_plan_regulation_group_relations:
-                    _items.append(_item_plan_regulation_group_relations.to_dict())
+                _items.append(
+                    _item_plan_regulation_group_relations.to_dict()
+                    if _item_plan_regulation_group_relations is not None
+                    else None
+                )
             _dict["planRegulationGroupRelations"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in related_plan_object_regulation_group_relations (list)
         _items = []
@@ -349,10 +400,11 @@ class Plan(BaseModel):
             for (
                 _item_related_plan_object_regulation_group_relations
             ) in self.related_plan_object_regulation_group_relations:
-                if _item_related_plan_object_regulation_group_relations:
-                    _items.append(
-                        _item_related_plan_object_regulation_group_relations.to_dict()
-                    )
+                _items.append(
+                    _item_related_plan_object_regulation_group_relations.to_dict()
+                    if _item_related_plan_object_regulation_group_relations is not None
+                    else None
+                )
             _dict["relatedPlanObjectRegulationGroupRelations"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in related_regulation_group_plan_object_relations (list)
         _items = []
@@ -360,10 +412,11 @@ class Plan(BaseModel):
             for (
                 _item_related_regulation_group_plan_object_relations
             ) in self.related_regulation_group_plan_object_relations:
-                if _item_related_regulation_group_plan_object_relations:
-                    _items.append(
-                        _item_related_regulation_group_plan_object_relations.to_dict()
-                    )
+                _items.append(
+                    _item_related_regulation_group_plan_object_relations.to_dict()
+                    if _item_related_regulation_group_plan_object_relations is not None
+                    else None
+                )
             _dict["relatedRegulationGroupPlanObjectRelations"] = _items
         # set to None if legal_effect_of_local_master_plans (nullable) is None
         # and model_fields_set contains the field
@@ -419,6 +472,14 @@ class Plan(BaseModel):
             and "plan_cancellation_infos" in self.model_fields_set
         ):
             _dict["planCancellationInfos"] = None
+
+        # set to None if binding_plot_division_cancellation_infos (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.binding_plot_division_cancellation_infos is None
+            and "binding_plot_division_cancellation_infos" in self.model_fields_set
+        ):
+            _dict["bindingPlotDivisionCancellationInfos"] = None
 
         # set to None if plan_report (nullable) is None
         # and model_fields_set contains the field
@@ -543,6 +604,12 @@ class Plan(BaseModel):
                     for _item in obj["planCancellationInfos"]
                 ]
                 if obj.get("planCancellationInfos") is not None
+                else None,
+                "bindingPlotDivisionCancellationInfos": [
+                    BindingPlotDivisionCancellationInfo.from_dict(_item)
+                    for _item in obj["bindingPlotDivisionCancellationInfos"]
+                ]
+                if obj.get("bindingPlotDivisionCancellationInfos") is not None
                 else None,
                 "planReport": PlanReport.from_dict(obj["planReport"])
                 if obj.get("planReport") is not None

@@ -22,7 +22,10 @@ Name | Type | Description | Notes
 **participation_and_assessment_scheme** | [**ParticipationAndAssessmentScheme**](ParticipationAndAssessmentScheme.md) | Osallistumis- ja arviointisuunnitelma | [optional] 
 **source_datas** | [**List[PlanSourceData]**](PlanSourceData.md) | Lähtötietoaineisto | [optional] 
 **related_plan_matters** | **List[str]** | Liittyvät kaava asiat (URI) | [optional] 
+**effective_life_cycle_status** | **str** | Ajantasainen elinkaaren tila. Jos kaavan kaikki kaavakohteet on kumottu, palautetaan kumottu (14). | [optional] 
+**period_of_validity** | [**TimePeriodDateOnly**](TimePeriodDateOnly.md) | Ajantasainen voimassaoloaika (alku- ja loppupäivämäärä). | [optional] 
 **plan_matter_phases** | [**List[PlanMatterPhaseUriResponse]**](PlanMatterPhaseUriResponse.md) |  | 
+**cancelled_by** | [**List[CancelledByResponse]**](CancelledByResponse.md) | Kumoamistieto. Kuvaa kaavan kumoamista. Kumoamistieto voi kumota kaavan kokonaan tai osittain. | [optional] 
 **original_administrative_area_identifiers** | **List[str]** |  | 
 **plan_matter_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planmatter/{identifier}) | [optional] [readonly] 
 

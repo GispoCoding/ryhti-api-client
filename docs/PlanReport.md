@@ -6,7 +6,7 @@ Kaavaselostus
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_report_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_report_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_report_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planreport/{guid}) | [optional] [readonly] 
 **attachment_documents** | [**List[PlanAttachmentDocument]**](PlanAttachmentDocument.md) |  | 
 

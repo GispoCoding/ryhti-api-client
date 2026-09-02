@@ -1,13 +1,13 @@
 # GeoJsonMultiPointGeometry
 
-MultiPoint GeoJson    Esimerkki: { \"type\": \"multiPoint\", \"coordinates\": [ [100.0, 0.0], [101.0, 1.0] ] }
+GeoJSON MultiPoint
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**coordinates** | **List[List[float]]** | Koordinaatit | 
-**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;multiPoint\&quot; | 
+**type** | **str** |  | 
+**coordinates** | **List[List[float]]** |  | 
 
 ## Example
 

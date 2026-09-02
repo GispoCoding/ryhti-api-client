@@ -19,6 +19,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.access_to_road import AccessToRoad
 from ryhti_api_client.models.binding_plot_division_cancellation_info import (
     BindingPlotDivisionCancellationInfo,
@@ -29,6 +30,7 @@ from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
 from ryhti_api_client.models.time_period_date_only import TimePeriodDateOnly
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class BindingPlotDivision(BaseModel):
@@ -36,7 +38,7 @@ class BindingPlotDivision(BaseModel):
     Sitova tonttijako
     """  # noqa: E501
 
-    binding_plot_division_key: StrictStr = Field(
+    binding_plot_division_key: UUID = Field(
         description="Sitova tonttijako avain", alias="bindingPlotDivisionKey"
     )
     binding_plot_division_uri: Optional[StrictStr] = Field(
@@ -78,7 +80,8 @@ class BindingPlotDivision(BaseModel):
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -89,8 +92,7 @@ class BindingPlotDivision(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -125,17 +127,21 @@ class BindingPlotDivision(BaseModel):
             for (
                 _item_binding_plot_division_cancellation_infos
             ) in self.binding_plot_division_cancellation_infos:
-                if _item_binding_plot_division_cancellation_infos:
-                    _items.append(
-                        _item_binding_plot_division_cancellation_infos.to_dict()
-                    )
+                _items.append(
+                    _item_binding_plot_division_cancellation_infos.to_dict()
+                    if _item_binding_plot_division_cancellation_infos is not None
+                    else None
+                )
             _dict["bindingPlotDivisionCancellationInfos"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plot_division_plots (list)
         _items = []
         if self.plot_division_plots:
             for _item_plot_division_plots in self.plot_division_plots:
-                if _item_plot_division_plots:
-                    _items.append(_item_plot_division_plots.to_dict())
+                _items.append(
+                    _item_plot_division_plots.to_dict()
+                    if _item_plot_division_plots is not None
+                    else None
+                )
             _dict["plotDivisionPlots"] = _items
         # override the default output from pydantic by calling `to_dict()` of period_of_validity
         if self.period_of_validity:
@@ -147,15 +153,21 @@ class BindingPlotDivision(BaseModel):
         _items = []
         if self.boundary_points:
             for _item_boundary_points in self.boundary_points:
-                if _item_boundary_points:
-                    _items.append(_item_boundary_points.to_dict())
+                _items.append(
+                    _item_boundary_points.to_dict()
+                    if _item_boundary_points is not None
+                    else None
+                )
             _dict["boundaryPoints"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in accesses_to_road (list)
         _items = []
         if self.accesses_to_road:
             for _item_accesses_to_road in self.accesses_to_road:
-                if _item_accesses_to_road:
-                    _items.append(_item_accesses_to_road.to_dict())
+                _items.append(
+                    _item_accesses_to_road.to_dict()
+                    if _item_accesses_to_road is not None
+                    else None
+                )
             _dict["accessesToRoad"] = _items
         # set to None if binding_plot_division_cancellation_infos (nullable) is None
         # and model_fields_set contains the field

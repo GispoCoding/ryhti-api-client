@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_post**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_post) | **POST** /api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/phase/{bindingPlotDivisionMatterPhaseKey} | Rajapinta sitovan tonttijaon asian vaiheen lisäämiseen olemassa olevalle sitovan tonttijaon asialle.
 [**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_put**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_put) | **PUT** /api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/phase/{bindingPlotDivisionMatterPhaseKey} | Rajapinta jo tallennetun vaiheen päivittämiseen.
 [**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_validate_post**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_phase_binding_plot_division_matter_phase_key_validate_post) | **POST** /api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/phase/{bindingPlotDivisionMatterPhaseKey}/validate | Rajapinta sitovan tonttijaon asian vaiheen validoimiseen ilman tallennusta.
-[**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post) | **POST** /api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/planEffects | Rajapinta kaavan vaikutusten luomiseen.
+[**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post) | **POST** /api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier}/planEffects/{permanentPlanIdentifier} | Rajapinta uusien kaavan vaikutusten luomiseen.
 [**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_post**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_post) | **POST** /api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier} | Rajapinta sitovan tonttijaon asian luomiseen.
 [**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_post_0**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_post_0) | **POST** /api/BindingPlotDivisionMatter/PermanentBindingPlotDivisionIdentifier | Rajapinta sitovan tonttijaon pysyvän tunnuksen varaamiseen.
 [**api_binding_plot_division_matter_permanent_binding_plot_division_identifier_put**](BindingPlotDivisionMatterApi.md#api_binding_plot_division_matter_permanent_binding_plot_division_identifier_put) | **PUT** /api/BindingPlotDivisionMatter/{permanentBindingPlotDivisionIdentifier} | Rajapinta sitovan tonttijaon asian päivittämiseen.
@@ -138,7 +138,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.BindingPlotDivisionMatterApi(api_client)
     permanent_binding_plot_division_identifier = 'permanent_binding_plot_division_identifier_example' # str | 
-    binding_plot_division_matter_phase_key = 'binding_plot_division_matter_phase_key_example' # str | 
+    binding_plot_division_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Sitovan tonttijaon asian vaiheen hakeminen avaimella.
@@ -157,7 +157,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_binding_plot_division_identifier** | **str**|  | 
- **binding_plot_division_matter_phase_key** | **str**|  | 
+ **binding_plot_division_matter_phase_key** | **UUID**|  | 
 
 ### Return type
 
@@ -225,7 +225,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.BindingPlotDivisionMatterApi(api_client)
     permanent_binding_plot_division_identifier = 'permanent_binding_plot_division_identifier_example' # str | Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle.
-    binding_plot_division_matter_phase_key = 'binding_plot_division_matter_phase_key_example' # str | Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle.
+    binding_plot_division_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle.
     binding_plot_division_matter_phase = ryhti_api_client.BindingPlotDivisionMatterPhase() # BindingPlotDivisionMatterPhase | Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan.
 
     try:
@@ -245,7 +245,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_binding_plot_division_identifier** | **str**| Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. | 
- **binding_plot_division_matter_phase_key** | **str**| Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. | 
+ **binding_plot_division_matter_phase_key** | **UUID**| Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. | 
  **binding_plot_division_matter_phase** | [**BindingPlotDivisionMatterPhase**](BindingPlotDivisionMatterPhase.md)| Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. | 
 
 ### Return type
@@ -311,7 +311,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.BindingPlotDivisionMatterApi(api_client)
     permanent_binding_plot_division_identifier = 'permanent_binding_plot_division_identifier_example' # str | 
-    binding_plot_division_matter_phase_key = 'binding_plot_division_matter_phase_key_example' # str | 
+    binding_plot_division_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     binding_plot_division_matter_phase = ryhti_api_client.BindingPlotDivisionMatterPhase() # BindingPlotDivisionMatterPhase | 
 
     try:
@@ -329,7 +329,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_binding_plot_division_identifier** | **str**|  | 
- **binding_plot_division_matter_phase_key** | **str**|  | 
+ **binding_plot_division_matter_phase_key** | **UUID**|  | 
  **binding_plot_division_matter_phase** | [**BindingPlotDivisionMatterPhase**](BindingPlotDivisionMatterPhase.md)|  | 
 
 ### Return type
@@ -399,7 +399,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.BindingPlotDivisionMatterApi(api_client)
     permanent_binding_plot_division_identifier = 'permanent_binding_plot_division_identifier_example' # str | Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle.
-    binding_plot_division_matter_phase_key = 'binding_plot_division_matter_phase_key_example' # str | Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle.
+    binding_plot_division_matter_phase_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle.
     binding_plot_division_matter_phase = ryhti_api_client.BindingPlotDivisionMatterPhase() # BindingPlotDivisionMatterPhase | Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan.
 
     try:
@@ -419,7 +419,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_binding_plot_division_identifier** | **str**| Pysyvä sitovan tonttijaon tunnus sitovan tonttijaon asialle. | 
- **binding_plot_division_matter_phase_key** | **str**| Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. | 
+ **binding_plot_division_matter_phase_key** | **UUID**| Pysyvä yksilöivä tunnus sitovan tonttijaon asian vaiheelle. | 
  **binding_plot_division_matter_phase** | [**BindingPlotDivisionMatterPhase**](BindingPlotDivisionMatterPhase.md)| Lisättävä sitovan tonttijaon asian vaihe kokonaisuudessaan. | 
 
 ### Return type
@@ -445,10 +445,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post**
-> str api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post(permanent_binding_plot_division_identifier, plan_effects)
+# **api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post**
+> SuccessResponse api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post(permanent_binding_plot_division_identifier, permanent_plan_identifier, plan_effects)
 
-Rajapinta kaavan vaikutusten luomiseen.
+Rajapinta uusien kaavan vaikutusten luomiseen.
 
 ### Example
 
@@ -458,6 +458,7 @@ Rajapinta kaavan vaikutusten luomiseen.
 ```python
 import ryhti_api_client
 from ryhti_api_client.models.plan_effects import PlanEffects
+from ryhti_api_client.models.success_response import SuccessResponse
 from ryhti_api_client.rest import ApiException
 from pprint import pprint
 
@@ -485,15 +486,16 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.BindingPlotDivisionMatterApi(api_client)
     permanent_binding_plot_division_identifier = 'permanent_binding_plot_division_identifier_example' # str | Pysyvä yksilöivä tunnus sitovan tonttijaon asialle.
+    permanent_plan_identifier = 'permanent_plan_identifier_example' # str | Pysyvä yksilöivä tunnus kaavalle.
     plan_effects = ryhti_api_client.PlanEffects() # PlanEffects | Kaavan vaikutukset.
 
     try:
-        # Rajapinta kaavan vaikutusten luomiseen.
-        api_response = api_instance.api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post(permanent_binding_plot_division_identifier, plan_effects)
-        print("The response of BindingPlotDivisionMatterApi->api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post:\n")
+        # Rajapinta uusien kaavan vaikutusten luomiseen.
+        api_response = api_instance.api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post(permanent_binding_plot_division_identifier, permanent_plan_identifier, plan_effects)
+        print("The response of BindingPlotDivisionMatterApi->api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BindingPlotDivisionMatterApi->api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_post: %s\n" % e)
+        print("Exception when calling BindingPlotDivisionMatterApi->api_binding_plot_division_matter_permanent_binding_plot_division_identifier_plan_effects_permanent_plan_identifier_post: %s\n" % e)
 ```
 
 
@@ -504,11 +506,12 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permanent_binding_plot_division_identifier** | **str**| Pysyvä yksilöivä tunnus sitovan tonttijaon asialle. | 
+ **permanent_plan_identifier** | **str**| Pysyvä yksilöivä tunnus kaavalle. | 
  **plan_effects** | [**PlanEffects**](PlanEffects.md)| Kaavan vaikutukset. | 
 
 ### Return type
 
-**str**
+[**SuccessResponse**](SuccessResponse.md)
 
 ### Authorization
 

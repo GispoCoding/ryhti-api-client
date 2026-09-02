@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**handling_event_key** | **str** | Avain | 
+**handling_event_key** | **UUID** | Avain | 
 **handling_event_uri** | **str** |  | [optional] [readonly] 
 **type** | **str** | Laji. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/alueidenkaytonRajoituksenKasittelytapahtumanLaji\&quot;&gt;http://uri.suomi.fi/codelist/rytj/alueidenkaytonRajoituksenKasittelytapahtumanLaji&lt;/a&gt; | 
 **name** | [**LanguageString**](LanguageString.md) | Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli. | [optional] 

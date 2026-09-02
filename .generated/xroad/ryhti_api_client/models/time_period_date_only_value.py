@@ -17,53 +17,36 @@ import re  # noqa: F401
 import json
 
 from datetime import date
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from ryhti_api_client.models.attribute_value import AttributeValue
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
-class TimePeriodDateOnlyValue(BaseModel):
+class TimePeriodDateOnlyValue(AttributeValue):
     """
-    TimePeriodDateOnly
+    TimePeriodDateOnlyValue
     """  # noqa: E501
 
+    data_type: StrictStr = Field(
+        description='Pakollinen arvo: "TimePeriodDateOnly"', alias="dataType"
+    )
     begin: Optional[date] = Field(default=None, description="Alkupäivä")
     end: Optional[date] = Field(default=None, description="Loppupäivä")
-    data_type: StrictStr = Field(
-        description='Pakollinen arvo: "timePeriodDateOnly"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = ["dataType", "begin", "end"]
 
     @field_validator("data_type")
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(
-            [
-                "LocalizedText",
-                "Text",
-                "Numeric",
-                "NumericRange",
-                "PositiveNumeric",
-                "PositiveNumericRange",
-                "Decimal",
-                "DecimalRange",
-                "PositiveDecimal",
-                "PositiveDecimalRange",
-                "Code",
-                "Identifier",
-                "SpotElevation",
-                "TimePeriod",
-                "TimePeriodDateOnly",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('LocalizedText', 'Text', 'Numeric', 'NumericRange', 'PositiveNumeric', 'PositiveNumericRange', 'Decimal', 'DecimalRange', 'PositiveDecimal', 'PositiveDecimalRange', 'Code', 'Identifier', 'SpotElevation', 'TimePeriod', 'TimePeriodDateOnly')"
-            )
+        if value not in set(["TimePeriodDateOnly"]):
+            raise ValueError("must be one of enum values ('TimePeriodDateOnly')")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -74,8 +57,7 @@ class TimePeriodDateOnlyValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -99,6 +81,16 @@ class TimePeriodDateOnlyValue(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if begin (nullable) is None
+        # and model_fields_set contains the field
+        if self.begin is None and "begin" in self.model_fields_set:
+            _dict["begin"] = None
+
+        # set to None if end (nullable) is None
+        # and model_fields_set contains the field
+        if self.end is None and "end" in self.model_fields_set:
+            _dict["end"] = None
+
         return _dict
 
     @classmethod
@@ -110,5 +102,11 @@ class TimePeriodDateOnlyValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "begin": obj.get("begin"),
+                "end": obj.get("end"),
+            }
+        )
         return _obj

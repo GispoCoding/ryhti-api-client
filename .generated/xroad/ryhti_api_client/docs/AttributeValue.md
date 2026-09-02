@@ -1,11 +1,12 @@
 # AttributeValue
 
+Base class for attribute values representing typed values with units of measure.  Note: CustomSwaggerSchemaFilter overrides Swagger descriptions to show property-specific XML comments (#31650),  e.g., \"Positiivinen numeerinen arvo\" is replaced to be \"Rakentamisen määrä\".
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_type** | **str** | Enumeraatio joka määrittää Arvo-luokkien (Domain.ValueObjects.AttributeValue) tyypin.  Jokaisella konkreettisella Arvo-luokan (Domain.ValueObjects.AttributeValue) toteutuksella tulee olla sitä vastaava DataType enumeraation arvo. | [optional] 
+**data_type** | **str** | Enumeraatio joka määrittää Arvo-luokkien (Domain.ValueObjects.AttributeValue) tyypin.  Jokaisella konkreettisella Arvo-luokan (Domain.ValueObjects.AttributeValue) toteutuksella tulee olla sitä vastaava DataType enumeraation arvo. | 
 
 ## Example
 

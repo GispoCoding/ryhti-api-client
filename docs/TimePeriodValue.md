@@ -1,14 +1,13 @@
 # TimePeriodValue
 
-TimePeriod
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;TimePeriod\&quot; | 
 **begin_utc** | **datetime** | Alkuaika | [optional] 
 **end_utc** | **datetime** | Loppuaika | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;timePeriod\&quot; | 
 
 ## Example
 

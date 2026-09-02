@@ -27,6 +27,7 @@ from pydantic import (
 )
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.building_ordinance_operator import (
     BuildingOrdinanceOperator,
 )
@@ -34,6 +35,7 @@ from ryhti_api_client.models.descriptor import Descriptor
 from ryhti_api_client.models.language_string import LanguageString
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class BuildingOrdinanceAttachmentDocument(BaseModel):
@@ -41,7 +43,7 @@ class BuildingOrdinanceAttachmentDocument(BaseModel):
     BuildingOrdinanceAttachmentDocument
     """  # noqa: E501
 
-    attachment_document_key: Annotated[str, Field(min_length=1, strict=True)] = Field(
+    attachment_document_key: UUID = Field(
         description="Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
         alias="attachmentDocumentKey",
     )
@@ -69,7 +71,7 @@ class BuildingOrdinanceAttachmentDocument(BaseModel):
     languages: Annotated[List[StrictStr], Field(min_length=1)] = Field(
         description='Asiakirjan kieli tai sisältämät kielet. Käytetään koodistoa <a href="http://uri.suomi.fi/codelist/rytj/ryhtikielet">http://uri.suomi.fi/codelist/rytj/ryhtikielet</a>'
     )
-    file_key: StrictStr = Field(
+    file_key: UUID = Field(
         description="Erillisen rajapinnan kautta tallennetun tiedoston avain.",
         alias="fileKey",
     )
@@ -150,7 +152,8 @@ class BuildingOrdinanceAttachmentDocument(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -161,8 +164,7 @@ class BuildingOrdinanceAttachmentDocument(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -198,8 +200,11 @@ class BuildingOrdinanceAttachmentDocument(BaseModel):
         _items = []
         if self.descriptors:
             for _item_descriptors in self.descriptors:
-                if _item_descriptors:
-                    _items.append(_item_descriptors.to_dict())
+                _items.append(
+                    _item_descriptors.to_dict()
+                    if _item_descriptors is not None
+                    else None
+                )
             _dict["descriptors"] = _items
         # override the default output from pydantic by calling `to_dict()` of document_specification
         if self.document_specification:
@@ -208,8 +213,11 @@ class BuildingOrdinanceAttachmentDocument(BaseModel):
         _items = []
         if self.document_creator_operators:
             for _item_document_creator_operators in self.document_creator_operators:
-                if _item_document_creator_operators:
-                    _items.append(_item_document_creator_operators.to_dict())
+                _items.append(
+                    _item_document_creator_operators.to_dict()
+                    if _item_document_creator_operators is not None
+                    else None
+                )
             _dict["documentCreatorOperators"] = _items
         # set to None if confirmation_date (nullable) is None
         # and model_fields_set contains the field

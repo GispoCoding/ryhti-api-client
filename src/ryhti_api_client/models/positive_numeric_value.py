@@ -20,24 +20,26 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Literal, Optional
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PositiveNumericValue(BaseModel):
     """
-    Positiivinen numeerinen arvo
+    PositiveNumericValue
     """  # noqa: E501
 
+    data_type: Literal["PositiveNumeric"] = Field(
+        description='Pakollinen arvo: "PositiveNumeric"', alias="dataType"
+    )
     number: Optional[StrictInt] = Field(default=None, description="Numero")
     unit_of_measure: Optional[StrictStr] = Field(
         default=None, description="Mittayksikkö", alias="unitOfMeasure"
     )
-    data_type: Literal["PositiveNumeric"] = Field(
-        description='Pakollinen arvo: "positiveNumeric"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = ["dataType", "number", "unitOfMeasure"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -48,8 +50,7 @@ class PositiveNumericValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -84,5 +85,11 @@ class PositiveNumericValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "number": obj.get("number"),
+                "unitOfMeasure": obj.get("unitOfMeasure"),
+            }
+        )
         return _obj

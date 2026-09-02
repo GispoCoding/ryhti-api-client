@@ -1,14 +1,15 @@
 # PlanRegulationValue
 
+Base class for attribute values representing typed values with units of measure.  Note: CustomSwaggerSchemaFilter overrides Swagger descriptions to show property-specific XML comments (#31650),  e.g., \"Positiivinen numeerinen arvo\" is replaced to be \"Rakentamisen määrä\".
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;TimePeriodDateOnly\&quot; | 
 **code** | **str** | Koodiston arvo (uri) | [optional] 
 **code_list** | **str** | Koodisto | [optional] 
 **title** | [**LanguageString**](LanguageString.md) | Nimi | [optional] 
-**data_type** | **str** | Enumeraatio joka määrittää Arvo-luokkien (Domain.ValueObjects.AttributeValue) tyypin.  Jokaisella konkreettisella Arvo-luokan (Domain.ValueObjects.AttributeValue) toteutuksella tulee olla sitä vastaava DataType enumeraation arvo. | 
 **number** | **int** | Arvo | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
 **minimum_value** | **float** | Minimiarvo | [optional] 

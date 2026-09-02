@@ -6,7 +6,7 @@ Kaava-asian vaihe
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_matter_phase_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_matter_phase_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **life_cycle_status** | **str** | Asian elinkaaren tila. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari\&quot;&gt;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari&lt;/a&gt; | 
 **geographical_area** | [**RyhtiGeometry**](RyhtiGeometry.md) | Aluerajaus | 
 **handling_event** | [**HandlingEvent**](HandlingEvent.md) | Käsittelytapahtuma | [optional] 

@@ -6,7 +6,7 @@ Käsittelytapahtuma
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**handling_event_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**handling_event_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **handling_event_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/handlingevent/{guid}) | [optional] [readonly] 
 **handling_event_type** | **str** | Käsittelytapahtuman tyyppi. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/kaavakastap\&quot;&gt;http://uri.suomi.fi/codelist/rytj/kaavakastap&lt;/a&gt; | 
 **event_time** | **date** |  | [optional] 

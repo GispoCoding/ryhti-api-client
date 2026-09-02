@@ -45,7 +45,7 @@ configuration.api_key['Bearer'] = os.environ["API_KEY"]
 with ryhti_api_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ryhti_api_client.PlanAttachmentDocumentApi(api_client)
-    attachment_document_key = 'attachment_document_key_example' # str | Liiteasiakirjan avain
+    attachment_document_key = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Liiteasiakirjan avain
 
     try:
         # Liiteasiakirjan tiedoston hakeminen liiteasiakirjan avaimella.
@@ -63,7 +63,7 @@ with ryhti_api_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **attachment_document_key** | **str**| Liiteasiakirjan avain | 
+ **attachment_document_key** | **UUID**| Liiteasiakirjan avain | 
 
 ### Return type
 

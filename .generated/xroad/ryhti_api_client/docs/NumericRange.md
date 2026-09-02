@@ -1,15 +1,14 @@
 # NumericRange
 
-Numeerinen arvoväli
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;NumericRange\&quot; | 
 **minimum_value** | **int** | Minimiarvo | [optional] 
 **maximum_value** | **int** | Maksimiarvo | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;numericRange\&quot; | 
 
 ## Example
 

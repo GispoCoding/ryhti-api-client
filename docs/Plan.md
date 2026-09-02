@@ -6,7 +6,7 @@ Kaava
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plan/{guid}) | [optional] [readonly] 
 **life_cycle_status** | **str** | Kaavan elinkaaren tila. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari\&quot;&gt;http://uri.suomi.fi/codelist/rytj/kaavaelinkaari&lt;/a&gt; | 
 **legal_effect_of_local_master_plans** | **List[str]** | Yleiskaavan oikeusvaikutteisuuden määritykset. Käytössä ainoastaan yleiskaavan yhteydessä. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK\&quot;&gt;http://uri.suomi.fi/codelist/rytj/oikeusvaik_YK&lt;/a&gt; | [optional] 
@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **plan_annexes** | [**List[PlanAttachmentDocument]**](PlanAttachmentDocument.md) | Kaavan liittet | [optional] 
 **other_plan_materials** | [**List[OtherPlanMaterial]**](OtherPlanMaterial.md) | Muu kaava-aineisto | [optional] 
 **plan_cancellation_infos** | [**List[PlanCancellationInfo]**](PlanCancellationInfo.md) | Kumoamistieto | [optional] 
+**binding_plot_division_cancellation_infos** | [**List[BindingPlotDivisionCancellationInfo]**](BindingPlotDivisionCancellationInfo.md) | Sitovan tonttijaon kumoutumistieto. | [optional] 
 **plan_report** | [**PlanReport**](PlanReport.md) | Kaavaselostus | [optional] 
 **general_regulation_groups** | [**List[GeneralRegulationGroup]**](GeneralRegulationGroup.md) | Kaavamääräysryhmät | [optional] 
 **presentation_alignments** | [**List[PresentationAlignment]**](PresentationAlignment.md) | Esitystavankohdistus | [optional] 

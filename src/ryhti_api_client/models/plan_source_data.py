@@ -19,11 +19,13 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.language_string import LanguageString
 from ryhti_api_client.models.plan_attachment_document import PlanAttachmentDocument
 from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PlanSourceData(BaseModel):
@@ -31,7 +33,7 @@ class PlanSourceData(BaseModel):
     Lähtötietoaineisto
     """  # noqa: E501
 
-    plan_source_data_key: StrictStr = Field(
+    plan_source_data_key: UUID = Field(
         description="Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
         alias="planSourceDataKey",
     )
@@ -65,7 +67,8 @@ class PlanSourceData(BaseModel):
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -76,8 +79,7 @@ class PlanSourceData(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -116,8 +118,9 @@ class PlanSourceData(BaseModel):
         _items = []
         if self.files:
             for _item_files in self.files:
-                if _item_files:
-                    _items.append(_item_files.to_dict())
+                _items.append(
+                    _item_files.to_dict() if _item_files is not None else None
+                )
             _dict["files"] = _items
         # set to None if name (nullable) is None
         # and model_fields_set contains the field

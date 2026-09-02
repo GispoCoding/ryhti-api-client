@@ -6,7 +6,7 @@ Toimija
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**binding_plot_division_operator_key** | **str** | Toimijan avain | 
+**binding_plot_division_operator_key** | **UUID** | Toimijan avain | 
 **binding_plot_division_operator_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivisionoperator/{guid}) | [optional] [readonly] 
 **first_name** | **str** | Etunimi | [optional] 
 **last_name** | **str** | Sukunimi | [optional] 

@@ -6,7 +6,7 @@ Lähtötietoaineisto
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_source_data_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_source_data_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_source_data_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/plansourcedata/{guid}) | [optional] [readonly] 
 **type** | **str** | Aineiston tyyppi. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/RY_LahtotietoaineistonLaji\&quot;&gt;http://uri.suomi.fi/codelist/rytj/RY_LahtotietoaineistonLaji&lt;/a&gt; | 
 **name** | [**LanguageString**](LanguageString.md) | Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli. | [optional] 

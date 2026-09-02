@@ -18,10 +18,12 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from ryhti_api_client.models.related_plan import RelatedPlan
 from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class LandUseRestrictionObject(BaseModel):
@@ -29,7 +31,7 @@ class LandUseRestrictionObject(BaseModel):
     LandUseRestrictionObject
     """  # noqa: E501
 
-    land_use_restriction_object_key: StrictStr = Field(
+    land_use_restriction_object_key: UUID = Field(
         description="Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus.",
         alias="landUseRestrictionObjectKey",
     )
@@ -60,7 +62,8 @@ class LandUseRestrictionObject(BaseModel):
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -71,8 +74,7 @@ class LandUseRestrictionObject(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -105,8 +107,11 @@ class LandUseRestrictionObject(BaseModel):
         _items = []
         if self.related_plans:
             for _item_related_plans in self.related_plans:
-                if _item_related_plans:
-                    _items.append(_item_related_plans.to_dict())
+                _items.append(
+                    _item_related_plans.to_dict()
+                    if _item_related_plans is not None
+                    else None
+                )
             _dict["relatedPlans"] = _items
         # override the default output from pydantic by calling `to_dict()` of geometry
         if self.geometry:

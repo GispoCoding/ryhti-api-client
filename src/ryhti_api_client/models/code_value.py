@@ -21,25 +21,27 @@ from typing import Any, ClassVar, Dict, List, Literal, Optional
 from ryhti_api_client.models.language_string import LanguageString
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class CodeValue(BaseModel):
     """
-    Koodiston arvo
+    CodeValue
     """  # noqa: E501
 
+    data_type: Literal["Code"] = Field(
+        description='Pakollinen arvo: "Code"', alias="dataType"
+    )
     code: Optional[StrictStr] = Field(default=None, description="Koodiston arvo (uri)")
     code_list: Optional[StrictStr] = Field(
         default=None, description="Koodisto", alias="codeList"
     )
     title: Optional[LanguageString] = Field(default=None, description="Nimi")
-    data_type: Literal["Code"] = Field(
-        description='Pakollinen arvo: "code"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = ["dataType", "code", "codeList", "title"]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -50,8 +52,7 @@ class CodeValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -75,6 +76,9 @@ class CodeValue(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of title
+        if self.title:
+            _dict["title"] = self.title.to_dict()
         return _dict
 
     @classmethod
@@ -86,5 +90,14 @@ class CodeValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "code": obj.get("code"),
+                "codeList": obj.get("codeList"),
+                "title": LanguageString.from_dict(obj["title"])
+                if obj.get("title") is not None
+                else None,
+            }
+        )
         return _obj

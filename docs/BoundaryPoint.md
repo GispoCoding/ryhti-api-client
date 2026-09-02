@@ -6,6 +6,7 @@ Rajapiste
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**boundary_point_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima rajapisteen versioriippumaton tunnus | 
 **boundary_point_or_peg_id** | **str** | Rajapisteen tai rajapyykin tunnus | 
 **geometry** | [**RyhtiGeometry**](RyhtiGeometry.md) | Pistegeometria (Geometriatyypin oltava GeoJsonPointGeometryGeoJsonPointGeometry) | 
 

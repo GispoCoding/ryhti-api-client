@@ -26,11 +26,13 @@ from pydantic import (
     field_validator,
 )
 from typing import Any, ClassVar, Dict, List, Optional
+from uuid import UUID
 from ryhti_api_client.models.language_string import LanguageString
 from ryhti_api_client.models.plan_attachment_document import PlanAttachmentDocument
 from ryhti_api_client.models.ryhti_geometry import RyhtiGeometry
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class HandlingEvent(BaseModel):
@@ -38,7 +40,7 @@ class HandlingEvent(BaseModel):
     Käsittelytapahtuma
     """  # noqa: E501
 
-    handling_event_key: StrictStr = Field(
+    handling_event_key: UUID = Field(
         description="Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus",
         alias="handlingEventKey",
     )
@@ -115,7 +117,8 @@ class HandlingEvent(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -126,8 +129,7 @@ class HandlingEvent(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -169,8 +171,11 @@ class HandlingEvent(BaseModel):
         _items = []
         if self.related_documents:
             for _item_related_documents in self.related_documents:
-                if _item_related_documents:
-                    _items.append(_item_related_documents.to_dict())
+                _items.append(
+                    _item_related_documents.to_dict()
+                    if _item_related_documents is not None
+                    else None
+                )
             _dict["relatedDocuments"] = _items
         # set to None if event_time (nullable) is None
         # and model_fields_set contains the field

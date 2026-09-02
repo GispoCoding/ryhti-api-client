@@ -45,7 +45,7 @@ RYHTIGEOMETRYGEOMETRY_ONE_OF_SCHEMAS = [
 
 class RyhtiGeometryGeometry(BaseModel):
     """
-    Geometria GeoJson rakenteella: https://geojson.org/
+    Geometria GeoJSON rakenteella: https://geojson.org/
     """
 
     # data type: GeoJsonPointGeometry
@@ -83,6 +83,8 @@ class RyhtiGeometryGeometry(BaseModel):
         validate_assignment=True,
         protected_namespaces=(),
     )
+
+    discriminator_value_class_map: Dict[str, str] = {}
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
@@ -170,6 +172,46 @@ class RyhtiGeometryGeometry(BaseModel):
         instance = cls.model_construct()
         error_messages = []
         match = 0
+
+        # use oneOf discriminator to lookup the data type
+        _discriminator_property = "type"
+        _data_type = json.loads(json_str).get(_discriminator_property)
+        if not _data_type:
+            raise ValueError(
+                f"Failed to lookup data type from the field `{_discriminator_property}` in the input."
+            )
+
+        # check if data type is `GeoJsonLineStringGeometry`
+        if _data_type == "LineString":
+            instance.actual_instance = GeoJsonLineStringGeometry.from_json(json_str)
+            return instance
+
+        # check if data type is `GeoJsonMultiLineStringGeometry`
+        if _data_type == "MultiLineString":
+            instance.actual_instance = GeoJsonMultiLineStringGeometry.from_json(
+                json_str
+            )
+            return instance
+
+        # check if data type is `GeoJsonMultiPointGeometry`
+        if _data_type == "MultiPoint":
+            instance.actual_instance = GeoJsonMultiPointGeometry.from_json(json_str)
+            return instance
+
+        # check if data type is `GeoJsonMultiPolygonGeometry`
+        if _data_type == "MultiPolygon":
+            instance.actual_instance = GeoJsonMultiPolygonGeometry.from_json(json_str)
+            return instance
+
+        # check if data type is `GeoJsonPointGeometry`
+        if _data_type == "Point":
+            instance.actual_instance = GeoJsonPointGeometry.from_json(json_str)
+            return instance
+
+        # check if data type is `GeoJsonPolygonGeometry`
+        if _data_type == "Polygon":
+            instance.actual_instance = GeoJsonPolygonGeometry.from_json(json_str)
+            return instance
 
         # deserialize data into GeoJsonPointGeometry
         try:

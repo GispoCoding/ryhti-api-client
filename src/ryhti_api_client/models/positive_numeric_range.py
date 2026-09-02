@@ -20,13 +20,17 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Literal, Optional
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PositiveNumericRange(BaseModel):
     """
-    Positiivinen arvoväli
+    PositiveNumericRange
     """  # noqa: E501
 
+    data_type: Literal["PositiveNumericRange"] = Field(
+        description='Pakollinen arvo: "PositiveNumericRange"', alias="dataType"
+    )
     minimum_value: Optional[StrictInt] = Field(
         default=None, description="Minimiarvo", alias="minimumValue"
     )
@@ -36,13 +40,16 @@ class PositiveNumericRange(BaseModel):
     unit_of_measure: Optional[StrictStr] = Field(
         default=None, description="Mittayksikkö", alias="unitOfMeasure"
     )
-    data_type: Literal["PositiveNumericRange"] = Field(
-        description='Pakollinen arvo: "positiveNumericRange"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = [
+        "dataType",
+        "minimumValue",
+        "maximumValue",
+        "unitOfMeasure",
+    ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -53,8 +60,7 @@ class PositiveNumericRange(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -89,5 +95,12 @@ class PositiveNumericRange(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "minimumValue": obj.get("minimumValue"),
+                "maximumValue": obj.get("maximumValue"),
+                "unitOfMeasure": obj.get("unitOfMeasure"),
+            }
+        )
         return _obj

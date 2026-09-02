@@ -6,8 +6,8 @@ Geometria GeoJson rakenteella: https://geojson.org/
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;Point\&quot; | 
 **coordinates** | **List[List[List[List[float]]]]** | Koordinaatit | 
-**type** | **str** | Tuetut geometriatyypit | 
 
 ## Example
 

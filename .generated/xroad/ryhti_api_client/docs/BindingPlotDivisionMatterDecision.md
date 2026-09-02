@@ -6,7 +6,7 @@ Sitovan tonttijaon asian päätös
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**binding_plot_division_matter_decision_key** | **str** | Sitovan tonttijaon asian päätösavain | 
+**binding_plot_division_matter_decision_key** | **UUID** | Sitovan tonttijaon asian päätösavain | 
 **binding_plot_division_matter_decision_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/bindingplotdivisionmatterdecision/{guid}) | [optional] [readonly] 
 **decision_date** | **date** | Päätöspäivämäärä | 
 **date_of_decision** | **date** | Päätöksenantopäivämäärä | 
@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **type_of_decision_maker** | **str** | Päättäjän laji, monijäseninen toimielin tai viranhaltija. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/PaatoksenTekija\&quot;&gt;http://uri.suomi.fi/codelist/rytj/PaatoksenTekija&lt;/a&gt; | 
 **statute** | [**Statute**](Statute.md) | Ohjaava säädös | [optional] 
 **decision_maker** | [**BindingPlotDivisionOperator**](BindingPlotDivisionOperator.md) | Päätöksentekijä | [optional] 
+**binding_plot_division_cancellations** | [**List[BindingPlotDivisionCancellationInfo]**](BindingPlotDivisionCancellationInfo.md) | Kumoutumistieto | [optional] 
 
 ## Example
 

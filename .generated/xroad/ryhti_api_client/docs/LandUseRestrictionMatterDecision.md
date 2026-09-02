@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**land_use_restriction_matter_decision_key** | **str** | Avain | 
+**land_use_restriction_matter_decision_key** | **UUID** | Avain | 
 **land_use_restriction_matter_decision_uri** | **str** |  | [optional] [readonly] 
 **decision_date** | **date** | Päätöspäivämäärä | 
 **date_of_decision** | **date** | Päätöksenantopäivämäärä | 

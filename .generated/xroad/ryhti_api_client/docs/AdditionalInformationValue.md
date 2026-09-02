@@ -6,10 +6,10 @@ Arvo
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;TimePeriodDateOnly\&quot; | 
 **code** | **str** | Koodiston arvo (uri) | [optional] 
 **code_list** | **str** | Koodisto | [optional] 
 **title** | [**LanguageString**](LanguageString.md) | Nimi | [optional] 
-**data_type** | **str** | Enumeraatio joka määrittää Arvo-luokkien (Domain.ValueObjects.AttributeValue) tyypin.  Jokaisella konkreettisella Arvo-luokan (Domain.ValueObjects.AttributeValue) toteutuksella tulee olla sitä vastaava DataType enumeraation arvo. | 
 **number** | **int** | Arvo | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
 **minimum_value** | **float** | Minimiarvo | [optional] 

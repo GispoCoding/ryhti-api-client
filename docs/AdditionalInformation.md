@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | Määräystä täydentävä tieto, jolla ohjataan alueidenkäyttöä ja rakentamista. Käytetään koodistoa &lt;a href&#x3D;\&quot;http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji\&quot;&gt;http://uri.suomi.fi/codelist/rytj/RY_Kaavamaarayksen_Lisatiedonlaji&lt;/a&gt; | 
-**value** | [**AdditionalInformationValue**](AdditionalInformationValue.md) |  | [optional] 
+**value** | [**AttributeValue**](AttributeValue.md) |  | [optional] 
 
 ## Example
 

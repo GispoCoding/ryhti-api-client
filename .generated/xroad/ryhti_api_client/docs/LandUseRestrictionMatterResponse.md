@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **responsible_party** | [**LandUseRestrictionOperator**](LandUseRestrictionOperator.md) | Vastuutaho | [optional] 
 **related_land_use_restriction_matters** | **List[str]** | Liittyvät alueidenkäytön rajoituksen asiat | [optional] 
 **land_use_restriction_matter_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/landuserestrictionmatter/{identifier}) | [optional] [readonly] 
+**original_administrative_area_identifiers** | **List[str]** | Alkuperäiset hallinnollisen alueen tunnukset | 
 **phases** | [**List[LandUseRestrictionMatterPhase]**](LandUseRestrictionMatterPhase.md) | Vaiheet | 
 
 ## Example

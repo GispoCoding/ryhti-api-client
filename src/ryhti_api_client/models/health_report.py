@@ -21,6 +21,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from ryhti_api_client.models.health_report_entry import HealthReportEntry
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class HealthReport(BaseModel):
@@ -46,7 +47,8 @@ class HealthReport(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -57,8 +59,7 @@ class HealthReport(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -95,8 +96,11 @@ class HealthReport(BaseModel):
         _field_dict = {}
         if self.entries:
             for _key_entries in self.entries:
-                if self.entries[_key_entries]:
-                    _field_dict[_key_entries] = self.entries[_key_entries].to_dict()
+                _field_dict[_key_entries] = (
+                    self.entries[_key_entries].to_dict()
+                    if self.entries[_key_entries] is not None
+                    else None
+                )
             _dict["entries"] = _field_dict
         return _dict
 

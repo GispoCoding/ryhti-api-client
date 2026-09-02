@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**land_use_restriction_operator_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus. | 
+**land_use_restriction_operator_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus. | 
 **land_use_restriction_operator_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/landuserestrictionoperator/{guid}) | [optional] [readonly] 
 **first_name** | **str** | Toimijan etunimi | [optional] 
 **last_name** | **str** | Toimijan sukunimi | [optional] 

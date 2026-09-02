@@ -30,6 +30,7 @@ from ryhti_api_client.models.plan_operator import PlanOperator
 from ryhti_api_client.models.plan_source_data import PlanSourceData
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class PlanMatterCreate(BaseModel):
@@ -180,7 +181,8 @@ class PlanMatterCreate(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -191,8 +193,7 @@ class PlanMatterCreate(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -226,8 +227,11 @@ class PlanMatterCreate(BaseModel):
         _items = []
         if self.matter_annexes:
             for _item_matter_annexes in self.matter_annexes:
-                if _item_matter_annexes:
-                    _items.append(_item_matter_annexes.to_dict())
+                _items.append(
+                    _item_matter_annexes.to_dict()
+                    if _item_matter_annexes is not None
+                    else None
+                )
             _dict["matterAnnexes"] = _items
         # override the default output from pydantic by calling `to_dict()` of responsible_party
         if self.responsible_party:
@@ -241,15 +245,21 @@ class PlanMatterCreate(BaseModel):
         _items = []
         if self.source_datas:
             for _item_source_datas in self.source_datas:
-                if _item_source_datas:
-                    _items.append(_item_source_datas.to_dict())
+                _items.append(
+                    _item_source_datas.to_dict()
+                    if _item_source_datas is not None
+                    else None
+                )
             _dict["sourceDatas"] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in plan_matter_phases (list)
         _items = []
         if self.plan_matter_phases:
             for _item_plan_matter_phases in self.plan_matter_phases:
-                if _item_plan_matter_phases:
-                    _items.append(_item_plan_matter_phases.to_dict())
+                _items.append(
+                    _item_plan_matter_phases.to_dict()
+                    if _item_plan_matter_phases is not None
+                    else None
+                )
             _dict["planMatterPhases"] = _items
         # set to None if description (nullable) is None
         # and model_fields_set contains the field

@@ -1,13 +1,12 @@
 # GeoJsonPolygonGeometry
 
-Polygon GeoJson    Esimerkki: { \"type\": \"polygon\", \"coordinates\": [ [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ] ] }
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;Polygon\&quot; | 
 **coordinates** | **List[List[List[float]]]** | Koordinaatit | 
-**type** | **str** | Geometriatyyppi. Pakollinen arvo: \&quot;polygon\&quot; | 
 
 ## Example
 

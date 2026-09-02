@@ -6,7 +6,7 @@ Toimija
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_operator_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**plan_operator_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **plan_operator_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/planoperator/{guid}) | [optional] [readonly] 
 **first_name** | **str** | Etunimi | [optional] 
 **last_name** | **str** | Sukunimi | [optional] 

@@ -1,12 +1,12 @@
 # GeneralRegulationGroup
 
-Yleiskaavamääräysryhmä
+Yleismääräysryhmä
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**general_regulation_group_key** | **str** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
+**general_regulation_group_key** | **UUID** | Tiedon tuottajatahon tietojärjestelmän generoima kohteen versioriippumaton tunnus | 
 **general_regulation_group_uri** | **str** | Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/generalregulationgroup/{guid}) | [optional] [readonly] 
 **title_of_plan_regulation** | [**LanguageString**](LanguageString.md) | Lokalisoitu merkkijono-luokka eri kielille. Lisää vähintään yksi kieli. | 
 **plan_regulations** | [**List[PlanRegulation]**](PlanRegulation.md) | Kaavamääräykset | [optional] 

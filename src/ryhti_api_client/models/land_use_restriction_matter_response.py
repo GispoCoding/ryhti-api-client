@@ -32,6 +32,7 @@ from ryhti_api_client.models.land_use_restriction_operator import (
 from ryhti_api_client.models.language_string import LanguageString
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class LandUseRestrictionMatterResponse(BaseModel):
@@ -92,6 +93,10 @@ class LandUseRestrictionMatterResponse(BaseModel):
         description="Luokan pysyvä URI -muotoinen viittaustunniste (https://uri.rakennetunymparistontietojarjestelma.fi/landuserestrictionmatter/{identifier})",
         alias="landUseRestrictionMatterUri",
     )
+    original_administrative_area_identifiers: List[StrictStr] = Field(
+        description="Alkuperäiset hallinnollisen alueen tunnukset",
+        alias="originalAdministrativeAreaIdentifiers",
+    )
     phases: List[LandUseRestrictionMatterPhase] = Field(description="Vaiheet")
     __properties: ClassVar[List[str]] = [
         "permanentLandUseRestrictionIdentifier",
@@ -107,11 +112,13 @@ class LandUseRestrictionMatterResponse(BaseModel):
         "responsibleParty",
         "relatedLandUseRestrictionMatters",
         "landUseRestrictionMatterUri",
+        "originalAdministrativeAreaIdentifiers",
         "phases",
     ]
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -122,8 +129,7 @@ class LandUseRestrictionMatterResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -162,8 +168,11 @@ class LandUseRestrictionMatterResponse(BaseModel):
         _items = []
         if self.matter_annexes:
             for _item_matter_annexes in self.matter_annexes:
-                if _item_matter_annexes:
-                    _items.append(_item_matter_annexes.to_dict())
+                _items.append(
+                    _item_matter_annexes.to_dict()
+                    if _item_matter_annexes is not None
+                    else None
+                )
             _dict["matterAnnexes"] = _items
         # override the default output from pydantic by calling `to_dict()` of responsible_party
         if self.responsible_party:
@@ -172,8 +181,9 @@ class LandUseRestrictionMatterResponse(BaseModel):
         _items = []
         if self.phases:
             for _item_phases in self.phases:
-                if _item_phases:
-                    _items.append(_item_phases.to_dict())
+                _items.append(
+                    _item_phases.to_dict() if _item_phases is not None else None
+                )
             _dict["phases"] = _items
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
@@ -269,6 +279,9 @@ class LandUseRestrictionMatterResponse(BaseModel):
                     "relatedLandUseRestrictionMatters"
                 ),
                 "landUseRestrictionMatterUri": obj.get("landUseRestrictionMatterUri"),
+                "originalAdministrativeAreaIdentifiers": obj.get(
+                    "originalAdministrativeAreaIdentifiers"
+                ),
                 "phases": [
                     LandUseRestrictionMatterPhase.from_dict(_item)
                     for _item in obj["phases"]

@@ -5,7 +5,6 @@ ryhti_api_client/configuration.py
 ryhti_api_client/docs/AccessToRoad.md
 ryhti_api_client/docs/AdditionalInformation.md
 ryhti_api_client/docs/AdditionalInformationValue.md
-ryhti_api_client/docs/AttachmentDocument.md
 ryhti_api_client/docs/AttributeValue.md
 ryhti_api_client/docs/AuthenticationApi.md
 ryhti_api_client/docs/BindingPlotDivision.md
@@ -23,6 +22,7 @@ ryhti_api_client/docs/BuildingOrdinance.md
 ryhti_api_client/docs/BuildingOrdinanceApi.md
 ryhti_api_client/docs/BuildingOrdinanceAttachmentDocument.md
 ryhti_api_client/docs/BuildingOrdinanceOperator.md
+ryhti_api_client/docs/CancelledByResponse.md
 ryhti_api_client/docs/CancelledGroupRelations.md
 ryhti_api_client/docs/CodeValue.md
 ryhti_api_client/docs/CustomValidationError.md
@@ -31,7 +31,6 @@ ryhti_api_client/docs/DecimalRange.md
 ryhti_api_client/docs/DecimalValue.md
 ryhti_api_client/docs/Descriptor.md
 ryhti_api_client/docs/GeneralRegulationGroup.md
-ryhti_api_client/docs/GeoJsonGeometry.md
 ryhti_api_client/docs/GeoJsonLineStringGeometry.md
 ryhti_api_client/docs/GeoJsonMultiLineStringGeometry.md
 ryhti_api_client/docs/GeoJsonMultiPointGeometry.md
@@ -57,6 +56,7 @@ ryhti_api_client/docs/LandUseRestrictionOperator.md
 ryhti_api_client/docs/LanguageString.md
 ryhti_api_client/docs/LocalDetailedPlanMatterApi.md
 ryhti_api_client/docs/LocalMasterPlanMatterApi.md
+ryhti_api_client/docs/LocalizedMessage.md
 ryhti_api_client/docs/LocalizedTextValue.md
 ryhti_api_client/docs/MotherProperty.md
 ryhti_api_client/docs/NumericRange.md
@@ -69,6 +69,7 @@ ryhti_api_client/docs/PlanAttachmentDocumentApi.md
 ryhti_api_client/docs/PlanCancellationInfo.md
 ryhti_api_client/docs/PlanDecision.md
 ryhti_api_client/docs/PlanEffects.md
+ryhti_api_client/docs/PlanEffectsPlot.md
 ryhti_api_client/docs/PlanMap.md
 ryhti_api_client/docs/PlanMatterCreate.md
 ryhti_api_client/docs/PlanMatterPhase.md
@@ -96,7 +97,6 @@ ryhti_api_client/docs/ProblemDetails.md
 ryhti_api_client/docs/RegionalPlanMatterApi.md
 ryhti_api_client/docs/RelatedPlan.md
 ryhti_api_client/docs/RelatedPlanObjectRegulationGroupRelation.md
-ryhti_api_client/docs/RelatedPlotDivisionPlot.md
 ryhti_api_client/docs/RelatedRegulationGroupPlanObjectRelation.md
 ryhti_api_client/docs/ReserveBuildingOrdinancePermanentIdentifierCommand.md
 ryhti_api_client/docs/ReserveLocalDetailedPlanMatterPermanentIdentifierCommand.md
@@ -121,7 +121,6 @@ ryhti_api_client/models/__init__.py
 ryhti_api_client/models/access_to_road.py
 ryhti_api_client/models/additional_information.py
 ryhti_api_client/models/additional_information_value.py
-ryhti_api_client/models/attachment_document.py
 ryhti_api_client/models/attribute_value.py
 ryhti_api_client/models/binding_plot_division.py
 ryhti_api_client/models/binding_plot_division_attachment_document.py
@@ -136,6 +135,7 @@ ryhti_api_client/models/boundary_point.py
 ryhti_api_client/models/building_ordinance.py
 ryhti_api_client/models/building_ordinance_attachment_document.py
 ryhti_api_client/models/building_ordinance_operator.py
+ryhti_api_client/models/cancelled_by_response.py
 ryhti_api_client/models/cancelled_group_relations.py
 ryhti_api_client/models/code_value.py
 ryhti_api_client/models/custom_validation_error.py
@@ -144,7 +144,6 @@ ryhti_api_client/models/decimal_range.py
 ryhti_api_client/models/decimal_value.py
 ryhti_api_client/models/descriptor.py
 ryhti_api_client/models/general_regulation_group.py
-ryhti_api_client/models/geo_json_geometry.py
 ryhti_api_client/models/geo_json_line_string_geometry.py
 ryhti_api_client/models/geo_json_multi_line_string_geometry.py
 ryhti_api_client/models/geo_json_multi_point_geometry.py
@@ -167,6 +166,7 @@ ryhti_api_client/models/land_use_restriction_matter_update.py
 ryhti_api_client/models/land_use_restriction_object.py
 ryhti_api_client/models/land_use_restriction_operator.py
 ryhti_api_client/models/language_string.py
+ryhti_api_client/models/localized_message.py
 ryhti_api_client/models/localized_text_value.py
 ryhti_api_client/models/mother_property.py
 ryhti_api_client/models/numeric_range.py
@@ -178,6 +178,7 @@ ryhti_api_client/models/plan_attachment_document.py
 ryhti_api_client/models/plan_cancellation_info.py
 ryhti_api_client/models/plan_decision.py
 ryhti_api_client/models/plan_effects.py
+ryhti_api_client/models/plan_effects_plot.py
 ryhti_api_client/models/plan_map.py
 ryhti_api_client/models/plan_matter_create.py
 ryhti_api_client/models/plan_matter_phase.py
@@ -204,7 +205,6 @@ ryhti_api_client/models/presentation_alignment.py
 ryhti_api_client/models/problem_details.py
 ryhti_api_client/models/related_plan.py
 ryhti_api_client/models/related_plan_object_regulation_group_relation.py
-ryhti_api_client/models/related_plot_division_plot.py
 ryhti_api_client/models/related_regulation_group_plan_object_relation.py
 ryhti_api_client/models/reserve_building_ordinance_permanent_identifier_command.py
 ryhti_api_client/models/reserve_local_detailed_plan_matter_permanent_identifier_command.py
@@ -224,6 +224,9 @@ ryhti_api_client/models/time_period_date_only_value.py
 ryhti_api_client/models/time_period_value.py
 ryhti_api_client/rest.py
 ryhti_api_client/test/__init__.py
+ryhti_api_client/test/test_cancelled_by_response.py
+ryhti_api_client/test/test_localized_message.py
+ryhti_api_client/test/test_plan_effects_plot.py
 ryhti_api_client/xroad_api/__init__.py
 ryhti_api_client/xroad_api/authentication_api.py
 ryhti_api_client/xroad_api/binding_plot_division_matter_api.py

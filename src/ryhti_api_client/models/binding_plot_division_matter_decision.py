@@ -20,8 +20,12 @@ from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.binding_plot_division_attachment_document import (
     BindingPlotDivisionAttachmentDocument,
+)
+from ryhti_api_client.models.binding_plot_division_cancellation_info import (
+    BindingPlotDivisionCancellationInfo,
 )
 from ryhti_api_client.models.binding_plot_division_operator import (
     BindingPlotDivisionOperator,
@@ -30,6 +34,7 @@ from ryhti_api_client.models.language_string import LanguageString
 from ryhti_api_client.models.statute import Statute
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class BindingPlotDivisionMatterDecision(BaseModel):
@@ -37,7 +42,7 @@ class BindingPlotDivisionMatterDecision(BaseModel):
     Sitovan tonttijaon asian päätös
     """  # noqa: E501
 
-    binding_plot_division_matter_decision_key: StrictStr = Field(
+    binding_plot_division_matter_decision_key: UUID = Field(
         description="Sitovan tonttijaon asian päätösavain",
         alias="bindingPlotDivisionMatterDecisionKey",
     )
@@ -80,6 +85,13 @@ class BindingPlotDivisionMatterDecision(BaseModel):
     decision_maker: Optional[BindingPlotDivisionOperator] = Field(
         default=None, description="Päätöksentekijä", alias="decisionMaker"
     )
+    binding_plot_division_cancellations: Optional[
+        List[BindingPlotDivisionCancellationInfo]
+    ] = Field(
+        default=None,
+        description="Kumoutumistieto",
+        alias="bindingPlotDivisionCancellations",
+    )
     __properties: ClassVar[List[str]] = [
         "bindingPlotDivisionMatterDecisionKey",
         "bindingPlotDivisionMatterDecisionUri",
@@ -94,6 +106,7 @@ class BindingPlotDivisionMatterDecision(BaseModel):
         "typeOfDecisionMaker",
         "statute",
         "decisionMaker",
+        "bindingPlotDivisionCancellations",
     ]
 
     @field_validator("name")
@@ -141,7 +154,8 @@ class BindingPlotDivisionMatterDecision(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -152,8 +166,7 @@ class BindingPlotDivisionMatterDecision(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -186,8 +199,11 @@ class BindingPlotDivisionMatterDecision(BaseModel):
         _items = []
         if self.decision_documents:
             for _item_decision_documents in self.decision_documents:
-                if _item_decision_documents:
-                    _items.append(_item_decision_documents.to_dict())
+                _items.append(
+                    _item_decision_documents.to_dict()
+                    if _item_decision_documents is not None
+                    else None
+                )
             _dict["decisionDocuments"] = _items
         # override the default output from pydantic by calling `to_dict()` of decision_article
         if self.decision_article:
@@ -201,6 +217,18 @@ class BindingPlotDivisionMatterDecision(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of decision_maker
         if self.decision_maker:
             _dict["decisionMaker"] = self.decision_maker.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in binding_plot_division_cancellations (list)
+        _items = []
+        if self.binding_plot_division_cancellations:
+            for (
+                _item_binding_plot_division_cancellations
+            ) in self.binding_plot_division_cancellations:
+                _items.append(
+                    _item_binding_plot_division_cancellations.to_dict()
+                    if _item_binding_plot_division_cancellations is not None
+                    else None
+                )
+            _dict["bindingPlotDivisionCancellations"] = _items
         # set to None if decision_article (nullable) is None
         # and model_fields_set contains the field
         if (
@@ -231,6 +259,14 @@ class BindingPlotDivisionMatterDecision(BaseModel):
         # and model_fields_set contains the field
         if self.decision_maker is None and "decision_maker" in self.model_fields_set:
             _dict["decisionMaker"] = None
+
+        # set to None if binding_plot_division_cancellations (nullable) is None
+        # and model_fields_set contains the field
+        if (
+            self.binding_plot_division_cancellations is None
+            and "binding_plot_division_cancellations" in self.model_fields_set
+        ):
+            _dict["bindingPlotDivisionCancellations"] = None
 
         return _dict
 
@@ -276,6 +312,12 @@ class BindingPlotDivisionMatterDecision(BaseModel):
                     obj["decisionMaker"]
                 )
                 if obj.get("decisionMaker") is not None
+                else None,
+                "bindingPlotDivisionCancellations": [
+                    BindingPlotDivisionCancellationInfo.from_dict(_item)
+                    for _item in obj["bindingPlotDivisionCancellations"]
+                ]
+                if obj.get("bindingPlotDivisionCancellations") is not None
                 else None,
             }
         )

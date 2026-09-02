@@ -17,7 +17,6 @@ import re  # noqa: F401
 import json
 
 from pydantic import (
-    BaseModel,
     ConfigDict,
     Field,
     StrictFloat,
@@ -26,55 +25,38 @@ from pydantic import (
     field_validator,
 )
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from ryhti_api_client.models.attribute_value import AttributeValue
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
-class PositiveDecimalValue(BaseModel):
+class PositiveDecimalValue(AttributeValue):
     """
-    Positiivinen desimaali
+    PositiveDecimalValue
     """  # noqa: E501
 
+    data_type: StrictStr = Field(
+        description='Pakollinen arvo: "PositiveDecimal"', alias="dataType"
+    )
     number: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None, description="Desimaali"
     )
     unit_of_measure: Optional[StrictStr] = Field(
         default=None, description="Mittayksikkö", alias="unitOfMeasure"
     )
-    data_type: StrictStr = Field(
-        description='Pakollinen arvo: "positiveDecimal"', alias="dataType"
-    )
-    __properties: ClassVar[List[str]] = ["dataType"]
+    __properties: ClassVar[List[str]] = ["dataType", "number", "unitOfMeasure"]
 
     @field_validator("data_type")
     def data_type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(
-            [
-                "LocalizedText",
-                "Text",
-                "Numeric",
-                "NumericRange",
-                "PositiveNumeric",
-                "PositiveNumericRange",
-                "Decimal",
-                "DecimalRange",
-                "PositiveDecimal",
-                "PositiveDecimalRange",
-                "Code",
-                "Identifier",
-                "SpotElevation",
-                "TimePeriod",
-                "TimePeriodDateOnly",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('LocalizedText', 'Text', 'Numeric', 'NumericRange', 'PositiveNumeric', 'PositiveNumericRange', 'Decimal', 'DecimalRange', 'PositiveDecimal', 'PositiveDecimalRange', 'Code', 'Identifier', 'SpotElevation', 'TimePeriod', 'TimePeriodDateOnly')"
-            )
+        if value not in set(["PositiveDecimal"]):
+            raise ValueError("must be one of enum values ('PositiveDecimal')")
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -85,8 +67,7 @@ class PositiveDecimalValue(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -121,5 +102,11 @@ class PositiveDecimalValue(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"dataType": obj.get("dataType")})
+        _obj = cls.model_validate(
+            {
+                "dataType": obj.get("dataType"),
+                "number": obj.get("number"),
+                "unitOfMeasure": obj.get("unitOfMeasure"),
+            }
+        )
         return _obj

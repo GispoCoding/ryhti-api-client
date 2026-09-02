@@ -39,7 +39,6 @@ __all__ = [
     "AccessToRoad",
     "AdditionalInformation",
     "AdditionalInformationValue",
-    "AttachmentDocument",
     "AttributeValue",
     "BindingPlotDivision",
     "BindingPlotDivisionAttachmentDocument",
@@ -54,6 +53,7 @@ __all__ = [
     "BuildingOrdinance",
     "BuildingOrdinanceAttachmentDocument",
     "BuildingOrdinanceOperator",
+    "CancelledByResponse",
     "CancelledGroupRelations",
     "CodeValue",
     "CustomValidationError",
@@ -62,7 +62,6 @@ __all__ = [
     "DecimalValue",
     "Descriptor",
     "GeneralRegulationGroup",
-    "GeoJsonGeometry",
     "GeoJsonLineStringGeometry",
     "GeoJsonMultiLineStringGeometry",
     "GeoJsonMultiPointGeometry",
@@ -85,6 +84,7 @@ __all__ = [
     "LandUseRestrictionObject",
     "LandUseRestrictionOperator",
     "LanguageString",
+    "LocalizedMessage",
     "LocalizedTextValue",
     "MotherProperty",
     "NumericRange",
@@ -96,6 +96,7 @@ __all__ = [
     "PlanCancellationInfo",
     "PlanDecision",
     "PlanEffects",
+    "PlanEffectsPlot",
     "PlanMap",
     "PlanMatterCreate",
     "PlanMatterPhase",
@@ -122,7 +123,6 @@ __all__ = [
     "ProblemDetails",
     "RelatedPlan",
     "RelatedPlanObjectRegulationGroupRelation",
-    "RelatedPlotDivisionPlot",
     "RelatedRegulationGroupPlanObjectRelation",
     "ReserveBuildingOrdinancePermanentIdentifierCommand",
     "ReserveLocalDetailedPlanMatterPermanentIdentifierCommand",
@@ -143,7 +143,9 @@ __all__ = [
 ]
 
 # import apis into sdk package
-from ryhti_api_client.xroad_api.authentication_api import AuthenticationApi as AuthenticationApi
+from ryhti_api_client.xroad_api.authentication_api import (
+    AuthenticationApi as AuthenticationApi,
+)
 from ryhti_api_client.xroad_api.binding_plot_division_matter_api import (
     BindingPlotDivisionMatterApi as BindingPlotDivisionMatterApi,
 )
@@ -166,7 +168,9 @@ from ryhti_api_client.xroad_api.regional_plan_matter_api import (
     RegionalPlanMatterApi as RegionalPlanMatterApi,
 )
 from ryhti_api_client.xroad_api.status_api import StatusApi as StatusApi
-from ryhti_api_client.xroad_api.uploaded_file_api import UploadedFileApi as UploadedFileApi
+from ryhti_api_client.xroad_api.uploaded_file_api import (
+    UploadedFileApi as UploadedFileApi,
+)
 
 # import ApiClient
 from ryhti_api_client.api_response import ApiResponse as ApiResponse
@@ -186,9 +190,6 @@ from ryhti_api_client.models.additional_information import (
 )
 from ryhti_api_client.models.additional_information_value import (
     AdditionalInformationValue as AdditionalInformationValue,
-)
-from ryhti_api_client.models.attachment_document import (
-    AttachmentDocument as AttachmentDocument,
 )
 from ryhti_api_client.models.attribute_value import AttributeValue as AttributeValue
 from ryhti_api_client.models.binding_plot_division import (
@@ -228,6 +229,9 @@ from ryhti_api_client.models.building_ordinance_attachment_document import (
 from ryhti_api_client.models.building_ordinance_operator import (
     BuildingOrdinanceOperator as BuildingOrdinanceOperator,
 )
+from ryhti_api_client.models.cancelled_by_response import (
+    CancelledByResponse as CancelledByResponse,
+)
 from ryhti_api_client.models.cancelled_group_relations import (
     CancelledGroupRelations as CancelledGroupRelations,
 )
@@ -244,7 +248,6 @@ from ryhti_api_client.models.descriptor import Descriptor as Descriptor
 from ryhti_api_client.models.general_regulation_group import (
     GeneralRegulationGroup as GeneralRegulationGroup,
 )
-from ryhti_api_client.models.geo_json_geometry import GeoJsonGeometry as GeoJsonGeometry
 from ryhti_api_client.models.geo_json_line_string_geometry import (
     GeoJsonLineStringGeometry as GeoJsonLineStringGeometry,
 )
@@ -303,6 +306,9 @@ from ryhti_api_client.models.land_use_restriction_operator import (
     LandUseRestrictionOperator as LandUseRestrictionOperator,
 )
 from ryhti_api_client.models.language_string import LanguageString as LanguageString
+from ryhti_api_client.models.localized_message import (
+    LocalizedMessage as LocalizedMessage,
+)
 from ryhti_api_client.models.localized_text_value import (
     LocalizedTextValue as LocalizedTextValue,
 )
@@ -324,6 +330,7 @@ from ryhti_api_client.models.plan_cancellation_info import (
 )
 from ryhti_api_client.models.plan_decision import PlanDecision as PlanDecision
 from ryhti_api_client.models.plan_effects import PlanEffects as PlanEffects
+from ryhti_api_client.models.plan_effects_plot import PlanEffectsPlot as PlanEffectsPlot
 from ryhti_api_client.models.plan_map import PlanMap as PlanMap
 from ryhti_api_client.models.plan_matter_create import (
     PlanMatterCreate as PlanMatterCreate,
@@ -383,9 +390,6 @@ from ryhti_api_client.models.problem_details import ProblemDetails as ProblemDet
 from ryhti_api_client.models.related_plan import RelatedPlan as RelatedPlan
 from ryhti_api_client.models.related_plan_object_regulation_group_relation import (
     RelatedPlanObjectRegulationGroupRelation as RelatedPlanObjectRegulationGroupRelation,
-)
-from ryhti_api_client.models.related_plot_division_plot import (
-    RelatedPlotDivisionPlot as RelatedPlotDivisionPlot,
 )
 from ryhti_api_client.models.related_regulation_group_plan_object_relation import (
     RelatedRegulationGroupPlanObjectRelation as RelatedRegulationGroupPlanObjectRelation,

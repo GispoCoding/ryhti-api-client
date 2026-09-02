@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**plan_object_key** | **str** |  | 
-**plan_regulation_group_key** | **str** |  | 
-**geometry** | [**RyhtiGeometry**](RyhtiGeometry.md) |  | 
-**rotation** | **int** |  | [optional] 
-**language** | **str** |  | [optional] 
+**plan_object_key** | **UUID** | Key of the plan object this presentation alignment is associated with. | 
+**plan_regulation_group_key** | **UUID** | Key of the plan regulation group this presentation alignment is associated with. | 
+**geometry** | [**RyhtiGeometry**](RyhtiGeometry.md) | Geometry of the presentation alignment. Allowed types: Point, LineString. | 
+**rotation** | **int** | Rotation of the presentation alignment in degrees. Allowed range: -360 to 360. | [optional] 
+**language** | **str** | Language of the presentation alignment.  Code value from: http://uri.suomi.fi/codelist/rytj/ryhtikielet    Allowed values:  &lt;list type&#x3D;\&quot;bullet\&quot;&gt;&lt;item&gt;&lt;description&gt;fi - suomi&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;description&gt;sv - ruotsi&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;description&gt;en - englanti&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;description&gt;smn - inarinsaame&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;description&gt;sms - koltansaame&lt;/description&gt;&lt;/item&gt;&lt;item&gt;&lt;description&gt;se - pohjoissaame&lt;/description&gt;&lt;/item&gt;&lt;/list&gt; | [optional] 
 
 ## Example
 

@@ -20,6 +20,7 @@ from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from uuid import UUID
 from ryhti_api_client.models.land_use_restriction import LandUseRestriction
 from ryhti_api_client.models.land_use_restriction_attachment_document import (
     LandUseRestrictionAttachmentDocument,
@@ -30,6 +31,7 @@ from ryhti_api_client.models.land_use_restriction_operator import (
 from ryhti_api_client.models.statute import Statute
 from typing import Set
 from typing_extensions import Self
+from pydantic_core import to_jsonable_python
 
 
 class LandUseRestrictionMatterDecision(BaseModel):
@@ -37,7 +39,7 @@ class LandUseRestrictionMatterDecision(BaseModel):
     LandUseRestrictionMatterDecision
     """  # noqa: E501
 
-    land_use_restriction_matter_decision_key: StrictStr = Field(
+    land_use_restriction_matter_decision_key: UUID = Field(
         description="Avain", alias="landUseRestrictionMatterDecisionKey"
     )
     land_use_restriction_matter_decision_uri: Optional[StrictStr] = Field(
@@ -130,7 +132,8 @@ class LandUseRestrictionMatterDecision(BaseModel):
         return value
 
     model_config = ConfigDict(
-        populate_by_name=True,
+        validate_by_name=True,
+        validate_by_alias=True,
         validate_assignment=True,
         protected_namespaces=(),
     )
@@ -141,8 +144,7 @@ class LandUseRestrictionMatterDecision(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(to_jsonable_python(self.to_dict()))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -175,8 +177,11 @@ class LandUseRestrictionMatterDecision(BaseModel):
         _items = []
         if self.decision_documents:
             for _item_decision_documents in self.decision_documents:
-                if _item_decision_documents:
-                    _items.append(_item_decision_documents.to_dict())
+                _items.append(
+                    _item_decision_documents.to_dict()
+                    if _item_decision_documents is not None
+                    else None
+                )
             _dict["decisionDocuments"] = _items
         # override the default output from pydantic by calling `to_dict()` of decision_maker
         if self.decision_maker:

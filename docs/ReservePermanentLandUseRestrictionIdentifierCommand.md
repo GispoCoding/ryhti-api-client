@@ -7,7 +7,7 @@ Sanoma alueidenkäytön rajoitusten pysyvien tunnisteiden varaamiseen.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **administrative_area_identifier** | **str** | Hallinnollisen alueen tunnus (esim. kunta tai maakunta) | [optional] 
-**project_name** | **str** | Kaavahankkeen pysyvä nimi. Nimi on uniikki eikä sitä voi vaihtaa. | [optional] 
+**project_name** | **str** | Hankkeen pysyvä nimi. Nimi on uniikki eikä sitä voi vaihtaa. | [optional] 
 
 ## Example
 

@@ -1,15 +1,14 @@
 # PositiveNumericRange
 
-Positiivinen arvoväli
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**data_type** | **str** | Pakollinen arvo: \&quot;PositiveNumericRange\&quot; | 
 **minimum_value** | **int** | Minimiarvo | [optional] 
 **maximum_value** | **int** | Maksimiarvo | [optional] 
 **unit_of_measure** | **str** | Mittayksikkö | [optional] 
-**data_type** | **str** | Pakollinen arvo: \&quot;positiveNumericRange\&quot; | 
 
 ## Example
 
